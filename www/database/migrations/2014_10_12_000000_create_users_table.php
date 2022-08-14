@@ -15,13 +15,18 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name')->comment('Nome');
+            $table->string('email')->comment('E-mail');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->comment('Senha');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->index(['name','deleted_at']);
+            $table->unique(['email','deleted_at']);
         });
+        db_comment_table('users', 'Usuários');
     }
 
     /**
@@ -31,6 +36,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::disableForeignKeyConstraints();
+		Schema::dropIfExists('users');
+		Schema::enableForeignKeyConstraints();
     }
 }
