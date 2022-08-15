@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\PageController;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,16 @@ Route::group
         );
     }
 );
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
+    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
+    Route::get('/logout', [AdminAuthController::class, 'getLogout'])->name('adminLogout');
+
+    Route::group(['middleware' => 'adminauth'], function () {
+        Route::get('/', function () {
+            return view('welcome');
+        })->name('adminDashboard');
+
+    });
+});
