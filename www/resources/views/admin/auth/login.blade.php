@@ -1,74 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-</head>
-
-<body class="vertical-layout vertical-menu-modern" data-open="click" data-menu="vertical-menu-modern" data-col="" data-framework="laravel">
-    <div class="auth-wrapper auth-basic px-2">
-        <div class="auth-inner my-2">
-            <!-- Login basic -->
-            @if(\Session::get('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <div class="alert-body">
-                    {{ \Session::get('success') }}
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-            {{ \Session::forget('success') }}
-            @if(\Session::get('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <div class="alert-body">
-                    {{ \Session::get('error') }}
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-            <div class="card mb-0">
-                <div class="card-body">
-                    <h2 class="brand-text text-primary ms-1">Admin Login</h2>
-
-                    <form class="auth-login-form mt-2" action="{{route('adminLoginPost')}}" method="post">
-                        @csrf
-                        <div class="mb-1">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" value="{{old('email') }}" autofocus />
-                            @if ($errors->has('email'))
-                            <span class="help-block font-red-mint">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-
-                        <div class="mb-1">
-                            <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Password</label>
-                                <a href="{{url('auth/forgot-password-basic')}}">
-                                    <small>Forgot Password?</small>
-                                </a>
-                            </div>
-                            <div class="input-group input-group-merge form-password-toggle">
-                                <input type="password" class="form-control form-control-merge" id="password" name="password" tabindex="2" />
-                                <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
-                            </div>
-                            @if ($errors->has('password'))
-                            <span class="help-block font-red-mint">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100" tabindex="4">Sign in</button>
-                    </form>
-                </div>
-            </div>
-            <!-- /Login basic -->
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="{{ url('/adminlte/plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ url('/adminlte/dist/css/adminlte.min.css?v=3.2.0') }}">
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+          <h1>
+            <b>Admin</b>
+            </h1>
         </div>
+        <div class="card-body">
+          <form class="auth-login-form mt-2" action="{{ route('adminLoginPost') }}" method="post">
+            @csrf
+            <div class="input-group mb-0">
+              <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}" autofocus />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+                @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                @endif
+            </div>
+            <div class="input-group mb-0">
+              <input type="password" class="form-control form-control-merge" id="password" name="password" />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+                @if ($errors->has('password'))
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                @endif
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block">Conectar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
-
+    <script src="{{ url('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url('/adminlte/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
+  </body>
 </html>
