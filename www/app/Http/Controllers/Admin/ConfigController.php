@@ -16,8 +16,8 @@ class ConfigController extends BaseAdminController
     // create index method
     public function index()
     {
-        // get all configs paginated
-        $configs = \App\Models\Config::paginate(2);
+        // get all configs paginated order by id desc
+        $configs = $this->model::orderBy('id', 'desc')->paginate(2);
 
         // return view with configs
         return view('admin.config.index', compact('configs'));
@@ -69,7 +69,15 @@ class ConfigController extends BaseAdminController
 		{
 			$message = ($id) ? 'Registro atualizado com sucesso.' : 'Registro criado com sucesso.';
 			$request->session()->flash('messages', [$message]);
-			return redirect(request()->headers->get('referer'));
+
+            if ($id)
+            {
+                return redirect()->route('adminConfigEdit', ['id' => $id]);
+            }
+            else
+            {
+                return redirect()->route('adminConfig');
+            }
 		}
 		else
 		{
@@ -77,5 +85,21 @@ class ConfigController extends BaseAdminController
 				->withErrors('Ocorreu um erro na gravação do registro.')
 				->withInput();
 		}
+    }
+
+    // add delete method
+    public function delete(Request $request, $id)
+    {
+        $config = $this->model::find($id);
+        if($config)
+        {
+            $config->delete();
+            $request->session()->flash('messages', ['Registro excluído com sucesso.']);
+        }
+        else
+        {
+            $request->session()->flash('messages', ['Registro não encontrado.']);
+        }
+        return redirect()->route('adminConfig');
     }
 }
