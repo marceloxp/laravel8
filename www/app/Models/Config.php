@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Config extends Model
+class Config extends BaseModel
 {
     use HasFactory;
+	// add protected guarded dates
+	protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     // create static function validate
 	public static function validate($request, $id = '')

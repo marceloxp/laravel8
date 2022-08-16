@@ -2,6 +2,7 @@
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use App\Http\Utilities\Cached;
 
 if (!function_exists('db_database_name'))
 {
@@ -98,6 +99,80 @@ if (!function_exists('db_table_has_index'))
 		$sm = Schema::getConnection()->getDoctrineSchemaManager();
 		$indexes = \Illuminate\Support\Collection::wrap($sm->listTableIndexes(db_prefixed_table($table_name)));
 		$result = $indexes->has($index_name);
+		return $result;
+	}
+}
+
+/**
+ * Get all comments from table table_name
+ * @param $table_name
+ * @return collection
+ * 
+ */
+if (!function_exists('db_table_get_fields_captions'))
+{
+	function db_table_get_fields_captions($table_name)
+	{
+		$result = Cached::get
+		(
+			'sys-model',
+			['db_table_get_fields_captions', $table_name],
+			function() use ($table_name)
+			{
+				$register = DB::select(sprintf('SHOW FULL COLUMNS FROM %s', db_prefixed_table($table_name)));
+				$register = \Illuminate\Support\Collection::make($register);
+
+				// set Comment as "Criado em" if Field = "created_at"
+				$register = $register->map(function($item) {
+					if ($item->Field == 'created_at') {
+						if (empty($item->Comment)) {
+							$item->Comment = 'Criado em';
+						}
+					}
+					if ($item->Field == 'updated_at') {
+						if (empty($item->Comment)) {
+							$item->Comment = 'Atualizado em';
+						}
+					}
+					// set Comment as "#" if Field = "id" and comment is empty
+					if ($item->Field == 'id') {
+						if (empty($item->Comment)) {
+							$item->Comment = '#';
+						}
+					}
+					return $item;
+				});
+				
+				// change all empty comments to field name
+				$register = $register->map(function($item) {
+					if (empty($item->Comment)) {
+						$item->Comment = $item->Field;
+					}
+					return $item;
+				});
+
+				$result = $register->pluck('Comment', 'Field');
+				return $result;
+			},
+			15
+		);
+		return $result['data'];
+	}
+}
+
+/**
+ * Get comment from table table_name field "field_name"
+ * @param $table_name
+ * @param $field_name
+ * @return string
+ * 
+ */
+if (!function_exists('db_table_get_field_comment'))
+{
+	function db_table_get_field_comment($table_name, $field_name)
+	{
+		$result = db_table_get_fields_captions($table_name);
+		$result = $result->get($field_name);
 		return $result;
 	}
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ConfigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,6 @@ use App\Http\Controllers\Admin\AdminAuthController;
 |
  */
 
-
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
@@ -22,8 +23,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/', function () {
-            return view('welcome');
-        })->name('adminDashboard');
+            return redirect()->route('adminDashboard');
+        });
+        // add dashboard route
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
 
+        // add grouped config all routes
+        Route::group(['prefix' => 'config'], function () {
+            Route::get('/', [ConfigController::class, 'index'])->name('adminConfig');
+            Route::get('/create', [ConfigController::class, 'createOrEdit'])->name('adminConfigCreate');
+            Route::post('/store', [ConfigController::class, 'store'])->name('adminConfigStore');
+            Route::get('/edit/{id}', [ConfigController::class, 'createOrEdit'])->name('adminConfigEdit');
+            Route::post('/update/{id}', [ConfigController::class, 'update'])->name('adminConfigUpdate');
+            Route::get('/delete/{id}', [ConfigController::class, 'delete'])->name('adminConfigDelete');
+        });
     });
 });
