@@ -58,11 +58,17 @@
 							<td>{{ $config->created_at }}</td>
 							<td>{{ $config->updated_at }}</td>
 							<td>
-								<a href="{{ url('/admin/config/edit/' . $config->id) }}" class="btn btn-primary btn-sm">Editar</a>
+								<!-- button edit with icon -->
+								<a href="{{ route('adminConfigEdit', ['id' => $config->id]) }}" class="btn btn-sm btn-success">
+									<i class="fas fa-edit"></i> Editar
+								</a>
 								<form action="{{ url('/admin/config/delete/' . $config->id) }}" method="POST" style="display: inline-block;">
 									@csrf
 									@method('DELETE')
-									<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir este registro?')">Excluir</button>
+									<!-- submit button Excluir with icon and confirm -->
+									<button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Deseja realmente excluir este registro?')">
+										<i class="fas fa-trash"></i> Excluir
+									</button>
 								</form>
 							</td>
 						</tr>
