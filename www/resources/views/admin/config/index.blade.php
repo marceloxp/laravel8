@@ -11,13 +11,14 @@
 @section('content')
 	@include('admin.includes.alerts')
 
+	<!-- add adminlte table navigator search -->
 	<nav class="navbar navbar-expand navbar-white navbar-light ml-0">
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 			</li>
 			<li class="nav-item d-none d-sm-inline-block">
-				<a href="{{ url('/admin/config/create') }}" class="nav-link">Adicionar</a>
+				<a href="{{ route('adminConfigCreate') }}" class="nav-link">Adicionar</a>
 			</li>
 		</ul>
 		<form class="form-inline ml-3">
@@ -34,7 +35,6 @@
 
 	<!-- add adminlte table -->
 	<div class="card">
-		<!-- /.card-header -->
 		<div class="card-body table-responsive p-0">
 			<table class="table table-hover">
 				<thead>
@@ -70,11 +70,7 @@
 				</tbody>
 			</table>
 		</div>
-		<!-- /.card-body -->
 	</div>
-	<!-- /.card -->
-
-	<!-- add adminlte table -->
 
 	<!-- add config pagination links -->
 	<div>

@@ -19,7 +19,7 @@ class Config extends BaseModel
 	{
 		$rules = 
 		[
-			'name'   => 'required|max:150',
+			'name' => 'required|max:255|unique:configs,name,' . $id . ',id,deleted_at,NULL',
 			'value'  => 'required|max:255',
 			'status' => 'required|in:Ativo,Inativo'
 		];

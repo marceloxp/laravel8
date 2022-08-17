@@ -9,14 +9,15 @@
 	</div>
 @endif
 
-{{-- blade print if session has erros messages --}}
-@if(session()->has('errors'))
+@if ($errors->any())
 	<div class="alert alert-danger alert-dismissible">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<h5><i class="icon fas fa-check"></i> Mensagem do Sistema</h5>
-		@foreach (session()->get('errors') as $error)
-			<p>{{ $error }}</p>
-		@endforeach
+		<ul>
+			@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach
+		</ul>
 	</div>
 @endif
 

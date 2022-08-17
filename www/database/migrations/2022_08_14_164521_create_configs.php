@@ -15,12 +15,15 @@ class CreateConfigs extends Migration
     {
         Schema::create('configs', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 150)->unique()->comment('Nome');
+            $table->string('name', 150)->comment('Nome');
             $table->string('value')->comment('Valor');
             $table->integer('flags')->nullable()->comment('Flags');
             $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo')->comment('Status');
             $table->timestamps();
             $table->softDeletes();
+            $table->index('name');
+            $table->index('status');
+            $table->index(['name', 'status']);
             $table->index(['name','deleted_at']);
         });
         db_comment_table('configs', 'Configurações');

@@ -64,6 +64,7 @@ class BaseModel extends Model
 			{
 				$result['success'] = false;
 				$result['message'] = 'Entrada de dados inválida.';
+				$result['single']['message'] = 'Entrada de dados inválida.';
 				$result['all']     = [ $result['message'] ];
 				$result['fields']  = [];
 

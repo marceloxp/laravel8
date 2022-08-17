@@ -57,7 +57,7 @@
 			</div>
 			<div class="card-footer">
 				<button type="submit" class="btn btn-primary">Salvar</button>
-				<a href="{{ url('/admin/config') }}" class="btn btn-default">Cancelar</a>
+				<a href="{{ route('adminConfig') }}" class="btn btn-default">Cancelar</a>
 			</div>
 		</form>
 	</div>
