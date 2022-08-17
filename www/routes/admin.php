@@ -36,6 +36,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             Route::get('/edit/{id}', [ConfigController::class, 'createOrEdit'])->name('adminConfigEdit');
             Route::post('/update/{id}', [ConfigController::class, 'update'])->name('adminConfigUpdate');
             Route::delete('/delete/{id}', [ConfigController::class, 'delete'])->name('adminConfigDelete');
+            Route::get('/search', [ConfigController::class, 'search'])->name('adminConfigSearch');
         });
     });
 });

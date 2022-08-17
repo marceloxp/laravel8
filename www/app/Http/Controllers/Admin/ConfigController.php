@@ -10,6 +10,7 @@ class ConfigController extends BaseAdminController
     public function __construct()
     {
         $this->model = \App\Models\Config::class;
+        $this->setAdminTitle('Configurações');
         parent::__construct();
     }
 
@@ -21,6 +22,30 @@ class ConfigController extends BaseAdminController
 
         // return view with configs
         return view('admin.config.index', compact('configs'));
+    }
+
+    // add serach method
+    public function search(Request $request)
+    {
+        // get search value
+        $search = trim($request->get('search'));
+
+        // remove all special characters and preserve space from search value
+        $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
+
+        if (empty($search))
+        {
+            return redirect()->route('adminConfig');
+        }
+
+        $fmt_search = str_replace(' ', '%', $search);
+
+        // get posts by search
+        $configs = $this->model::where('name', 'like', '%' . $fmt_search . '%')
+            ->orWhere('value', 'like', '%' . $fmt_search . '%')
+            ->orderBy('id', 'desc')
+            ->paginate(2);
+        return view('admin.config.index', compact('configs','search'));
     }
 
     // add create or edit method

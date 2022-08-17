@@ -21,9 +21,9 @@
 				<a href="{{ route('adminConfigCreate') }}" class="nav-link">Adicionar</a>
 			</li>
 		</ul>
-		<form class="form-inline ml-3">
+		<form class="form-inline ml-3" action="{{ route('adminConfig') }}/search" method="get">
 			<div class="input-group input-group-sm">
-				<input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Buscar">
+				<input class="form-control form-control-navbar" id="search" name="search" type="search" placeholder="Buscar" aria-label="Buscar" value="{{ isset($search) ? $search : '' }}">
 				<div class="input-group-append">
 					<button class="btn btn-navbar" type="submit">
 						<i class="fas fa-search"></i>

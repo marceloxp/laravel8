@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class BaseAdminController extends Controller
 {
+	public $admin_title = 'UMS Admin';
+
     // create constructor method
     public function __construct()
     {
@@ -25,6 +27,7 @@ class BaseAdminController extends Controller
 					return $next($request);
 				}
 
+				$this->setAdminTitle($this->admin_title);
 				$this->user = $user;
 				$this->route_name = $route_name;
 
@@ -42,5 +45,12 @@ class BaseAdminController extends Controller
 			}
 		);
     }
+
+	// add function set admin title
+	public function setAdminTitle($admin_title)
+	{
+		$this->admin_title = $admin_title;
+		View::share(['admin_title' => $this->admin_title]);
+	}
     
 }
