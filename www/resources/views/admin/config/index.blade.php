@@ -49,20 +49,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($configs as $config)
+					@foreach($table as $register)
 						<tr>
-							<td>{{ $config->id }}</td>
-							<td>{{ $config->name }}</td>
-							<td>{{ $config->value }}</td>
-							<td>{{ $config->status }}</td>
-							<td>{{ $config->created_at }}</td>
-							<td>{{ $config->updated_at }}</td>
+							<td>{{ $register->id }}</td>
+							<td>{{ $register->name }}</td>
+							<td>{{ $register->value }}</td>
+							<td>{{ $register->status }}</td>
+							<td>{{ $register->created_at }}</td>
+							<td>{{ $register->updated_at }}</td>
 							<td>
 								<!-- button edit with icon -->
-								<a href="{{ route('adminConfigEdit', ['id' => $config->id]) }}" class="btn btn-sm btn-success">
+								<a href="{{ route('adminConfigEdit', ['id' => $register->id]) }}" class="btn btn-sm btn-success">
 									<i class="fas fa-edit"></i> Editar
 								</a>
-								<form action="{{ url('/admin/config/delete/' . $config->id) }}" method="POST" style="display: inline-block;">
+								<form action="{{ url('/admin/config/delete/' . $register->id) }}" method="POST" style="display: inline-block;">
 									@csrf
 									@method('DELETE')
 									<!-- submit button Excluir with icon and confirm -->
@@ -80,6 +80,6 @@
 
 	<!-- add config pagination links -->
 	<div>
-		{!! $configs->links() !!}
+		{!! $table->links() !!}
 	</div>
 @endsection

@@ -18,10 +18,10 @@ class ConfigController extends BaseAdminController
     public function index()
     {
         // get all configs paginated order by id desc
-        $configs = $this->model::orderBy('id', 'desc')->paginate(2);
+        $table = $this->model::orderBy('id', 'desc')->paginate(2);
 
         // return view with configs
-        return view('admin.config.index', compact('configs'));
+        return view('admin.config.index', compact('table'));
     }
 
     // add serach method
@@ -41,24 +41,24 @@ class ConfigController extends BaseAdminController
         $fmt_search = str_replace(' ', '%', $search);
 
         // get posts by search
-        $configs = $this->model::where('name', 'like', '%' . $fmt_search . '%')
+        $table = $this->model::where('name', 'like', '%' . $fmt_search . '%')
             ->orWhere('value', 'like', '%' . $fmt_search . '%')
             ->orderBy('id', 'desc')
             ->paginate(2);
-        return view('admin.config.index', compact('configs','search'));
+        return view('admin.config.index', compact('table','search'));
     }
 
     // add create or edit method
     public function createOrEdit(Request $request, $id = null)
     {
         // get config or create new config
-        $config = \App\Models\Config::find($id);
-        if(!$config)
+        $table = \App\Models\Config::find($id);
+        if(!$table)
         {
-            $config = new \App\Models\Config();
+            $table = new \App\Models\Config();
         }
         // return view with config
-        return view('admin.config.create_edit', compact('config'));
+        return view('admin.config.create_edit', compact('table'));
     }
 
     // add store method
@@ -115,10 +115,10 @@ class ConfigController extends BaseAdminController
     // add delete method
     public function delete(Request $request, $id)
     {
-        $config = $this->model::find($id);
-        if($config)
+        $register = $this->model::find($id);
+        if($register)
         {
-            $config->delete();
+            $register->delete();
             $request->session()->flash('messages', ['Registro excluído com sucesso.']);
         }
         else
