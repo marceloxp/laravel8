@@ -26,8 +26,8 @@ Route::group
             (
             [],
             function () {
-                Route::get('', [PageController::class, 'index'])->name('site.home');
-                Route::get('empresa', [PageController::class, 'empresa'])->name('site.empresa');
+                Route::get('', [PageController::class, 'index'])->name('home');
+                Route::get('empresa', [PageController::class, 'empresa'])->name('empresa');
             }
         );
     }
