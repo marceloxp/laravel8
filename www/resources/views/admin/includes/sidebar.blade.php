@@ -19,6 +19,12 @@
                                 <p>Configurações</p>
                             </a>
                         </li>
+                        <!-- add user menu -->
+                        <li class="nav-item">
+                            <a href="{{ url('/admin/user') }}" class="nav-link {{ admin_sidebar_active('user') }}"> <i class="fas fa-users nav-icon"></i>
+                                <p>Usuários</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- add logout link -->

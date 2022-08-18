@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->comment('E-mail');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->comment('Senha');
+            $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo')->comment('Status');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

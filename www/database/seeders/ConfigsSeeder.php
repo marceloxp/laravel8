@@ -14,7 +14,7 @@ class ConfigsSeeder extends Seeder
     public function run()
     {
         $now = \Carbon\Carbon::now();
-        
+
         \App\Models\Config::create([
             'name' => 'initial',
             'value' => '1',

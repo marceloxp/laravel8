@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<link rel="stylesheet" href="{{ vasset('/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 	<link rel="stylesheet" href="{{ url('/adminlte/dist/css/adminlte.min.css?v=3.2.0') }}">
+	@section('styles')
+
+	@show
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -25,7 +28,7 @@
 				</div>
 			</div>
 			<div class="content">
-				@yield('content')	
+				@yield('content')
 			</div>
 		</div>
 		<footer class="main-footer">
@@ -35,6 +38,8 @@
 	<script src="{{ vasset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
 	<script src="{{ vasset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ url('/adminlte/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
+
+	@yield('scripts')
 </body>
 
 </html>

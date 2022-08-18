@@ -4,13 +4,24 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+class User extends BaseModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
+    use Authenticatable, Authorizable, CanResetPassword;
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+
+	protected $dates   = ['created_at','updated_at','deleted_at'];
+	protected $guarded = ['created_at','updated_at','deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -41,4 +52,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+	public function roles()
+	{
+		return $this->belongsToMany(\App\Models\Role::class);
+	}
+
+        public static function validate($request, $id = '')
+    {
+		$rules = 
+		[
+			'name'  => 'required|min:3|max:150',
+			'email' => 'required|min:5|max:255|unique:users,email,' . $id . ',id,deleted_at,NULL'
+		];
+
+		if (!$id)
+		{
+			$rules['password'] = 'required|min:4|max:255';
+		}
+
+		return User::_validate($request, $rules, $id);
+    }
 }
