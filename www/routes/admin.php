@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             Route::get('/edit/{id}', [ConfigController::class, 'createOrEdit'])->name('adminConfigEdit');
             Route::post('/update/{id}', [ConfigController::class, 'update'])->name('adminConfigUpdate');
             Route::delete('/delete/{id}', [ConfigController::class, 'delete'])->name('adminConfigDelete');
-            Route::get('/search', [ConfigController::class, 'search'])->name('adminConfigSearch');
+            Route::get('/search', [ConfigController::class, 'index'])->name('adminConfigSearch');
         });
 
         // add grouped user all routes
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             Route::get('/edit/{id}', [UserController::class, 'createOrEdit'])->name('adminUserEdit');
             Route::post('/update/{id}', [UserController::class, 'update'])->name('adminUserUpdate');
             Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('adminUserDelete');
-            Route::get('/search', [UserController::class, 'search'])->name('adminUserSearch');
+            Route::get('/search', [UserController::class, 'index'])->name('adminUserSearch');
         });
     });
 });

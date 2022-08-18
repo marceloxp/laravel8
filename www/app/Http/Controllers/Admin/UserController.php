@@ -11,38 +11,31 @@ class UserController extends BaseAdminController
     {
         $this->model = \App\Models\User::class;
         $this->setAdminTitle('Usuários');
+        $this->setPaginationLimit(2);
         parent::__construct();
     }
 
-    // create index method
-    public function index()
-    {
-        // get all users and roles paginated order by id desc
-        $table = $this->model::orderBy('id', 'desc')->paginate(2);
-
-        // return view with users
-        return view('admin.user.index', compact('table'));
-    }
-
-    // add serach method
-    public function search(Request $request)
+    // create index method with search and pagination limit
+    public function index(Request $request)
     {
         // get search value
         $search = trim($request->get('search'));
 
         // remove all special characters and preserve space from search value
         $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
-
-        if (empty($search))
-        {
-            return redirect()->route('adminUser');
+        
+        if (!empty($search)) {
+            // get all users and roles order by id desc
+            $table = $this->model::where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orderBy('id', 'desc')
+                ->paginate($this->getpaginationLimit());
+        } else {
+            // get all users and roles order by id desc
+            $table = $this->model::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
         }
-        $fmt_search = str_replace(' ', '%', $search);
-        // get users by search
-        $table = $this->model::where('name', 'like', '%' . $fmt_search . '%')
-            ->orWhere('email', 'like', '%' . $fmt_search . '%')
-            ->orderBy('id', 'desc')
-            ->paginate(2);
+        
+        // return view with users
         return view('admin.user.index', compact('table','search'));
     }
 
@@ -68,6 +61,7 @@ class UserController extends BaseAdminController
 
         // get request except _token
         $form = $request->except('_token');
+
         // remove password if empty
         if(empty($form['password']))
         {
@@ -102,8 +96,8 @@ class UserController extends BaseAdminController
             // sync user roles
             $register->roles()->sync($roles);
 
-			$message = ($id) ? 'Registro atualizado com sucesso.' : 'Registro criado com sucesso.';
-			$request->session()->flash('messages', [$message]);
+			$message = ($id) ? 'Usuário atualizado com sucesso.' : 'Usuário criado com sucesso.';
+			$request->session()->flash('messages', $message);
 
             if ($id)
             {
@@ -117,44 +111,9 @@ class UserController extends BaseAdminController
 		else
 		{
 			return back()
-				->withErrors('Ocorreu um erro na gravação do registro.')
+				->withErrors('Ocorreu um erro na gravação do usuário.')
 				->withInput();
 		}
-    }
-
-    // create store method
-    public function storeOld(Request $request)
-    {
-        $id = $request->get('id');
-
-        // validate request
-        $valid = $this->model::validate($form, $id);
-		if (!$valid['success'])
-		{
-			return back()
-				->withErrors($valid['single'])
-				->withInput()
-			;
-		}
-
-        // get request data
-        $data = $request->all();
-        // create new user
-        $user = \App\Models\User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => \Hash::make($data['password']),
-        ]);
-        // get user roles
-        $roles = $data['roles'];
-        // if user has roles
-        if(!empty($roles))
-        {
-            // sync user roles
-            $user->roles()->sync($roles);
-        }
-        // return to index with success message
-        return redirect()->route('adminUser')->with('success','Usuário criado com sucesso.');
     }
 
     // create delete method

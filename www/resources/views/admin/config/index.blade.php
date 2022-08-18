@@ -11,27 +11,7 @@
 @section('content')
 	@include('admin.includes.alerts')
 
-	<!-- add adminlte table navigator search -->
-	<nav class="navbar navbar-expand navbar-white navbar-light ml-0">
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-			</li>
-			<li class="nav-item d-none d-sm-inline-block">
-				<a href="{{ route('adminConfigCreate') }}" class="nav-link">Adicionar</a>
-			</li>
-		</ul>
-		<form class="form-inline ml-3" action="{{ route('adminConfig') }}/search" method="get">
-			<div class="input-group input-group-sm">
-				<input class="form-control form-control-navbar" id="search" name="search" type="search" placeholder="Buscar" aria-label="Buscar" value="{{ isset($search) ? $search : '' }}">
-				<div class="input-group-append">
-					<button class="btn btn-navbar" type="submit">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-	</nav>
+	<x-admin-table-nav-bar route="config" search="{{ isset($search) ? $search : '' }}"/>
 
 	<!-- add adminlte table -->
 	<div class="card">
@@ -62,7 +42,7 @@
 								<a href="{{ route('adminConfigEdit', ['id' => $register->id]) }}" class="btn btn-sm btn-success">
 									<i class="fas fa-edit"></i> Editar
 								</a>
-								<form action="{{ url('/admin/config/delete/' . $register->id) }}" method="POST" style="display: inline-block;">
+								<form action="{{ route('adminConfigDelete', $register->id) }}" method="POST" style="display: inline-block;">
 									@csrf
 									@method('DELETE')
 									<!-- submit button Excluir with icon and confirm -->

@@ -11,21 +11,12 @@ class ConfigController extends BaseAdminController
     {
         $this->model = \App\Models\Config::class;
         $this->setAdminTitle('Configurações');
+        $this->setPaginationLimit(2);
         parent::__construct();
     }
 
     // create index method
-    public function index()
-    {
-        // get all configs paginated order by id desc
-        $table = $this->model::orderBy('id', 'desc')->paginate(2);
-
-        // return view with configs
-        return view('admin.config.index', compact('table'));
-    }
-
-    // add serach method
-    public function search(Request $request)
+    public function index(Request $request)
     {
         // get search value
         $search = trim($request->get('search'));
@@ -33,18 +24,18 @@ class ConfigController extends BaseAdminController
         // remove all special characters and preserve space from search value
         $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
 
-        if (empty($search))
-        {
-            return redirect()->route('adminConfig');
+        if (!empty($search)) {
+            // get all configs order by id desc
+            $table = \App\Models\Config::where('name', 'like', '%' . $search . '%')
+                ->orWhere('value', 'like', '%' . $search . '%')
+                ->orderBy('id', 'desc')
+                ->paginate($this->getpaginationLimit());
+        } else {
+            // get all configs order by id desc
+            $table = \App\Models\Config::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
         }
 
-        $fmt_search = str_replace(' ', '%', $search);
-
-        // get posts by search
-        $table = $this->model::where('name', 'like', '%' . $fmt_search . '%')
-            ->orWhere('value', 'like', '%' . $fmt_search . '%')
-            ->orderBy('id', 'desc')
-            ->paginate(2);
+        // return view with configs
         return view('admin.config.index', compact('table','search'));
     }
 

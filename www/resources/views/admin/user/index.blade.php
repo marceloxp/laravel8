@@ -64,11 +64,11 @@
 							<td>{{ $register->updated_at }}</td>
 							<td>
 								<!-- button edit with icon -->
-								<a href="{{ route('adminUserEdit', ['id' => $register->id]) }}" class="btn btn-success btn-sm">
+								<a href="{{ route('adminUserEdit', $register->id) }}" class="btn btn-success btn-sm">
 									<i class="fas fa-edit"></i> Editar
 								</a>
 								<!-- add delete form button with icon and confirm -->
-								<form action="{{ route('adminUserDelete', ['id' => $register->id]) }}" method="post" class="d-inline">
+								<form action="{{ route('adminUserDelete', $register->id) }}" method="post" class="d-inline">
 									@csrf
 									@method('DELETE')
 									<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir este registro?')">

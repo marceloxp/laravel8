@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class BaseAdminController extends Controller
 {
 	public $admin_title = 'UMS Admin';
+	public $pagination_limit = 10;
 
     // create constructor method
     public function __construct()
@@ -51,6 +52,18 @@ class BaseAdminController extends Controller
 	{
 		$this->admin_title = $admin_title;
 		View::share(['admin_title' => $this->admin_title]);
+	}
+
+	// add set pagination limit method
+	public function setPaginationLimit($pagination_limit)
+	{
+		$this->pagination_limit = $pagination_limit;
+	}
+
+	// add function get pagination limit
+	public function getPaginationLimit()
+	{
+		return $this->pagination_limit;
 	}
     
 }
