@@ -53,6 +53,7 @@ php artisan migrate:refresh --seed
 | ezyang/htmlpurifier              | <https://github.com/ezyang/htmlpurifier>                 |
 | summernote/summernote            | <https://github.com/summernote/summernote>               |
 | technoknol/log-my-queries        | <https://github.com/technoknol/LogMyQueries>             |
+| semver/semver                    | <https://github.com/semver/semver>                       |
 
 ## Libraries
 
