@@ -17,3 +17,39 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('brasil')->group
+(
+	function()
+	{
+		Route::get
+		(
+			'states',
+			function()
+			{
+				$result = \App\Http\Utilities\Brasil::getStates();
+				return response($result)->withHeaders(cached_headers($result));
+			}
+		);
+
+		Route::get
+		(
+			'cities/{uf}',
+			function($uf)
+			{
+				$result = \App\Http\Utilities\Brasil::getCitiesByUf($uf);
+				return response($result)->withHeaders(cached_headers($result));
+			}
+		);
+
+		Route::get
+		(
+			'cep/{cep}',
+			function($cep)
+			{
+				$result = cep_to_address($cep);
+				return $result['data'];
+			}
+		);
+	}
+);

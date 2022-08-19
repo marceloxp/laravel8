@@ -233,7 +233,7 @@ if (!function_exists('db_table_name_to_model'))
 {
 	function db_table_name_to_model($table_name)
 	{
-		return str_singular(ucfirst(mb_strtolower($table_name)));
+		return Illuminate\Support\Str::singular(ucfirst(mb_strtolower($table_name)));
 	}
 }
 

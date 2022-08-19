@@ -159,6 +159,11 @@ RouteLang::getCurrentLocale();        // Returns app current locale config (dyna
 - `{{url}}/api/brasil/states`
 - `{{url}}/api/brasil/cities/rj`
 
+| URL                                               |
+| ------------------------------------------------- |
+| http://local.laravel8.com.br/api/brasil/states    |
+| http://local.laravel8.com.br/api/brasil/cities/rj |
+
 ### Helpers
 
 #### admin
