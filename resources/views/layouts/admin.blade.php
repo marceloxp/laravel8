@@ -21,7 +21,6 @@
 <body class="hold-transition sidebar-mini {{ $darkMode }}">
 	<div class="wrapper">
 		@yield('sidebar')
-		
 		<div class="content-wrapper">
 			<div class="content-header">
 				<div class="container-fluid">
@@ -36,9 +35,6 @@
 				@yield('content')
 			</div>
 		</div>
-		<footer class="main-footer">
-			<div class="float-right d-none d-sm-inline"> Anything you want </div> <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-		</footer>
 	</div>
 	<script src="{{ vasset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
 	<script src="{{ vasset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
