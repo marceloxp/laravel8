@@ -19,8 +19,6 @@ class UsersSeeder extends Seeder
 		$prefix = trim(DB::getTablePrefix(), '_');
 		$year   = Carbon::now()->year;
 
-		echo sprintf('%s%s%s', $prefix, $year, 'admin'); die;
-
 		\DB::select('SET FOREIGN_KEY_CHECKS=0;');
 		\DB::select(sprintf('TRUNCATE TABLE %s;', db_prefixed_table('users')));
 		\DB::select('SET FOREIGN_KEY_CHECKS=1;');

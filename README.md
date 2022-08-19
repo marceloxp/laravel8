@@ -27,7 +27,7 @@ php artisan migrate:refresh --seed
 
 ## Framework
 
-- Laravel 8.x: <https://laravel.com/>
+- Laravel 8.x: <https://laravel.com/docs/8.x>
 
 ### Server Requirements
 
