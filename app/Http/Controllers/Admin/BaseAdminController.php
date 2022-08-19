@@ -22,6 +22,11 @@ class BaseAdminController extends Controller
                 $user = auth()->guard('admin')->user();
 				$route_name = Route::currentRouteName();
 
+				// get config from browser cookie
+				$darkMode = \Cookie::get('dark-mode');
+				$darkMode = (!empty($darkMode)) ? 'dark-mode' : '';
+				View::share('darkMode', $darkMode);
+
 				$is_ajax = $request->ajax();
 				if ($is_ajax)
 				{

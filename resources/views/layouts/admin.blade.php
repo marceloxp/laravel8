@@ -1,3 +1,8 @@
+@php
+	use \App\Http\Utilities\Datasite;
+	use \App\Http\Utilities\AutoAssets;
+@endphp
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -13,7 +18,7 @@
 	@show
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini {{ $darkMode }}">
 	<div class="wrapper">
 		@yield('sidebar')
 		
@@ -38,8 +43,14 @@
 	<script src="{{ vasset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
 	<script src="{{ vasset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ url('/adminlte/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
+	<script type="text/javascript" src="{{ vasset('/lib/cjsbaseclass.slim.min.js') }}" data-jquery-exclusive="true" data-silent-host="www.site.com.br"></script>
 
-	@yield('scripts')
+	{{-- Page Scripts --}}
+	@section('scripts')
+		{{ AutoAssets::print('js') }}
+	@show
+
+	{{ javascript('/js/admin/common.js') }}
 </body>
 
 </html>

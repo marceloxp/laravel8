@@ -14,6 +14,7 @@
                         <p> Administração <i class="right fas fa-angle-left"></i> </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <!-- add config menu -->    
                         <li class="nav-item">
                             <a href="{{ url('/admin/config') }}" class="nav-link {{ admin_sidebar_active('config') }}"> <i class="fas fa-cogs nav-icon"></i>
                                 <p>Configurações</p>
@@ -27,13 +28,24 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active"> <i class="fas fa-user-cog nav-icon"></i>
+                        <p> Preferências <i class="right fas fa-angle-left"></i> </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link"> <i class="fas fa-desktop nav-icon"></i>
+                                <p id="screen-mode">Tema Escuro</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <!-- add logout link -->
                 <li class="nav-item">
                     <a href="{{ route('adminLogout') }}" class="nav-link"> <i class="nav-icon fas fa-times"></i>
                         <p>Sair</p>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>

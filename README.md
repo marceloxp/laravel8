@@ -46,22 +46,22 @@ php artisan migrate:refresh --seed
 
 ## Plugins
 
-| Plugin                           | Address                                                  |
-| -------------------------------- | -------------------------------------------------------- |
-| digitalnature/php-ref            | <https://github.com/digitalnature/php-ref>               |
-| barryvdh/laravel-debugbar        | <https://github.com/barryvdh/laravel-debugbar>           |
-| ezyang/htmlpurifier              | <https://github.com/ezyang/htmlpurifier>                 |
-| summernote/summernote            | <https://github.com/summernote/summernote>               |
-| technoknol/log-my-queries        | <https://github.com/technoknol/LogMyQueries>             |
-| semver/semver                    | <https://github.com/semver/semver>                       |
+| Plugin                           | Address                                        |
+| -------------------------------- | ---------------------------------------------- |
+| digitalnature/php-ref            | <https://github.com/digitalnature/php-ref>     |
+| barryvdh/laravel-debugbar        | <https://github.com/barryvdh/laravel-debugbar> |
+| ezyang/htmlpurifier              | <https://github.com/ezyang/htmlpurifier>       |
+| summernote/summernote            | <https://github.com/summernote/summernote>     |
+| technoknol/log-my-queries        | <https://github.com/technoknol/LogMyQueries>   |
+| semver/semver                    | <https://github.com/semver/semver>             |
 
 ## Libraries
 
 | Local  | Library          | Site                                           | Description                                                                       |
-| ------ | ---------------- | ---------------------------------------------- | --------------------------------------------------------------------------------- |
-| Global | cjsbaseclass.js  | <https://www.npmjs.com/package/cjsbaseclass>   | Base JS class                                                                     |
-| Admin  | prism.js         | <http://prismjs.com/>                          | Syntax highlighter                                                                |
-| Admin  | sweetalert.js    | <https://sweetalert.js.org/>                   | A beautiful replacement for messages                                              |
+| ------ | ---------------- | ---------------------------------------------- | ------------------------------------ |
+| Global | cjsbaseclass.js  | <https://www.npmjs.com/package/cjsbaseclass>   | Base JS class                        |
+| Admin  | prism.js         | <http://prismjs.com/>                          | Syntax highlighter                   |
+| Admin  | sweetalert.js    | <https://sweetalert.js.org/>                   | A beautiful replacement for messages |
 
 ## Admin Template
 
@@ -192,18 +192,18 @@ echo admin_select_simple_with_add_button($p_field_name, $p_options, $p_field_val
 <!-- Versioned Asset -->
 <!-- Add host and app version -->
 <img src="{{ vasset('/img/logo.png') }}">
-<img src="https://wwww.site.com.br/img/logo.png?v=0.0.2">
+<img src="http://local.laravel8.com.br/images/logo.png?v=0.0.2">
 ```
 
 #### javascript and css
 
 ```php
 // Add host and app version
-javascript('/js/main.js');
-<script type="text/javascript" src="https://wwww.site.com.br/js/main.js?v=0.0.1"></script>>
+javascript('/js/home.js');
+<script type="text/javascript" src="http://local.laravel8.com.br/js/home.js?v=0.0.1"></script>>
 
 css('/css/style.css');
-<link rel="stylesheet" type="text/css" href="https://wwww.site.com.br/css/style.css?v=0.0.1">
+<link rel="stylesheet" type="text/css" href="http://local.laravel8.com.br/css/style.css?v=0.0.1">
 ```
 
 ```php
