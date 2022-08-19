@@ -181,6 +181,26 @@ echo admin_select_simple_with_add_button($p_field_name, $p_options, $p_field_val
 
 #### Bootstrap
 
+#### vasset
+
+```html
+<!-- Versioned Asset -->
+<!-- Add host and app version -->
+<img src="{{ vasset('/img/logo.png') }}">
+<img src="https://wwww.site.com.br/img/logo.png?v=0.0.2">
+```
+
+#### javascript and css
+
+```php
+// Add host and app version
+javascript('/js/main.js');
+<script type="text/javascript" src="https://wwww.site.com.br/js/main.js?v=0.0.1"></script>>
+
+css('/css/style.css');
+<link rel="stylesheet" type="text/css" href="https://wwww.site.com.br/css/style.css?v=0.0.1">
+```
+
 ```php
 echo alert_success('Mensagem enviada com sucesso.');
 echo alert_danger('Ocorreu um erro na solicitação!');
@@ -246,26 +266,6 @@ echo db_table_name_to_field_id('cities');               // Returns relative fiel
 echo db_trim_table_prefix('blp_cities');                // Returns table name without database table prefix => cities
 echo db_prefixed_table('cities');                       // Returns table with database table prefix => blp_cities
 echo db_table_exists('cities');                         // Returns if table exists in database
-```
-
-#### vasset
-
-```html
-<!-- Versioned Asset -->
-<!-- Add host and app version -->
-<img src="{{ vasset('/img/logo.png') }}">
-<img src="https://wwww.site.com.br/img/logo.png?v=0.0.2">
-```
-
-#### javascript and css
-
-```php
-// Add host and app version
-javascript('/js/main.js');
-<script type="text/javascript" src="https://wwww.site.com.br/js/main.js?v=0.0.1"></script>>
-
-css('/css/style.css');
-<link rel="stylesheet" type="text/css" href="https://wwww.site.com.br/css/style.css?v=0.0.1">
 ```
 
 #### app_version
