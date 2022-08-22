@@ -10,27 +10,28 @@
 		<form action="{{ route('adminUserStore') }}" method="POST">
 			@csrf
 			<div class="card-body">
-				<x-form-model :register="$register">
-					<!-- add id field -->
-					<x-form-model.id/>
+				<x-admin-form-model :register="$register">
+					<!-- add user id field -->	
+					<x-admin-form-model.id/>
 
 					<!-- add user name field -->
-					<x-form-model.text name="name"/>
+					<x-admin-form-model.text name="name"/>
 
 					<!-- add user email field -->
-					<x-form-model.email name="email"/>
+					<x-admin-form-model.email name="email"/>
 
 					<!-- add user password field -->
-					<x-form-model.password name="password"/>
+					<x-admin-form-model.password name="password"/>
 
 					<!-- add user status field -->
-					<x-form-model.active name="status"/>
+					<x-admin-form-model.active name="status"/>
 
 					<!-- add user roles field -->
-					<x-form-model.multiple name="roles" caption="Permissões" :table="$roles"/>
-				</x-form-model>
+					<x-admin-form-model.multiple name="roles" caption="Permissões" :table="$roles"/>
+				</x-admin-form-model>
 			</div>
-			<x-form-model.buttons index-route="{{ route('adminUser') }}"/>
+			<!-- add Save and Cancel buttons -->
+			<x-admin-form-model.buttons index-route-name="adminUser"/>
 		</form>
 	</div>
 @endsection

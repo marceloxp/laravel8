@@ -12,23 +12,25 @@
 			<div class="card-body">
 				{{-- https://laravel.com/docs/8.x/blade#rendering-components --}}
 				<!-- add optional id primary key field -->
-				<x-form-model :register="$register">
-					<x-form-model.id/>
+				<x-admin-form-model :register="$register">
+					<!-- add config id field -->	
+					<x-admin-form-model.id/>
 
 					<!-- add config name field -->
-					<x-form-model.text name="name"/>
+					<x-admin-form-model.text name="name"/>
 
 					<!-- add config value field -->
-					<x-form-model.text name="value"/>
+					<x-admin-form-model.text name="value"/>
 
 					<!-- add config flags field -->
-					<x-form-model.text name="flags"/>
+					<x-admin-form-model.text name="flags"/>
 
 					<!-- add config status active field -->
-					<x-form-model.active name="status"/>
-				</x-form-model>
+					<x-admin-form-model.active name="status"/>
+				</x-admin-form-model>
 			</div>
-			<x-form-model.buttons index-route="{{ route('adminConfig') }}"/>
+			<!-- add Save and Cancel buttons -->
+			<x-admin-form-model.buttons index-route-name="adminConfig"/>
 		</form>
 	</div>
 @endsection

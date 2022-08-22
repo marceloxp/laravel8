@@ -30,18 +30,12 @@
 							<td>{{ $register->created_at }}</td>
 							<td>{{ $register->updated_at }}</td>
 							<td>
-								<!-- button edit with icon -->
-								<a href="{{ route('adminConfigEdit', ['id' => $register->id]) }}" class="btn btn-sm btn-success">
-									<i class="fas fa-edit"></i> Editar
-								</a>
-								<form action="{{ route('adminConfigDelete', $register->id) }}" method="POST" style="display: inline-block;">
-									@csrf
-									@method('DELETE')
-									<!-- submit button Excluir with icon and confirm -->
-									<button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Deseja realmente excluir este registro?')">
-										<i class="fas fa-trash"></i> Excluir
-									</button>
-								</form>
+								<x-admin-table :register="$register">
+									<!-- admin button component edit with icon -->
+									<x-admin-table.action-edit action-route-name="adminConfigEdit" />
+									<!-- x-admin button delete -->
+									<x-admin-table.action-delete action-route-name="adminConfigDelete" />
+								</x-admin-table>
 							</td>
 						</tr>
 					@endforeach
