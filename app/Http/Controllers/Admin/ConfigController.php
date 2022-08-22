@@ -11,7 +11,6 @@ class ConfigController extends BaseAdminController
     {
         $this->model = \App\Models\Config::class;
         $this->setAdminTitle('Configurações');
-        $this->setPaginationLimit(2);
         parent::__construct();
     }
 

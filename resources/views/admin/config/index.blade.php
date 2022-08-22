@@ -50,8 +50,6 @@
 		</div>
 	</div>
 
-	<!-- add config pagination links -->
-	<div>
-		{!! $table->links() !!}
-	</div>
+	<!-- add component config pagination links -->
+	<x-admin-pagination-links :table="$table" />
 @endsection

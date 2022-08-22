@@ -73,4 +73,16 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 
 		return User::_validate($request, $rules, $id);
     }
+
+    // get if user isDeveloper
+    public function isDeveloper()
+    {
+        return $this->hasRole('Developer');
+    }
+
+    // get if user hasRole
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->count() == 1;
+    }
 }

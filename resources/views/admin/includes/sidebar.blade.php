@@ -26,6 +26,14 @@
                                 <p>Usuários</p>
                             </a>
                         </li>
+                        @if($user->isDeveloper())
+                            <!-- add clear cache link -->
+                            <li class="nav-item">
+                                <a href="{{ url('/admin/clear-cache') }}" class="nav-link {{ admin_sidebar_active('clear-cache') }}"> <i class="fas fa-sync-alt nav-icon"></i>
+                                    <p>Limpar Cache</p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
                 <li class="nav-item menu-open">

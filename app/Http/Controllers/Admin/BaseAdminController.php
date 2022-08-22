@@ -21,6 +21,7 @@ class BaseAdminController extends Controller
 			{
                 $user = auth()->guard('admin')->user();
 				$route_name = Route::currentRouteName();
+				$this->setPaginationLimit(intval(env('ADMIN_PAGINATION_LIMIT')));
 
 				// get config from browser cookie
 				$darkMode = \Cookie::get('dark-mode');

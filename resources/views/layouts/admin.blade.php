@@ -14,12 +14,25 @@
 	<link rel="stylesheet" href="{{ vasset('/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 	<link rel="stylesheet" href="{{ url('/adminlte/dist/css/adminlte.min.css?v=3.2.0') }}">
 	<link rel="stylesheet" href="{{ vasset('/adminlte/plugins/select2/css/select2.min.css') }}">
+	<!-- <link rel="stylesheet" href="{{ vasset('/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}"> -->
 	<style>
 		.dark-mode .select2-container--default .select2-selection--multiple {
 			background-color: #343a40;
 		}
 		.dark-mode .select2-cyan .select2-container--default .select2-search--inline .select2-search__field:focus {
 			border: none !important;
+		}
+		.table_pagination div {
+			display: flex;
+		}
+		.table_pagination_description {
+			justify-content: flex-end;
+		}
+		/* make align center where screeen less than 760 */
+		@media (max-width: 760px) {
+			.table_pagination div {
+				justify-content: center;
+			}
 		}
 	</style>
 	@section('styles')

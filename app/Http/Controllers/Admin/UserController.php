@@ -11,7 +11,6 @@ class UserController extends BaseAdminController
     {
         $this->model = \App\Models\User::class;
         $this->setAdminTitle('Usuários');
-        $this->setPaginationLimit(2);
         parent::__construct();
     }
 
@@ -34,7 +33,7 @@ class UserController extends BaseAdminController
             // get all users and roles order by id desc
             $table = $this->model::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
         }
-        
+
         // return view with users
         return view('admin.user.index', compact('table','search'));
     }

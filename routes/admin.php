@@ -50,5 +50,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('adminUserDelete');
             Route::get('/search', [UserController::class, 'index'])->name('adminUserSearch');
         });
+
+        // add clear cache route
+        Route::get('/clear-cache', function () {
+            $exitCode = Artisan::call('makex:cached --clear');
+            return redirect()->route('adminDashboard');
+        });
     });
 });
