@@ -63,6 +63,9 @@ php artisan migrate:refresh --seed
 | Admin  | prism.js         | <http://prismjs.com/>                          | Syntax highlighter                   |
 | Admin  | sweetalert.js    | <https://sweetalert.js.org/>                   | A beautiful replacement for messages |
 
+## Laravel components
+<https://laravel.com/docs/8.x/blade#rendering-components>
+
 ## Admin Template
 
 > AdminLTE: <https://adminlte.io/themes/v3/>

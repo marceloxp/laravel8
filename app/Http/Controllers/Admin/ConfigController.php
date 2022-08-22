@@ -43,13 +43,13 @@ class ConfigController extends BaseAdminController
     public function createOrEdit(Request $request, $id = null)
     {
         // get config or create new config
-        $table = \App\Models\Config::find($id);
-        if(!$table)
+        $register = \App\Models\Config::find($id);
+        if(!$register)
         {
-            $table = new \App\Models\Config();
+            $register = new \App\Models\Config();
         }
         // return view with config
-        return view('admin.config.create_edit', compact('table'));
+        return view('admin.config.create_edit', compact('register'));
     }
 
     // add store method

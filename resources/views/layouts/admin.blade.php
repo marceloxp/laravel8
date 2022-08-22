@@ -13,6 +13,15 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<link rel="stylesheet" href="{{ vasset('/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 	<link rel="stylesheet" href="{{ url('/adminlte/dist/css/adminlte.min.css?v=3.2.0') }}">
+	<link rel="stylesheet" href="{{ vasset('/adminlte/plugins/select2/css/select2.min.css') }}">
+	<style>
+		.dark-mode .select2-container--default .select2-selection--multiple {
+			background-color: #343a40;
+		}
+		.dark-mode .select2-cyan .select2-container--default .select2-search--inline .select2-search__field:focus {
+			border: none !important;
+		}
+	</style>
 	@section('styles')
 
 	@show
@@ -20,7 +29,7 @@
 
 <body class="hold-transition sidebar-mini {{ $darkMode }}">
 	<div class="wrapper">
-		@yield('sidebar')
+		@include('admin.includes.sidebar')
 		<div class="content-wrapper">
 			<div class="content-header">
 				<div class="container-fluid">
@@ -40,6 +49,12 @@
 	<script src="{{ vasset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ url('/adminlte/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
 	<script type="text/javascript" src="{{ vasset('/lib/cjsbaseclass.slim.min.js') }}" data-jquery-exclusive="true" data-silent-host="www.site.com.br"></script>
+	<script src="{{ vasset('/adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
+	<script>
+		$(document).ready(function() {
+			$('.select2').select2();
+		});
+	</script>
 
 	{{-- Page Scripts --}}
 	@section('scripts')
