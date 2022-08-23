@@ -14,8 +14,6 @@
 					<!-- add config id field -->	
 					<x-admin-form-model.id/>
 
-					<x-admin-form-model.mask type="data" name="date"/>
-
 					<!-- add config name field -->
 					<x-admin-form-model.text name="name"/>
 
