@@ -70,6 +70,68 @@ php artisan migrate:refresh --seed
 
 > AdminLTE: <https://adminlte.io/themes/v3/>
 
+## Admin Components
+
+### Forms
+
+```blade
+	<form action="{{ route('adminConfigStore') }}" method="POST">
+		@csrf
+		<div class="card-body">
+			<x-admin-form-model :register="$register">
+				{{-- Add ID register field --}}
+				<x-admin-form-model.id/>
+				
+				{{-- Add name register field --}}
+				<x-admin-form-model.text name="name"/>
+				
+				{{-- Add Active/Inactive status register field --}}
+				<x-admin-form-model.active name="status"/>
+				
+				{{-- Add mask date register field --}}
+				<x-admin-form-model.mask type="data" name="date"/>
+
+				{{-- Add mask cep register field --}}
+				<x-admin-form-model.mask type="cep" name="cep"/>
+
+				{{-- Add mask ddd phone register field --}}
+				<x-admin-form-model.mask type="ddd-tel9" name="dddphone"/>
+
+				{{-- Add mask phone register field --}}
+				<x-admin-form-model.mask type="tel9" name="phone"/>
+
+				{{-- Add mask cpf register field --}}
+				<x-admin-form-model.mask type="cpf" name="cpf"/>
+
+				{{-- Add mask cnpj register field --}}
+				<x-admin-form-model.mask type="cnpj" name="cnpj"/>
+			</x-admin-form-model>
+
+			{{-- Add Save and Cancel buttons --}}
+			<x-admin-form-model.buttons index-route-name="adminConfig"/>
+		</div>
+	</form>
+```
+
+### Index list table
+
+```blade
+	<!-- add component config pagination links -->
+	<x-admin-pagination-links :table="$table" />
+```
+
+### Each button Edit and Delete on list table
+
+```blade
+	<x-admin-table :register="$register">
+		<!-- admin button component edit with icon -->
+		<x-admin-table.action-edit action-route-name="adminConfigEdit"/>
+
+		<!-- x-admin button delete -->
+		<x-admin-table.action-delete action-route-name="adminConfigDelete"/>
+	</x-admin-table>
+```
+
 ## Custom Classes
 
 ### Datasite `\App\Http\Utilities\Datasite`

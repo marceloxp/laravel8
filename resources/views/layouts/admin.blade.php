@@ -14,7 +14,6 @@
 	<link rel="stylesheet" href="{{ vasset('/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 	<link rel="stylesheet" href="{{ url('/adminlte/dist/css/adminlte.min.css?v=3.2.0') }}">
 	<link rel="stylesheet" href="{{ vasset('/adminlte/plugins/select2/css/select2.min.css') }}">
-	<!-- <link rel="stylesheet" href="{{ vasset('/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}"> -->
 	<style>
 		.dark-mode .select2-container--default .select2-selection--multiple {
 			background-color: #343a40;
@@ -63,6 +62,7 @@
 	<script src="{{ url('/adminlte/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
 	<script type="text/javascript" src="{{ vasset('/lib/cjsbaseclass.slim.min.js') }}" data-jquery-exclusive="true" data-silent-host="www.site.com.br"></script>
 	<script src="{{ vasset('/adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
+	<script src="{{ vasset('/lib/jquery.SimpleMask.min.js') }}"></script>
 	<script>
 		$(document).ready(function() {
 			$('.select2').select2();

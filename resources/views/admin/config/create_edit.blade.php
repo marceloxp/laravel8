@@ -10,11 +10,11 @@
 		<form action="{{ route('adminConfigStore') }}" method="POST">
 			@csrf
 			<div class="card-body">
-				{{-- https://laravel.com/docs/8.x/blade#rendering-components --}}
-				<!-- add optional id primary key field -->
 				<x-admin-form-model :register="$register">
 					<!-- add config id field -->	
 					<x-admin-form-model.id/>
+
+					<x-admin-form-model.mask type="data" name="date"/>
 
 					<!-- add config name field -->
 					<x-admin-form-model.text name="name"/>
