@@ -58,12 +58,14 @@ php artisan migrate:refresh --seed
 ## Libraries
 
 | Local  | Library          | Site                                           | Description                                                                       |
-| ------ | ---------------- | ---------------------------------------------- | ------------------------------------ |
-| Global | cjsbaseclass.js  | <https://www.npmjs.com/package/cjsbaseclass>   | Base JS class                        |
-| Admin  | prism.js         | <http://prismjs.com/>                          | Syntax highlighter                   |
-| Admin  | sweetalert.js    | <https://sweetalert.js.org/>                   | A beautiful replacement for messages |
+| ------ | ------------------------ | ---------------------------------------------- | ------------------------------------ |
+| Global | cjsbaseclass.js          | <https://www.npmjs.com/package/cjsbaseclass>   | Base JS class                        |
+| Admin  | jquery.SimpleMask.min.js | <https://github.com/DevUtils/jQuerySimpleMask> | Jquery SimpleMask                    |
+| Admin  | prism.js                 | <http://prismjs.com>                           | Syntax highlighter                   |
+| Admin  | sweetalert.js            | <https://sweetalert.js.org>                    | A beautiful replacement for messages |
 
 ## Laravel components
+
 <https://laravel.com/docs/8.x/blade#rendering-components>
 
 ## Admin Template
@@ -75,61 +77,61 @@ php artisan migrate:refresh --seed
 ### Forms
 
 ```blade
-	<form action="{{ route('adminConfigStore') }}" method="POST">
-		@csrf
-		<div class="card-body">
-			<x-admin-form-model :register="$register">
-				{{-- Add ID register field --}}
-				<x-admin-form-model.id/>
-				
-				{{-- Add name register field --}}
-				<x-admin-form-model.text name="name"/>
-				
-				{{-- Add Active/Inactive status register field --}}
-				<x-admin-form-model.active name="status"/>
-				
-				{{-- Add mask date register field --}}
-				<x-admin-form-model.mask type="data" name="date"/>
+<form action="{{ route('adminConfigStore') }}" method="POST">
+	@csrf
+	<div class="card-body">
+		<x-admin-form-model :register="$register">
+			{{-- Add ID register field --}}
+			<x-admin-form-model.id/>
+			
+			{{-- Add name register field --}}
+			<x-admin-form-model.text name="name"/>
+			
+			{{-- Add Active/Inactive status register field --}}
+			<x-admin-form-model.active name="status"/>
+			
+			{{-- Add mask date register field --}}
+			<x-admin-form-model.mask type="data" name="date"/>
 
-				{{-- Add mask cep register field --}}
-				<x-admin-form-model.mask type="cep" name="cep"/>
+			{{-- Add mask cep register field --}}
+			<x-admin-form-model.mask type="cep" name="cep"/>
 
-				{{-- Add mask ddd phone register field --}}
-				<x-admin-form-model.mask type="ddd-tel9" name="dddphone"/>
+			{{-- Add mask ddd phone register field --}}
+			<x-admin-form-model.mask type="ddd-tel9" name="dddphone"/>
 
-				{{-- Add mask phone register field --}}
-				<x-admin-form-model.mask type="tel9" name="phone"/>
+			{{-- Add mask phone register field --}}
+			<x-admin-form-model.mask type="tel9" name="phone"/>
 
-				{{-- Add mask cpf register field --}}
-				<x-admin-form-model.mask type="cpf" name="cpf"/>
+			{{-- Add mask cpf register field --}}
+			<x-admin-form-model.mask type="cpf" name="cpf"/>
 
-				{{-- Add mask cnpj register field --}}
-				<x-admin-form-model.mask type="cnpj" name="cnpj"/>
-			</x-admin-form-model>
+			{{-- Add mask cnpj register field --}}
+			<x-admin-form-model.mask type="cnpj" name="cnpj"/>
+		</x-admin-form-model>
 
-			{{-- Add Save and Cancel buttons --}}
-			<x-admin-form-model.buttons index-route-name="adminConfig"/>
-		</div>
-	</form>
+		{{-- Add Save and Cancel buttons --}}
+		<x-admin-form-model.buttons index-route-name="adminConfig"/>
+	</div>
+</form>
 ```
 
 ### Index list table
 
 ```blade
-	<!-- add component config pagination links -->
-	<x-admin-pagination-links :table="$table" />
+<!-- add component config pagination links -->
+<x-admin-pagination-links :table="$table" />
 ```
 
 ### Each button Edit and Delete on list table
 
 ```blade
-	<x-admin-table :register="$register">
-		<!-- admin button component edit with icon -->
-		<x-admin-table.action-edit action-route-name="adminConfigEdit"/>
+<x-admin-table :register="$register">
+	<!-- admin button component edit with icon -->
+	<x-admin-table.action-edit action-route-name="adminConfigEdit"/>
 
-		<!-- x-admin button delete -->
-		<x-admin-table.action-delete action-route-name="adminConfigDelete"/>
-	</x-admin-table>
+	<!-- x-admin button delete -->
+	<x-admin-table.action-delete action-route-name="adminConfigDelete"/>
+</x-admin-table>
 ```
 
 ## Custom Classes
