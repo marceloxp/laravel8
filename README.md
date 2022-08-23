@@ -57,7 +57,7 @@ php artisan migrate:refresh --seed
 
 ## Libraries
 
-| Local  | Library          | Site                                           | Description                                                                       |
+| Local  | Library                  | Site                                           | Description                          |
 | ------ | ------------------------ | ---------------------------------------------- | ------------------------------------ |
 | Global | cjsbaseclass.js          | <https://www.npmjs.com/package/cjsbaseclass>   | Base JS class                        |
 | Admin  | jquery.SimpleMask.min.js | <https://github.com/DevUtils/jQuerySimpleMask> | Jquery SimpleMask                    |
