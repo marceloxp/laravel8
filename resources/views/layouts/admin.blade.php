@@ -63,6 +63,7 @@
 	<script type="text/javascript" src="{{ vasset('/lib/cjsbaseclass.slim.min.js') }}" data-jquery-exclusive="true" data-silent-host="www.site.com.br"></script>
 	<script src="{{ vasset('/adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
 	<script src="{{ vasset('/lib/jquery.SimpleMask.min.js') }}"></script>
+	<script src="{{ vasset('/lib/sweetalert.min.js') }}"></script>
 	<script>
 		$(document).ready(function() {
 			$('.select2').select2();
