@@ -31,7 +31,7 @@ php artisan migrate:refresh --seed
 
 ### Server Requirements
 
-- PHP >= 7.4
+- PHP >= 7.3
 - OpenSSL PHP Extension
 - PDO PHP Extension
 - Mbstring PHP Extension

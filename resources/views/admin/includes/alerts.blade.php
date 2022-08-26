@@ -28,9 +28,9 @@
 {{-- blade print if session has erros or messages --}}
 @if(session()->has('errors') || session()->has('messages'))
 	<script>
-		// hide alert after 3 seconds
+		// hide alert after 6 seconds
 		setTimeout(function() {
 			$('.alert').fadeOut();
-		}, 3000);
+		}, 6000);
 	</script>
 @endif

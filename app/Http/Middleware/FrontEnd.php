@@ -20,6 +20,7 @@ class FrontEnd
     {
 		if (!$request->ajax())
 		{
+			$env = env('APP_ENV');
 			$routename = Route::currentRouteName();
 			$url = 
 			[
@@ -30,7 +31,7 @@ class FrontEnd
 			];
 
 			Datasite::add('csrf_token', csrf_token());
-			Datasite::add(compact('url'));
+			Datasite::add(compact('url', 'env'));
 		}
 		
 		return $next($request);
