@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Utilities\Cached;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -83,6 +84,17 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     // get if user hasRole
     public function hasRole($role)
     {
-        return $this->roles()->where('name', $role)->count() == 1;
+        $result = Cached::get
+        (
+            'sys-user-hasRole',
+            [$this->id, $role],
+            function() use ($role)
+            {
+                return $this->roles()->where('name', $role)->count() == 1;
+            },
+            5
+        );
+        
+        return $result;
     }
 }
