@@ -13,6 +13,8 @@ class Config extends BaseModel
 
 	// add protected guarded dates
 	protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+	// add fillable fields
+	protected $fillable = ['name', 'value', 'status'];
 
     // create static function validate
 	public static function validate($request, $id = '')
