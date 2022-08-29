@@ -6,14 +6,16 @@ use Illuminate\View\Component;
 
 class AdminTableNavBar extends Component
 {
+    public $search;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($search)
     {
-        
+        $this->search = $search;
     }
 
     /**

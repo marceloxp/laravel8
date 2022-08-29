@@ -41,8 +41,8 @@ class BaseAdminController extends Controller
 				// get all field captions
 				if (isset($this->model))
 				{
-					$fields_captions = $this->model::getFieldsCaptions();
-					View::share('fields_captions', $fields_captions);
+					$this->fields_captions = $this->model::getFieldsCaptions();
+					View::share('fields_captions', $this->fields_captions);
 					View::share('model', $this->model);
 				}
 
@@ -52,6 +52,115 @@ class BaseAdminController extends Controller
                 return $next($request);
 			}
 		);
+    }
+
+	public function defaultIndex(Request $request)
+    {
+        // get search value
+        $search = trim($request->get('search'));
+
+        // remove all special characters and preserve space from search value
+        $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
+
+        if (!empty($search)) {
+			$fields_search = $this->fields_captions->keys()->toArray();
+			// remove created_at, updated_at and deleted_at from fields_search
+			$fields_search = array_diff($fields_search, ['created_at', 'updated_at', 'deleted_at']);
+
+            // get all table order by id desc
+            $table = $this->model::select();
+			// foreach $fields_search, add orWhere condition
+			foreach ($fields_search as $field) {
+				$table->orWhere($field, 'like', '%' . $search . '%');
+			}
+            $table = $table->orderBy('id', 'desc')->paginate($this->getpaginationLimit());
+        } else {
+            // get all table order by id desc
+            $table = $this->model::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
+        }
+
+        // return view with table
+        return view($this->model::getAdminViewPath('index'), compact('table','search'));
+    }
+
+    // add create or edit method
+    public function defaultCreateOrEdit(Request $request, $id = null)
+    {
+        // get table or create new table
+        $register = $this->model::find($id);
+        if(!$register)
+        {
+            $register = new $this->model();
+        }
+        // return view with table
+        return view($this->model::getAdminViewPath('create_edit'), compact('register'));
+    }
+
+    // add store method
+    public function defaultStore(Request $request)
+    {
+        $id = $request->get('id');
+
+        // get request except _token
+        $form = $request->except('_token');
+
+        // validate request
+		$valid = $this->model::validate($form, $id);
+		if (!$valid['success'])
+		{
+			return back()
+				->withErrors($valid['single'])
+				->withInput()
+			;
+		}
+
+		if (!empty($id))
+		{
+			$register = $this->model::firstOrNew(['id' => $id]);
+			$register->fill($form);
+		}
+		else
+		{
+			$register = $this->model::create($form);
+		}
+        $saved = (empty($id)) ? ($register->save()) : ($register->update());
+
+		if ($saved)
+		{
+			$message = ($id) ? 'Registro atualizado com sucesso.' : 'Registro criado com sucesso.';
+			$request->session()->flash('messages', [$message]);
+
+            if ($id)
+            {
+                return redirect()->route($this->model::getAdminRouteName('edit'), ['id' => $id]);
+            }
+            else
+            {
+                return redirect()->route($this->model::getAdminRouteName('index'));
+            }
+		}
+		else
+		{
+			return back()
+				->withErrors('Ocorreu um erro na gravação do registro.')
+				->withInput();
+		}
+    }
+
+    // add delete method
+    public function defaultDelete(Request $request, $id)
+    {
+        $register = $this->model::find($id);
+        if($register)
+        {
+            $register->delete();
+            $request->session()->flash('messages', ['Registro excluído com sucesso.']);
+        }
+        else
+        {
+            $request->session()->flash('messages', ['Registro não encontrado.']);
+        }
+        return redirect()->route($this->model::getAdminRouteName('index'));
     }
 
 	// add function set admin title
