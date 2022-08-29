@@ -37,6 +37,30 @@ class BaseModel extends Model
 		return db_table_get_fields_captions(self::getTableName());
 	}
 
+	// create function to get default admin route names
+	public static function getAdminRouteName($route)
+	{
+		if ($route === 'index') {
+			$route = '';
+		}
+		// get Laravel singular name of current table model
+		$singular_name = ucfirst(str_to_singular(strtolower(self::getTableName())));
+		return sprintf('admin%s%s', $singular_name, ucfirst(strtolower($route)));
+	}
+
+	// create function to get route of current table model
+	public static function getAdminRouteByName($route)
+	{
+		return ($route === 'index') ? route(self::getAdminRouteName('')) : route(self::getAdminRouteName($route));
+	}
+
+	// create function to get default admin view path
+	public static function getAdminViewPath($route)
+	{
+		$singular_name = str_to_singular(strtolower(self::getTableName()));
+		return sprintf('admin.%s.%s', $singular_name, $route);
+	}
+
 	public static function _validate($request, $rules, $id = null)
 	{
 		try

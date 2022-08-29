@@ -24,31 +24,31 @@ class ConfigController extends BaseAdminController
         $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
 
         if (!empty($search)) {
-            // get all configs order by id desc
-            $table = \App\Models\Config::where('name', 'like', '%' . $search . '%')
+            // get all table order by id desc
+            $table = $this->model::where('name', 'like', '%' . $search . '%')
                 ->orWhere('value', 'like', '%' . $search . '%')
                 ->orderBy('id', 'desc')
                 ->paginate($this->getpaginationLimit());
         } else {
-            // get all configs order by id desc
-            $table = \App\Models\Config::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
+            // get all table order by id desc
+            $table = $this->model::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
         }
 
-        // return view with configs
-        return view('admin.config.index', compact('table','search'));
+        // return view with table
+        return view($this->model::getAdminViewPath('index'), compact('table','search'));
     }
 
     // add create or edit method
     public function createOrEdit(Request $request, $id = null)
     {
-        // get config or create new config
-        $register = \App\Models\Config::find($id);
+        // get table or create new table
+        $register = $this->model::find($id);
         if(!$register)
         {
-            $register = new \App\Models\Config();
+            $register = new $this->model();
         }
-        // return view with config
-        return view('admin.config.create_edit', compact('register'));
+        // return view with table
+        return view($this->model::getAdminViewPath('create_edit'), compact('register'));
     }
 
     // add store method
@@ -87,11 +87,11 @@ class ConfigController extends BaseAdminController
 
             if ($id)
             {
-                return redirect()->route('adminConfigEdit', ['id' => $id]);
+                return redirect()->route($this->model::getAdminRouteName('edit'), ['id' => $id]);
             }
             else
             {
-                return redirect()->route('adminConfig');
+                return redirect()->route($this->model::getAdminRouteName('index'));
             }
 		}
 		else
@@ -115,6 +115,6 @@ class ConfigController extends BaseAdminController
         {
             $request->session()->flash('messages', ['Registro não encontrado.']);
         }
-        return redirect()->route('adminConfig');
+        return redirect()->route($this->model::getAdminRouteName('index'));
     }
 }

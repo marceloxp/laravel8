@@ -43,6 +43,7 @@ class BaseAdminController extends Controller
 				{
 					$fields_captions = $this->model::getFieldsCaptions();
 					View::share('fields_captions', $fields_captions);
+					View::share('model', $this->model);
 				}
 
 				// add view share data with compact function

@@ -3,7 +3,7 @@
 @section('content')
 	@include('admin.includes.alerts')
 
-	<x-admin-table-nav-bar route="config" search="{{ isset($search) ? $search : '' }}"/>
+	<x-admin-table-nav-bar/>
 
 	<!-- add adminlte table -->
 	<div class="card">
@@ -32,9 +32,9 @@
 							<td>
 								<x-admin-table :register="$register">
 									<!-- admin button component edit with icon -->
-									<x-admin-table.action-edit action-route-name="adminConfigEdit" />
+									<x-admin-table.action-edit/>
 									<!-- x-admin button delete -->
-									<x-admin-table.action-delete action-route-name="adminConfigDelete" />
+									<x-admin-table.action-delete/>
 								</x-admin-table>
 							</td>
 						</tr>

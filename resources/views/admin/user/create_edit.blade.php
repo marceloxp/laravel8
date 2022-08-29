@@ -7,7 +7,7 @@
 		<div class="card-header">
 			<h3 class="card-title">Editar Registro</h3>
 		</div>
-		<form action="{{ route('adminUserStore') }}" method="POST">
+		<form action="{{ $model::getAdminRouteByName('store') }}" method="POST">
 			@csrf
 			<div class="card-body">
 				<x-admin-form-model :register="$register">
@@ -31,7 +31,7 @@
 				</x-admin-form-model>
 			</div>
 			<!-- add Save and Cancel buttons -->
-			<x-admin-form-model.buttons index-route-name="adminUser"/>
+			<x-admin-form-model.buttons/>
 		</form>
 	</div>
 @endsection
