@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Swal extends Component
+class AdminDefaultSwal extends Component
 {
     private $messages_success = [];
     private $messages_errors = [];
@@ -56,7 +56,7 @@ class Swal extends Component
      */
     public function render()
     {
-        return view('components.swal', [
+        return view('components.admin-default-swal', [
             'messages_success' => $this->messages_success,
             'messages_errors' => $this->messages_errors,
         ]);

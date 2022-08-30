@@ -62,7 +62,7 @@
 				@yield('content')
 			</div>
 		</div>
-		<x-swal/>
+		<x-admin-default-swal/>
 	</div>
 
 	<script src="{{ vasset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
