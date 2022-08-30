@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-	@include('admin.includes.alerts')
-
 	<div class="card card-primary">
 		<div class="card-header">
 			<h3 class="card-title">Editar Registro</h3>

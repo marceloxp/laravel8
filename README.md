@@ -62,7 +62,6 @@ php artisan migrate:refresh --seed
 | Global | cjsbaseclass.js          | <https://www.npmjs.com/package/cjsbaseclass>   | Base JS class                        |
 | Admin  | jquery.SimpleMask.min.js | <https://github.com/DevUtils/jQuerySimpleMask> | Jquery SimpleMask                    |
 | Admin  | prism.js                 | <http://prismjs.com>                           | Syntax highlighter                   |
-| Admin  | sweetalert.js            | <https://sweetalert.js.org>                    | A beautiful replacement for messages |
 
 ## Admin Template
 
@@ -110,7 +109,7 @@ php artisan migrate:refresh --seed
 		</x-admin-form-model>
 
 		{{-- Add Save and Cancel buttons --}}
-		<x-admin-form-model.buttons index-route-name="adminConfig"/>
+		<x-admin-form-model.buttons/>
 	</div>
 </form>
 ```
@@ -127,10 +126,10 @@ php artisan migrate:refresh --seed
 ```blade
 <x-admin-table :register="$register">
 	<!-- admin button component edit with icon -->
-	<x-admin-table.action-edit action-route-name="adminConfigEdit"/>
+	<x-admin-table.action-edit/>
 
 	<!-- x-admin button delete -->
-	<x-admin-table.action-delete action-route-name="adminConfigDelete"/>
+	<x-admin-table.action-delete/>
 </x-admin-table>
 ```
 

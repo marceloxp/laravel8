@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-	@include('admin.includes.alerts')
-
 	<x-admin-table-nav-bar :search="$search"/>
 
 	<!-- add adminlte table -->
