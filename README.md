@@ -133,6 +133,12 @@ php artisan migrate:refresh --seed
 </x-admin-table>
 ```
 
+### Console Commands
+
+```sh
+makex:crud ModelName
+```
+
 ## Custom Classes
 
 ### Datasite `\App\Http\Utilities\Datasite`
