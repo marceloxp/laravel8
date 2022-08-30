@@ -53,11 +53,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // add clear cache route
         Route::get('/clear-cache', function () {
-            $exitCode = Artisan::call('makex:cached --clear');
-            $exitCode = Artisan::call('route:clear');
-            $exitCode = Artisan::call('config:clear');
+            $exitCode = Artisan::call('cache:clear');
             $exitCode = Artisan::call('view:clear');
+            $exitCode = Artisan::call('config:clear');
+            $exitCode = Artisan::call('route:clear');
+            $exitCode = Artisan::call('makex:cached --clear');
+            session()->flash('messages', ['Cache limpo com sucesso']);
             return redirect()->route('adminDashboard');
-        });
+        })->name('adminClearCache');
     });
 });

@@ -56,13 +56,11 @@ class Makex extends Command
                 $this->call('view:clear');
                 $this->call('config:clear');
                 $this->call('route:clear');
-                $this->call('clear-compiled');
                 $this->call('makex:cached', ['--clear' => true]);
             break;
             case 'Create a new Model, Migrate and Seeder':
                 $modelname = $this->ask('What is the model name?');
                 $this->call('make:model', ['name' => 'App/Models/' . $modelname, '--migration' => true, '-s' => true]);
-
                 // get filename of current Model
                 $modelFile = app_path('Models/' . $modelname . '.php');
                 $model = file_get_contents($modelFile);
@@ -77,7 +75,7 @@ class Makex extends Command
                 $this->call('makex:crud', ['modelname' => $modelname]);
             break;
             case 'Drop all tables and re-run all migrations and seeders':
-                // confirm before droping tables
+                // confirm before dropping tables
                 if ($this->confirm('Are you sure you want to drop all tables and re-run all migrations and seeders?')) {
                     $this->call('migrate:fresh', ['--seed' => true]);
                 }

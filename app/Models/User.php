@@ -81,6 +81,12 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         return $this->hasRole('Developer');
     }
 
+    // get if user isDeveloper or is Master
+    public function isDeveloperOrIsMaster()
+    {
+        return $this->hasRole('Developer') || $this->hasRole('Master');
+    }
+
     // get if user hasRole
     public function hasRole($role)
     {

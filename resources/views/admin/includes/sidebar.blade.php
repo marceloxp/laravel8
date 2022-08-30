@@ -9,45 +9,22 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active"> <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p> Administração <i class="right fas fa-angle-left"></i> </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <!-- add config menu -->    
-                        <li class="nav-item">
-                            <a href="{{ url('/admin/config') }}" class="nav-link {{ admin_sidebar_active('config') }}"> <i class="fas fa-cogs nav-icon"></i>
-                                <p>Configurações</p>
-                            </a>
-                        </li>
-                        <!-- add user menu -->
-                        <li class="nav-item">
-                            <a href="{{ url('/admin/user') }}" class="nav-link {{ admin_sidebar_active('user') }}"> <i class="fas fa-users nav-icon"></i>
-                                <p>Usuários</p>
-                            </a>
-                        </li>
-                        @if($user->isDeveloper())
-                            <!-- add clear cache link -->
-                            <li class="nav-item">
-                                <a href="{{ url('/admin/clear-cache') }}" class="nav-link {{ admin_sidebar_active('clear-cache') }}"> <i class="fas fa-sync-alt nav-icon"></i>
-                                    <p>Limpar Cache</p>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active"> <i class="fas fa-user-cog nav-icon"></i>
-                        <p> Preferências <i class="right fas fa-angle-left"></i> </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"> <i class="fas fa-desktop nav-icon"></i>
-                                <p id="screen-mode">Tema Escuro</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <x-admin-sidebar caption="Administração" icon="fas fa-tachometer-alt" :visible="$user->isDeveloperOrIsMaster()">
+                    <!-- add config menu component -->
+                    <x-admin-sidebar.item routeName="adminConfig" caption="Configurações" slug="config" icon="fas fa-cogs"/>
+                    <!-- add user menu component -->
+                    <x-admin-sidebar.item routeName="adminUser" caption="Usuários" slug="user" icon="fas fa-users"/>
+                    <!-- add clear cache link component -->
+                    <x-admin-sidebar.item routeName="adminClearCache" caption="Limpar Cache" slug="clear-cache" icon="fas fa-trash-alt" :visible="$user->isDeveloper()"/>
+                </x-admin-sidebar>
+                <!-- add sidebar header component -->
+                <x-admin-sidebar caption="Preferências" icon="fas fa-user-cog" :visible="true">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"> <i class="fas fa-desktop nav-icon"></i>
+                            <p id="screen-mode">Tema Escuro</p>
+                        </a>
+                    </li>
+                </x-admin-sidebar>
                 <!-- add logout link -->
                 <li class="nav-item">
                     <a href="{{ route('adminLogout') }}" class="nav-link"> <i class="nav-icon fas fa-times"></i>
