@@ -26,11 +26,7 @@
                     </li>
                 </x-admin-sidebar>
                 <!-- add logout link -->
-                <li class="nav-item">
-                    <a href="{{ route('adminLogout') }}" class="nav-link"> <i class="nav-icon fas fa-times"></i>
-                        <p>Sair</p>
-                    </a>
-                </li>
+                <x-admin-sidebar.item routeName="adminLogout" caption="Sair" slug="logout" icon="fas fa-sign-out-alt" :visible="true"/>
             </ul>
         </nav>
     </div>

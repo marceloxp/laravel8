@@ -2,7 +2,7 @@
 
 @if ($visible)
     <li class="nav-item">
-        <a href="{{ route($routeName) }}" class="nav-link {{ admin_sidebar_active($slug) }}"> <i class="{{ $icon }} nav-icon"></i>
+        <a href="{{ (!empty($routeName)) ? route($routeName) : '#' }}" class="nav-link {{ admin_sidebar_active($slug) }}"> <i class="{{ $icon }} nav-icon"></i>
             <p>{{ $caption }}</p>
         </a>
     </li>
