@@ -10,6 +10,9 @@ class State extends BaseModel
 	protected $dates   = ['created_at','updated_at','deleted_at'];
 	protected $guarded = ['created_at','updated_at','deleted_at'];
 
+	// add fillable fields
+	protected $fillable = ['name', 'uf'];
+
     public static function getStateIdByUf($p_uf)
 	{
 		try

@@ -10,12 +10,16 @@ class Role extends BaseModel
     protected $dates   = ['created_at','updated_at','deleted_at'];
 	protected $guarded = ['created_at','updated_at','deleted_at'];
 
+	// add fillable fields
+	protected $fillable = ['name', 'description', 'color'];
+
     public static function validate($request, $id = '')
     {
 		$rules = 
 		[
 			'name'        => 'required|min:5|max:150|unique:roles,name,' . $id,
-			'description' => 'required|min:5|max:255'
+			'description' => 'required|min:5|max:255',
+			'color'       => 'required|min:5|max:255'
 		];
 
 		return Role::_validate($request, $rules, $id);

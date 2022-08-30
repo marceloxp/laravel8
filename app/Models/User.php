@@ -33,6 +33,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         'name',
         'email',
         'password',
+        'status',
     ];
 
     /**

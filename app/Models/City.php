@@ -10,6 +10,9 @@ class City extends BaseModel
 	protected $dates   = ['created_at','updated_at','deleted_at'];
 	protected $guarded = ['created_at','updated_at','deleted_at'];
 
+	// add fillable fields
+	protected $fillable = ['name', 'state_id', 'status'];
+
 	public static function getByUf($p_uf)
 	{
 		$uf_id = \App\Models\State::getStateIdByUf($p_uf);
@@ -44,4 +47,3 @@ class City extends BaseModel
 		return Role::_validate($request, $rules, $id);
 	}
 }
-

@@ -11,8 +11,9 @@ class Config extends BaseModel
     use HasFactory;
 	use SoftDeletes;
 
-	// add protected guarded dates
+	protected $dates   = ['created_at','updated_at','deleted_at'];
 	protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+	
 	// add fillable fields
 	protected $fillable = ['name', 'value', 'status'];
 
