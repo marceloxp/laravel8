@@ -456,3 +456,13 @@ echo str2bool('foo');   // Returns false;
 		$this->publishes($publishes, 'summernote');
 	}
 ```
+
+### Tests
+
+```terminal
+vendor/bin/phpunit --filter ConfigTest
+vendor/bin/phpunit --filter UserTest
+php artisan dusk --filter AdminTest::testAdminLoginAccess
+php artisan dusk --filter AdminTest::testAdminConfigAdd
+php artisan dusk --filter AdminTest::testAdminConfigDelete
+```

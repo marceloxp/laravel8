@@ -23,7 +23,7 @@
 				<tbody>
 					@foreach($table as $register)
 						<tr>
-							<td>{{ $register->id }}</td>
+							<td><div data-id="{{ $register->id }}">{{ $register->id }}</div></td>
 							<td>{{ $register->name }}</td>
 							<td>{{ $register->value }}</td>
 							<td>{{ $register->status }}</td>

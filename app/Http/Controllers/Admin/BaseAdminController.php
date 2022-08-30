@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Utilities\Datasite;
+
 
 class BaseAdminController extends Controller
 {
@@ -78,6 +80,8 @@ class BaseAdminController extends Controller
             // get all table order by id desc
             $table = $this->model::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
         }
+
+		Datasite::add(compact('table'));
 
         // return view with table
         return view($this->model::getAdminViewPath('index'), compact('table','search'));

@@ -37,6 +37,10 @@
 	@section('styles')
 
 	@show
+
+	@section('datasite')
+		<script>window.datasite = @json(Datasite::get())</script>
+	@show
 </head>
 
 <body class="hold-transition sidebar-mini {{ $darkMode }}">

@@ -5,7 +5,7 @@
     @csrf
     @method('DELETE')
     <!-- submit button Excluir with icon and confirm -->
-    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('{{ $confirm_message }}')">
+    <button data-id="{{ $register->id }}" type="submit" class="btn btn-sm btn-danger" onclick="return confirm('{{ $confirm_message }}')">
         <i class="fas fa-trash"></i> {{ $caption }}
     </button>
 </form>

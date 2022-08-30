@@ -10,6 +10,6 @@ class ConfigTest extends TestCase
     public function check_if_config_columns_is_correct()
     {
         $config = new \App\Models\Config();
-        $this->assertEquals(['name', 'value', 'status', 'seila'], $config->getFillable());
+        $this->assertEquals(['name', 'value', 'status'], $config->getFillable());
     }
 }
