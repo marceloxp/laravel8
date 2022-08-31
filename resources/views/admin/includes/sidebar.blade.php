@@ -15,7 +15,7 @@
                     {{-- add user menu component --}}
                     <x-admin-sidebar.item routeName="adminUser" caption="Usuários" slug="user" icon="fas fa-users"/>
                     {{-- add clear cache link component --}}
-                    <x-admin-sidebar.item routeName="adminClearCache" caption="Limpar Cache" slug="clear-cache" icon="fas fa-trash-alt"/>
+                    <x-admin-sidebar.item routeName="adminClearCache" caption="Limpar Cache ({{ $cached_count }})" slug="clear-cache" icon="fas fa-trash-alt"/>
                     {{-- add logs link --}}
                     <x-admin-sidebar.item routeName="adminLogs" target="_blank" caption="Logs" slug="logs" icon="fas fa-file-alt"/>
 

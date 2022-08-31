@@ -36,6 +36,10 @@ class BaseAdminController extends Controller
 					return $next($request);
 				}
 
+				// get count of cached
+				$cached_count = \App\Http\Utilities\Cached::count();
+				View::share('cached_count', $cached_count);
+
 				$this->setAdminTitle($this->admin_title);
 				$this->user = $user;
 				$this->route_name = $route_name;
