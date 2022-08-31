@@ -10,14 +10,17 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <x-admin-sidebar caption="Administração" icon="fas fa-tachometer-alt" :visible="$user->isDeveloperOrIsMaster()">
-                    <!-- add config menu component -->
+                    {{-- add config menu component --}}
                     <x-admin-sidebar.item routeName="adminConfig" caption="Configurações" slug="config" icon="fas fa-cogs"/>
-                    <!-- add user menu component -->
+                    {{-- add user menu component --}}
                     <x-admin-sidebar.item routeName="adminUser" caption="Usuários" slug="user" icon="fas fa-users"/>
-                    <!-- add clear cache link component -->
-                    <x-admin-sidebar.item routeName="adminClearCache" caption="Limpar Cache" slug="clear-cache" icon="fas fa-trash-alt" :visible="$user->isDeveloper()"/>
+                    {{-- add clear cache link component --}}
+                    <x-admin-sidebar.item routeName="adminClearCache" caption="Limpar Cache" slug="clear-cache" icon="fas fa-trash-alt"/>
+                    {{-- add logs link --}}
+                    <x-admin-sidebar.item routeName="adminLogs" target="_blank" caption="Logs" slug="logs" icon="fas fa-file-alt"/>
+
                 </x-admin-sidebar>
-                <!-- add sidebar header component -->
+                {{-- add sidebar header component --}}
                 <x-admin-sidebar caption="Preferências" icon="fas fa-user-cog" :visible="true">
                     <li class="nav-item">
                         <a href="#" class="nav-link"> <i class="fas fa-desktop nav-icon"></i>
@@ -25,7 +28,7 @@
                         </a>
                     </li>
                 </x-admin-sidebar>
-                <!-- add logout link -->
+                {{-- add logout link --}}
                 <x-admin-sidebar.item routeName="adminLogout" caption="Sair" slug="logout" icon="fas fa-sign-out-alt" :visible="true"/>
             </ul>
         </nav>

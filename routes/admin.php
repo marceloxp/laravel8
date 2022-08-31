@@ -54,6 +54,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('adminUserDelete');
                 Route::get('/search', [UserController::class, 'index'])->name('adminUserSearch');
             });
+
+            Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('adminLogs');
         });
 
         // add clear cache route
