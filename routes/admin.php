@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\UserController;
+// add use AdminEnsureUserIsMasterDeveloper
+use App\Http\Middleware\AdminEnsureUserIsMasterDeveloper;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,26 +31,29 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // add dashboard route
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
 
-        // add grouped config all routes
-        Route::group(['prefix' => 'config'], function () {
-            Route::get('/', [ConfigController::class, 'index'])->name('adminConfig');
-            Route::get('/create', [ConfigController::class, 'createOrEdit'])->name('adminConfigCreate');
-            Route::post('/store', [ConfigController::class, 'store'])->name('adminConfigStore');
-            Route::get('/edit/{id}', [ConfigController::class, 'createOrEdit'])->name('adminConfigEdit');
-            Route::post('/update/{id}', [ConfigController::class, 'update'])->name('adminConfigUpdate');
-            Route::delete('/delete/{id}', [ConfigController::class, 'delete'])->name('adminConfigDelete');
-            Route::get('/search', [ConfigController::class, 'index'])->name('adminConfigSearch');
-        });
+        // add route group with middleware to ensure user is master or developer
+        Route::group(['middleware' => AdminEnsureUserIsMasterDeveloper::class], function () {
+            // add grouped config all routes
+            Route::group(['prefix' => 'config'], function () {
+                Route::get('/', [ConfigController::class, 'index'])->name('adminConfig');
+                Route::get('/create', [ConfigController::class, 'createOrEdit'])->name('adminConfigCreate');
+                Route::post('/store', [ConfigController::class, 'store'])->name('adminConfigStore');
+                Route::get('/edit/{id}', [ConfigController::class, 'createOrEdit'])->name('adminConfigEdit');
+                Route::post('/update/{id}', [ConfigController::class, 'update'])->name('adminConfigUpdate');
+                Route::delete('/delete/{id}', [ConfigController::class, 'delete'])->name('adminConfigDelete');
+                Route::get('/search', [ConfigController::class, 'index'])->name('adminConfigSearch');
+            });
 
-        // add grouped user all routes
-        Route::group(['prefix' => 'user'], function () {
-            Route::get('/', [UserController::class, 'index'])->name('adminUser');
-            Route::get('/create', [UserController::class, 'createOrEdit'])->name('adminUserCreate');
-            Route::post('/store', [UserController::class, 'store'])->name('adminUserStore');
-            Route::get('/edit/{id}', [UserController::class, 'createOrEdit'])->name('adminUserEdit');
-            Route::post('/update/{id}', [UserController::class, 'update'])->name('adminUserUpdate');
-            Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('adminUserDelete');
-            Route::get('/search', [UserController::class, 'index'])->name('adminUserSearch');
+            // add grouped user all routes
+            Route::group(['prefix' => 'user'], function () {
+                Route::get('/', [UserController::class, 'index'])->name('adminUser');
+                Route::get('/create', [UserController::class, 'createOrEdit'])->name('adminUserCreate');
+                Route::post('/store', [UserController::class, 'store'])->name('adminUserStore');
+                Route::get('/edit/{id}', [UserController::class, 'createOrEdit'])->name('adminUserEdit');
+                Route::post('/update/{id}', [UserController::class, 'update'])->name('adminUserUpdate');
+                Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('adminUserDelete');
+                Route::get('/search', [UserController::class, 'index'])->name('adminUserSearch');
+            });
         });
 
         // add clear cache route

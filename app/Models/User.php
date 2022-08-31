@@ -97,11 +97,11 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
             [$this->id, $role],
             function() use ($role)
             {
-                return $this->roles()->where('name', $role)->count() == 1;
+                return $this->roles()->where('name', $role)->exists();
             },
             5
         );
-        
-        return $result;
+
+        return $result['data'];
     }
 }
