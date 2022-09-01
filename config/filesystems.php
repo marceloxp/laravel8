@@ -42,6 +42,22 @@ return [
             'visibility' => 'public',
         ],
 
+        'upload_images' => 
+        [
+            'driver'     => 'local',
+            'root'       => storage_path('app/public/uploads/images'),
+            'url'        => env('APP_URL') . '/storage/uploads/images',
+            'visibility' => 'public',
+        ],
+
+        'upload_pdfs' => 
+		[
+            'driver'     => 'local',
+            'root'       => storage_path('app/public/uploads/pdfs'),
+            'url'        => env('APP_URL') . '/storage/uploads/pdfs',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

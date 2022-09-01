@@ -77,6 +77,8 @@ class UserController extends BaseAdminController
 			;
 		}
 
+        $form = $this->processUploads($request, $form);
+
 		if (!empty($id))
 		{
 			$register = $this->model::firstOrNew(['id' => $id]);

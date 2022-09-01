@@ -1,5 +1,13 @@
 @extends('layouts.admin')
 
+@section('styles')
+	<style>
+		.image_uploaded_file {
+			max-height: 100px;
+		}
+	</style>
+@endsection
+
 @section('content')
 	<x-admin-table-nav-bar :search="$search"/>
 
@@ -11,6 +19,7 @@
 				<thead>
 					<tr>
 						<th>{{ $fields_captions->get('id') }}</th>
+						<th>{{ $fields_captions->get('avatar') }}</th>
 						<th>{{ $fields_captions->get('name') }}</th>
 						<th>{{ $fields_captions->get('email') }}</th>
 						<th>Permissões</th>
@@ -23,6 +32,9 @@
 					@foreach($table as $register)
 						<tr>
 							<td>{{ $register->id }}</td>
+							<td>
+								<x-image-uploaded-file class="image_uploaded_file" :filename="$register->avatar" noimage="/images/admin/user-no-image.png"/>
+							</td>
 							<td>{{ $register->name }}</td>
 							<td>{{ $register->email }}</td>
 							<td>

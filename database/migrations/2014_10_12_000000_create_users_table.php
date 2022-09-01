@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name')->comment('Nome');
             $table->string('email')->comment('E-mail');
+            $table->string('avatar')->nullable()->comment('Avatar');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->comment('Senha');
             $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo')->comment('Status');

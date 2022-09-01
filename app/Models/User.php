@@ -32,6 +32,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     protected $fillable = [
         'name',
         'email',
+        'avatar',
         'password',
         'status',
     ];
@@ -60,12 +61,12 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 		return $this->belongsToMany(\App\Models\Role::class);
 	}
 
-        public static function validate($request, $id = '')
+    public static function validate($request, $id = '')
     {
 		$rules = 
 		[
 			'name'  => 'required|min:3|max:150',
-			'email' => 'required|min:5|max:255|unique:users,email,' . $id . ',id,deleted_at,NULL'
+			'email' => 'required|min:5|max:255|unique:users,email,' . $id . ',id,deleted_at,NULL',
 		];
 
 		if (!$id)
