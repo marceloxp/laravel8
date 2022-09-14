@@ -17,9 +17,8 @@ class CitiesTableSeeder extends Seeder
     {
         // php artisan iseed cities --chunksize=2000 --noindex --exclude=updated_at,deleted_at,created_at --force
 
-        // Schema::disableForeignKeyConstraints();
         DB::table('cities')->truncate();
-        // Schema::enableForeignKeyConstraints();
+        
         DB::table('cities')->insert(array (
             
             array (

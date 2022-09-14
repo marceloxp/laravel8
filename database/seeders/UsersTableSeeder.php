@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
@@ -19,9 +20,10 @@ class UsersTableSeeder extends Seeder
 		$prefix = trim(DB::getTablePrefix(), '_');
 		$year   = Carbon::now()->year;
 
-		\DB::select('SET FOREIGN_KEY_CHECKS=0;');
-		\DB::select(sprintf('TRUNCATE TABLE %s;', db_prefixed_table('users')));
-		\DB::select('SET FOREIGN_KEY_CHECKS=1;');
+		// truncate the table users, set disable foreign key check, use Schema facade
+		Schema::disableForeignKeyConstraints();
+		DB::table('users')->truncate();
+		Schema::enableForeignKeyConstraints();
 
 		$admin_user = 
 		[
