@@ -17,12 +17,9 @@ class CitiesTableSeeder extends Seeder
     {
         // php artisan iseed cities --chunksize=2000 --noindex --exclude=updated_at,deleted_at,created_at --force
 
-        // if count of cities is more than 0, then truncate table
-        if (DB::table('cities')->count() > 0) {
-            Schema::disableForeignKeyConstraints();
-            DB::table('cities')->truncate();
-            Schema::enableForeignKeyConstraints();
-        }
+        // Schema::disableForeignKeyConstraints();
+        DB::table('cities')->truncate();
+        // Schema::enableForeignKeyConstraints();
         DB::table('cities')->insert(array (
             
             array (

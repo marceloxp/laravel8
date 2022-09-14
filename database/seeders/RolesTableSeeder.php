@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class RolesTableSeeder extends Seeder
 {
@@ -15,10 +16,10 @@ class RolesTableSeeder extends Seeder
 	{
 		$now = \Carbon\Carbon::now();
 
-        \DB::select('SET FOREIGN_KEY_CHECKS=0;');
-		\DB::select(sprintf('TRUNCATE TABLE %s;', db_prefixed_table('roles')));
-		\DB::select(sprintf('TRUNCATE TABLE %s;', db_prefixed_table('role_user')));
-		\DB::select('SET FOREIGN_KEY_CHECKS=1;');
+        Schema::disableForeignKeyConstraints();
+		\App\Models\Role::truncate();
+		\DB::table('role_user')->truncate();
+		Schema::enableForeignKeyConstraints();
 
 		$public_role = 
 		[

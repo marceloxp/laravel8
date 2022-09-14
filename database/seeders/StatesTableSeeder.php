@@ -19,7 +19,6 @@ class StatesTableSeeder extends Seeder
         // php artisan iseed states --noindex --exclude=updated_at,deleted_at,created_at --force
 
         Schema::disableForeignKeyConstraints();
-        DB::table('cities')->truncate();
         DB::table('states')->truncate();
         Schema::enableForeignKeyConstraints();
         
