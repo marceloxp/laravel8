@@ -284,45 +284,6 @@ echo alert_danger('Ocorreu um erro na solicitação!');
 echo print_alert(); // Auto print messages from Session
 ```
 
-#### Money
-```sh
->>> use \App\Http\Utilities\Money;
-
-## Basic ------------------------------------------------
->>> $var = new Money(2.5);
-=> App\Http\Utilities\Money {
-	 +value: 2.5,
-	 +formated: "2,50",
-   }
->>> $var->value;
-=> 2.5
->>> $var->formated;
-=> "2,50"
->>> $var->getRaw();
-=> "250"
-
-## Increment --------------------------------------------
->>> $var->inc(3.50);
-=> App\Http\Utilities\Money {
-	 +value: 6.0,
-	 +formated: "6,00",
-   }
-   
-## Create another Money object
->>> $another = new Money(1.00);
-=> App\Http\Utilities\Money {
-	 +value: 1.0,
-	 +formated: "1,00",
-   }
-   
-## Increment using Money Object -------------------------
->>> $var->inc($another);
-=> App\Http\Utilities\Money {
-	 +value: 7.0,
-	 +formated: "7,00",
-   }
-```
-
 #### DB
 
 ```php
@@ -410,7 +371,6 @@ echo str2bool('foo');   // Returns false;
 | social.php      | Facebook, Twitter, etc         |
 | codetrait.php   | Length of model uniq code      |
 | tables.php      | Custom configs on admin tables |
-| payment.php     | Payments Type                  |
 
 ### Automatic Assets
 

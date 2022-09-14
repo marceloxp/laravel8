@@ -24,7 +24,7 @@ class HttpCurl
 			curl_close($ch);
 			return $result;
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			return false;
 		}

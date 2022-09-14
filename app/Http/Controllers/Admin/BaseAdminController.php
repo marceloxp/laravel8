@@ -14,6 +14,11 @@ class BaseAdminController extends Controller
 	public $admin_title = 'UMS Admin';
 	public $pagination_limit = 10;
 
+	public $user;
+	public $route_name;
+	public $fields_captions;
+	public $model;
+
     // create constructor method
     public function __construct()
     {

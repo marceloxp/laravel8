@@ -22,3 +22,4 @@ public/vendor/summernote
 config/tables\.php
 .env
 .phpunit.result.cache
+laravel8.code-workspace

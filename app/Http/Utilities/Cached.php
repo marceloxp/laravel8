@@ -102,7 +102,7 @@ class Cached
 		catch (\Exception $e)
 		{
 			return false;
-			report($e);
+			// report($e);
 		}
     }
 

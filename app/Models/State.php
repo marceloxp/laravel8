@@ -46,7 +46,7 @@ class State extends BaseModel
 				'getAll',
 				function()
 				{
-					return \App\Models\State::select('id','name')->get()->pluck('name','id')->toArray();
+					return \App\Models\State::select('id','name')->pluck('name','id')->toArray();
 				}
 			);
 		}

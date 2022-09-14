@@ -17,7 +17,7 @@ class MakexCached extends Command
 	/**
 	 * The name and signature of the console command.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	protected $examples = 
 	[

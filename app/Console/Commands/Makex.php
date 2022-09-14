@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Process\Process;
 
 class Makex extends Command
 {
@@ -47,6 +48,7 @@ class Makex extends Command
                 'Admin default Controller',
                 'Drop all tables and re-run all migrations and seeders',
                 'Increments app version',
+                'Run PHPStan',
             ]
         );
 
@@ -83,6 +85,19 @@ class Makex extends Command
             case 'Increments app version':
                 // call app:inc
                 $this->call('app:inc');
+            break;
+            case 'Run PHPStan':
+                // call phpstan
+                $process = new Process(['php', 'vendor/bin/phpstan', 'analyse', '--memory-limit=2G']);
+                $process->setTimeout(3600);
+                $process->run(function ($type, $buffer) {
+                    if (Process::ERR === $type) {
+                        echo 'ERR > '.$buffer;
+                    } else {
+                        echo $buffer;
+                    }
+                });
+                
             break;
         }
 

@@ -1,0 +1,19 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app
+    excludePaths:
+        - app/Providers/XpCollectionServiceProvider.php
+
+
+    # The level 9 is the highest level
+    level: 5
+
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
+
+    checkMissingIterableValueType: false
+    reportUnmatchedIgnoredErrors: false

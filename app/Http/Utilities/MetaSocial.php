@@ -50,7 +50,7 @@ class MetaSocial
 		$result = array_merge
 		(
 			config(sprintf('metasocial.%s.default', $locale)) ?? [],
-			config(sprintf('metasocial.pt-br.default', $locale)) ?? [],
+			// config(sprintf('metasocial.pt-br.default', $locale)) ?? [],
 			config(sprintf('metasocial.%s.%s', $locale, self::$config_use)) ?? [],
 			self::$custom_config
 		);

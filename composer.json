@@ -8,6 +8,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "digitalnature/php-ref": "^1.3",
+        "doctrine/dbal": "^3.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^8.75",
@@ -15,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "orangehill/iseed": "^3.0",
         "rap2hpoutre/laravel-log-viewer": "^2.2",
-        "semver/semver": "^1.1"
+        "semver/semver": "^1.1",
+        "symfony/process": "^5.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
@@ -26,6 +28,7 @@
         "laravel/telescope": "^4.9",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
+        "nunomaduro/larastan": "^1.0",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
@@ -49,10 +52,8 @@
 			"app/Http/Utilities/Helpers/helpers.php",
 			"app/Http/Utilities/Helpers/lang.php",
 			"app/Http/Utilities/Helpers/string.php",
-			"app/Http/Utilities/Helpers/money.php",
 			"app/Http/Utilities/Helpers/bootstrap.php",
 			"app/Http/Utilities/Helpers/forms.php",
-			"app/Http/Utilities/Helpers/html.php",
 			"app/Http/Utilities/Helpers/adminlte.php",
 			"app/Http/Utilities/Helpers/array.php"
 		]

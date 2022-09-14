@@ -20,7 +20,6 @@ if (!function_exists('is_image'))
 			case 'jpeg':
 			case 'gif':
 				return true;
-			break;
 		}
 
 		return false;
@@ -40,10 +39,8 @@ if (!function_exists('get_disk_name'))
 			case 'jpeg':
 			case 'gif':
 				return 'upload_images';
-			break;
 			case 'pdf':
 				return 'upload_pdfs';
-			break;
 		}
 
 		return 'others';
@@ -108,10 +105,8 @@ if (!function_exists('img_uploaded_file'))
 			case 'jpeg':
 			case 'gif':
 				return sprintf('<img src="%s?v=%s" %s >', uploaded_file_url($p_file_name), app_version('0.0.1'), $p_attr);
-			break;
 			case 'pdf':
 				return sprintf('<img src="%s?v=%s" %s >', vasset('/images/admin/fileextensions/pdf.png'), app_version('0.0.1'), $p_attr);
-			break;
 		}
 	}
 }
@@ -141,7 +136,6 @@ if (!function_exists('link_uploaded_img'))
 					app_version('0.0.1'),
 					$p_attr
 				);
-			break;
 			case 'pdf':
 				return sprintf
 				(
@@ -150,7 +144,6 @@ if (!function_exists('link_uploaded_img'))
 					vasset('/images/admin/fileextensions/pdf.png'),
 					$p_attr
 			);
-			break;
 		}
 	}
 }

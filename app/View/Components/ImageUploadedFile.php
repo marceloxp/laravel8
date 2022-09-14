@@ -6,6 +6,9 @@ use Illuminate\View\Component;
 
 class ImageUploadedFile extends Component
 {
+    public $filename;
+    public $noimage;
+
     /**
      * Create a new component instance.
      *
@@ -41,10 +44,8 @@ class ImageUploadedFile extends Component
 			case 'jpeg':
 			case 'gif':
 				return sprintf('<img {{ $attributes }} src="%s?v=%s">', uploaded_file_url($this->filename), app_version('0.0.1'));
-			break;
 			case 'pdf':
 				return sprintf('<img {{ $attributes }} src="%s?v=%s">', vasset('/images/admin/fileextensions/pdf.png'), app_version('0.0.1'));
-			break;
 		}
 
         return $no_image;

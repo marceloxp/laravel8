@@ -1,4 +1,4 @@
-<?php
+<?php /*<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -38,3 +38,4 @@ class TemplateController extends BaseAdminController
         return $this->defaultDelete($request, $id);
     }
 }
+*/ ?>

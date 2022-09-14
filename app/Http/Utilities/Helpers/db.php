@@ -3,6 +3,7 @@
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use App\Http\Utilities\Cached;
+use Illuminate\Support\Facades\Schema;
 
 if (!function_exists('db_database_name'))
 {
@@ -225,7 +226,7 @@ if (!function_exists('db_model_to_table_name'))
 {
 	function db_model_to_table_name($model_name)
 	{
-		return str_plural(mb_strtolower($model_name));
+		return Illuminate\Support\Str::plural(mb_strtolower($model_name));
 	}
 }
 
@@ -348,8 +349,8 @@ if (!function_exists('db_log_info'))
 	{
 		$filename = sprintf('/storage/logs/mysql.%s.log', \App\Http\Utilities\Carbex::now()->toSqlDate());
 		$view_log = new Logger('View Logs');
-		$view_log->pushHandler(new StreamHandler(app_path($filename), Logger::INFO));
-		$view_log->addInfo($message, $context);
+		$view_log->pushHandler(new StreamHandler(storage_path($filename), Logger::INFO));
+		$view_log->info($message, $context);
 	}
 }
 
@@ -357,9 +358,9 @@ if (!function_exists('db_log_slow'))
 {
 	function db_log_slow($message, $context = [])
 	{
-		$filename = sprintf('/storage/logs/mysql.slow.%s.log', \App\Http\Utilities\Carbex::now()->toSqlDate());
+		$filename = sprintf('/logs/mysql.slow.%s.log', \App\Http\Utilities\Carbex::now()->toSqlDate());
 		$view_log = new Logger('View Logs');
-		$view_log->pushHandler(new StreamHandler(app_path($filename), Logger::INFO));
-		$view_log->addInfo($message, $context);
+		$view_log->pushHandler(new StreamHandler(storage_path($filename), Logger::INFO));
+		$view_log->info($message, $context);
 	}
 }

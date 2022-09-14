@@ -27,7 +27,7 @@ class City extends BaseModel
 			['getByUf', $p_uf],
 			function() use ($uf_id)
 			{
-				return \App\Models\City::select('id','name')->where('state_id', $uf_id)->get()->pluck('name','id')->toArray();
+				return \App\Models\City::select('id','name')->where('state_id', $uf_id)->pluck('name','id')->toArray();
 			}
 		);
 	}

@@ -2,12 +2,8 @@
 
 namespace App\Http\Utilities;
 
-use App\Http\Utilities\Result;
-
 class Brasil
 {
-	private static $datasite = [];
-
 	public static function getStates()
 	{
 		return \App\Models\State::getAll();

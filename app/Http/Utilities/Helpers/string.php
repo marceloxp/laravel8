@@ -153,7 +153,7 @@ if (!function_exists('str_plural_2_singular'))
 		{
 			if (strcasecmp(str_right($p_word, 1), 's') === 0)
 			{
-				$result = rtrim($p_word, 's', 'S');
+				$result = rtrim($p_word, 'sS');
 			}
 		}
 		return $result;

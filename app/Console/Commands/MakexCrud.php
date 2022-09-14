@@ -50,11 +50,13 @@ class MakexCrud extends Command
 
         // if not confirm execution, exit
         if (!$this->confirm('Are you sure to create CRUD for ' . $modelName . '?')) {
-            return;
+            return 0;
         }
 
         // load file "app/Console/Resources/Templates/TemplateController.php" to variable $templateController
         $templateController = file_get_contents(__DIR__ . '/../Resources/Templates/TemplateController.php');
+        $templateController = str_replace('<?php /*', '', $templateController);
+        $templateController = str_replace('*/ ?>', '', $templateController);
         // replace [model_name] with model name
         $templateController = str_replace('Template', $modelName, $templateController);
         // replace [admin_title] with admin title

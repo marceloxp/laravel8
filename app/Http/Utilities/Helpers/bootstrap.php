@@ -56,6 +56,7 @@ if (!function_exists('combo_fa_ico_v5'))
 	$combo_fa_ico_scripts = false;
 	function combo_fa_ico_v5($p_name, $p_icon = '')
 	{
+		$result = '';
 		global $combo_fa_ico_v5_scripts;
 		if (!$combo_fa_ico_v5_scripts)
 		{
