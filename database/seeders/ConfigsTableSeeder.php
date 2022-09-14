@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class ConfigsSeeder extends Seeder
+class ConfigsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

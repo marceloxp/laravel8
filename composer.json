@@ -13,6 +13,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "orangehill/iseed": "^3.0",
         "rap2hpoutre/laravel-log-viewer": "^2.2",
         "semver/semver": "^1.1"
     },
