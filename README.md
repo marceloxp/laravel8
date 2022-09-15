@@ -270,9 +270,13 @@ echo admin_select_simple_with_add_button($p_field_name, $p_options, $p_field_val
 #### javascript and css
 
 ```php
+// Simple print url
+js('https://code.jquery.com/jquery-3.6.1.min.js');
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
 // Add host and app version
 javascript('/js/home.js');
-<script type="text/javascript" src="http://local.laravel8.com.br/js/home.js?v=0.0.1"></script>>
+<script type="text/javascript" src="http://local.laravel8.com.br/js/home.js?v=0.0.1"></script>
 
 css('/css/style.css');
 <link rel="stylesheet" type="text/css" href="http://local.laravel8.com.br/css/style.css?v=0.0.1">
