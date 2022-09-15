@@ -78,6 +78,14 @@ if (!function_exists('javascript'))
 	}
 }
 
+if (!function_exists('js'))
+{
+	function js($p_source)
+	{
+		return new \Illuminate\Support\HtmlString( sprintf('<script type="text/javascript" src="%s"></script>', $p_source) );
+	}
+}
+
 if (!function_exists('javascript_routine'))
 {
 	function javascript_routine($p_routine)
