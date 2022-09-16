@@ -5,8 +5,8 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\UserController;
-// add use AdminEnsureUserIsMasterDeveloper
 use App\Http\Middleware\AdminEnsureUserIsMasterDeveloper;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
