@@ -18,6 +18,8 @@
                     <x-admin-sidebar.item routeName="adminClearCache" caption="Limpar Cache ({{ $cached_count }})" slug="clear-cache" icon="fas fa-trash-alt"/>
                     {{-- add logs link --}}
                     <x-admin-sidebar.item routeName="adminLogs" target="_blank" caption="Logs" slug="logs" icon="fas fa-file-alt"/>
+                    {{-- add telescope link --}}
+                    <x-admin-sidebar.item routeName="adminTelescope" target="_blank" caption="Telescope" slug="telescope" icon="fas fa-binoculars"/>
 
                 </x-admin-sidebar>
                 {{-- add sidebar header component --}}

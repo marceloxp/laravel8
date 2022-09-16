@@ -56,6 +56,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             });
 
             Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('adminLogs');
+
+            // add route to simple folder telescope (https://laravel.com/docs/8.x/telescope)
+            Route::get('telescope', function () {
+                return redirect()->to('/telescope');
+            })->name('adminTelescope');
+
         });
 
         // add clear cache route
