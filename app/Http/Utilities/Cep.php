@@ -2,7 +2,7 @@
 
 namespace App\Http\Utilities;
 use App\Http\Utilities\HttpCurl;
-use App\Http\Utilities\Result;
+use App\Services\Result;
 
 class Cep
 {

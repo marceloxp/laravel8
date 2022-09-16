@@ -88,6 +88,7 @@ class Makex extends Command
             break;
             case 'Run PHPStan':
                 // call phpstan
+                // vendor/bin/phpstan analyse app
                 $process = new Process(['php', 'vendor/bin/phpstan', 'analyse', '--memory-limit=2G']);
                 $process->setTimeout(3600);
                 $process->run(function ($type, $buffer) {
@@ -97,7 +98,6 @@ class Makex extends Command
                         echo $buffer;
                     }
                 });
-                
             break;
         }
 

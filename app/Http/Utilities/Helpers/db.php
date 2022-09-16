@@ -4,6 +4,8 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use App\Http\Utilities\Cached;
 use Illuminate\Support\Facades\Schema;
+use App\Services\Result;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('db_database_name'))
 {
@@ -275,7 +277,7 @@ if (!function_exists('db_table_exists'))
 {
 	function db_table_exists($table_name)
 	{
-		$result = \Schema::hasTable(db_trim_table_prefix($table_name));
+		$result = Schema::hasTable(db_trim_table_prefix($table_name));
 		return (!empty($result)) ? $result : false;
 	}
 }
@@ -302,7 +304,7 @@ if (!function_exists('generate_unique_code'))
 			{
 				$k++;
 				$code  = mb_strtolower(\Illuminate\Support\Str::random($codelength));
-				$id    = \DB::table('codes')->insertGetId(['name' => $code, 'attempts' => $k]);
+				$id    = DB::table('codes')->insertGetId(['name' => $code, 'attempts' => $k]);
 				$valid = ($id > 0);
 			}
 			catch (\Exception $e)
@@ -316,7 +318,7 @@ if (!function_exists('generate_unique_code'))
 
 	function unique_code_exists($code)
 	{
-		return \DB::table('codes')->where('name', $code)->exists();
+		return DB::table('codes')->where('name', $code)->exists();
 	}
 }
 
@@ -324,7 +326,7 @@ if (!function_exists('cep_to_address'))
 {
 	function cep_to_address($cep)
 	{
-		return \App\Http\Utilities\Cached::get
+		return Cached::get
 		(
 			'brasil_cep',
 			[$cep],
@@ -334,9 +336,9 @@ if (!function_exists('cep_to_address'))
 				$address = collect(DB::select($query, [str_to_formatted_cep($cep)]))->first();
 				if (empty($address->endereco))
 				{
-					return \App\Http\Utilities\Result::error('Endereço não localizado.');
+					return Result::error('Endereço não localizado.');
 				}
-				return \App\Http\Utilities\Result::success('Endereço localizado', collect($address)->toArray());
+				return Result::success('Endereço localizado', collect($address)->toArray());
 			},
 			60
 		);

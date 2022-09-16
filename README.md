@@ -197,7 +197,7 @@ $masket  = Cep:mask('4045004');        // Returns '04045-004'
 $masket  = Cep:toNumeric('04045-004'); // Returns 4045004
 ```
 
-### Result `\App\Http\Utilities\Result`
+### Result `\App\Services\Result`
 
 ```php
 return Result::success('Dados cadastrados com sucesso.');

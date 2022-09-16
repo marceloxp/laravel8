@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Http\Utilities\Cached;
-use App\Http\Utilities\Result;
+use App\Services\Result;
 
 class City extends BaseModel
 {
