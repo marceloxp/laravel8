@@ -17,7 +17,8 @@
         "orangehill/iseed": "^3.0",
         "rap2hpoutre/laravel-log-viewer": "^2.2",
         "semver/semver": "^1.1",
-        "symfony/process": "^5.4"
+        "symfony/process": "^5.4",
+        "timwassenburg/laravel-service-generator": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
