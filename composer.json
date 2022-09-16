@@ -44,19 +44,19 @@
             "Tests\\": "tests/"
         },
 		"files": [
-			"app/Http/Utilities/Helpers/admin.php",
-			"app/Http/Utilities/Helpers/cached.php",
-			"app/Http/Utilities/Helpers/datasite.php",
-			"app/Http/Utilities/Helpers/db.php",
-			"app/Http/Utilities/Helpers/developer.php",
-			"app/Http/Utilities/Helpers/filesystem.php",
-			"app/Http/Utilities/Helpers/helpers.php",
-			"app/Http/Utilities/Helpers/lang.php",
-			"app/Http/Utilities/Helpers/string.php",
-			"app/Http/Utilities/Helpers/bootstrap.php",
-			"app/Http/Utilities/Helpers/forms.php",
-			"app/Http/Utilities/Helpers/adminlte.php",
-			"app/Http/Utilities/Helpers/array.php"
+			"app/Helpers/admin.php",
+			"app/Helpers/cached.php",
+			"app/Helpers/datasite.php",
+			"app/Helpers/db.php",
+			"app/Helpers/developer.php",
+			"app/Helpers/filesystem.php",
+			"app/Helpers/helpers.php",
+			"app/Helpers/lang.php",
+			"app/Helpers/string.php",
+			"app/Helpers/bootstrap.php",
+			"app/Helpers/forms.php",
+			"app/Helpers/adminlte.php",
+			"app/Helpers/array.php"
 		]
     },
     "scripts": {
