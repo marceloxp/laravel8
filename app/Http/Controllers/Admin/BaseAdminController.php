@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
-use App\Http\Utilities\Datasite;
-
+use App\Http\Controllers\Controller;
+use App\Utilities\Datasite;
+use \App\Utilities\Cached;
 
 class BaseAdminController extends Controller
 {
@@ -31,7 +32,7 @@ class BaseAdminController extends Controller
 				$this->setPaginationLimit(intval(env('ADMIN_PAGINATION_LIMIT')));
 
 				// get config from browser cookie
-				$darkMode = \Cookie::get('dark-mode');
+				$darkMode = Cookie::get('dark-mode');
 				$darkMode = (!empty($darkMode)) ? 'dark-mode' : '';
 				View::share('darkMode', $darkMode);
 
@@ -42,7 +43,7 @@ class BaseAdminController extends Controller
 				}
 
 				// get count of cached
-				$cached_count = \App\Http\Utilities\Cached::count();
+				$cached_count = Cached::count();
 				View::share('cached_count', $cached_count);
 
 				$this->setAdminTitle($this->admin_title);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Utilities;
+namespace App\Utilities;
 
 define('YT_DEFAULT'           , 'default.jpg');
 define('YT_HIGH_QUALITY'      , 'hqdefault.jpg');

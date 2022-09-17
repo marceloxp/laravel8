@@ -141,7 +141,7 @@ makex:crud ModelName
 
 ## Custom Classes
 
-### Datasite `\App\Http\Utilities\Datasite`
+### Datasite `\App\Utilities\Datasite`
 
 ```php
 Datasite::add('csrf_token', csrf_token());
@@ -151,7 +151,7 @@ datasite_add('csrf_token', csrf_token());
 datasite_add(compact('url'));
 ```
 
-### Cached `\App\Http\Utilities\Cached`
+### Cached `\App\Utilities\Cached`
 
 ```php
 // Time in minutes
@@ -172,7 +172,7 @@ Cached::forget('admin'); // Clear all files on admin prefix
 Cached::flush();         // Clear all cache
 ```
 
-### MetaSocial `\App\Http\Utilities\MetaSocial`
+### MetaSocial `\App\Utilities\MetaSocial`
 
 ```php
 MetaSocial::use('sobre');
@@ -181,13 +181,13 @@ MetaSocial::set('description', 'Entre em contato conosco.');
 Metasocial::print();
 ```
 
-### HttpCurl `\App\Http\Utilities\HttpCurl`
+### HttpCurl `\App\Utilities\HttpCurl`
 
 ```php
 $json_data = HttpCurl::json('https://viacep.com.br/ws/05415030/json/');
 ```
 
-### Cep `\App\Http\Utilities\Cep`
+### Cep `\App\Utilities\Cep`
 
 ```php
 $address = Cep::get('04045-004');      // Returns Adddress
@@ -209,7 +209,7 @@ return Result::invalid();     // Entrada de dados inválida.
 return Result::exception($e); // Ocorreu um erro na solicitação.
 ```
 
-### RouteLang `\App\Http\Utilities\RouteLang`
+### RouteLang `\App\Utilities\RouteLang`
 
 > Used in `/routes/multilanguague.php`
 

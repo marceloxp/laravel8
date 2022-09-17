@@ -1,9 +1,13 @@
 <?php
+
+use Illuminate\Support\Facades\DB;
+use App\Utilities\Cached;
+
 if (!function_exists('state_city'))
 {
 	function state_city()
 	{
-		$cities = \App\Http\Utilities\Cached::get
+		$cities = Cached::get
 		(
 			'frontend',
 			'get_statecity_json',
@@ -18,7 +22,7 @@ if (!function_exists('state_city'))
 			},
 			60
 		);
-		$cities = $cities['data'];
+		$cities = $cities->getData();
 
 		echo javascript_var('statecity', $cities, false);
 		echo javascript('/js/statecity.js');

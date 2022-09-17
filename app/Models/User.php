@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Http\Utilities\Cached;
+use App\Utilities\Cached;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -103,6 +103,6 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
             5
         );
 
-        return $result['data'];
+        return $result->getData();
     }
 }

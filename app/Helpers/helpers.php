@@ -11,7 +11,7 @@ if (!function_exists('carbex'))
 {
 	function carbex()
 	{
-		return \App\Http\Utilities\Carbex::class;
+		return App\Utilities\Carbex::class;
 	}
 }
 

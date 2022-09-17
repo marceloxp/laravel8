@@ -49,6 +49,7 @@
 			"app/Helpers/datasite.php",
 			"app/Helpers/db.php",
 			"app/Helpers/developer.php",
+			"app/Helpers/statecity.php",
 			"app/Helpers/filesystem.php",
 			"app/Helpers/helpers.php",
 			"app/Helpers/lang.php",

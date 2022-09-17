@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Http\Utilities\Cached;
+use App\Utilities\Cached;
 
 class MakexCached extends Command
 {
@@ -31,7 +31,7 @@ class MakexCached extends Command
 	 *
 	 * @var string
 	 */
-	protected $description = 'Manipulate App\Http\Utilities\Cached';
+	protected $description = 'Manipulate App\Utilities\Cached';
 
 	/**
 	 * Create a new command instance.

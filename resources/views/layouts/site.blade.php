@@ -1,7 +1,7 @@
 @php
-	use \App\Http\Utilities\Datasite;
-	use \App\Http\Utilities\AutoAssets;
-	use \App\Http\Utilities\MetaSocial;
+	use App\Utilities\Datasite;
+	use App\Utilities\AutoAssets;
+	use App\Utilities\MetaSocial;
 @endphp
 
 <!DOCTYPE html>

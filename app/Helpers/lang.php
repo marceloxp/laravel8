@@ -1,5 +1,7 @@
 <?php
 
+use App\Utilities\RouteLang;
+
 if (!function_exists('dic'))
 {
     function dic($p_string)
@@ -16,6 +18,6 @@ if (!function_exists('lang_home_link'))
 {
     function lang_home_link($p_lang = null)
 	{
-		return url(\App\Http\Utilities\RouteLang::rootUrl($p_lang));
+		return url(RouteLang::rootUrl($p_lang));
     }
 }

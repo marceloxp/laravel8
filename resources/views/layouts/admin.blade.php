@@ -1,11 +1,10 @@
 @php
-	use \App\Http\Utilities\Datasite;
-	use \App\Http\Utilities\AutoAssets;
+	use App\Utilities\Datasite;
+	use App\Utilities\AutoAssets;
 @endphp
 
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="{{ app()->getLocale() }}">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">

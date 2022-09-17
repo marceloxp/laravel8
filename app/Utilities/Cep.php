@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Utilities;
-use App\Http\Utilities\HttpCurl;
+namespace App\Utilities;
+use App\Utilities\HttpCurl;
 use App\Services\Result;
 
 class Cep
@@ -70,7 +70,7 @@ class Cep
 			$cep = self::mask($p_cep);
 			return Cached::get
 			(
-				'App\Http\Utilities\Cep',
+				'App\Utilities\Cep',
 				['get', $p_cep],
 				function() use ($cep)
 				{

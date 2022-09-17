@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Utilities\Cached;
+use App\Utilities\Cached;
 use App\Services\Result;
 
 class State extends BaseModel
@@ -28,7 +28,7 @@ class State extends BaseModel
 				}
 			);
 
-			return $result['data'] ?? false;
+			return $result->getData() ?? false;
 		}
 		catch (\Exception $e)
 		{

@@ -27,7 +27,7 @@ Route::prefix('brasil')->group
 			'states',
 			function()
 			{
-				$result = \App\Http\Utilities\Brasil::getStates();
+				$result = \App\Utilities\Brasil::getStates();
 				return response($result)->withHeaders(cached_headers($result));
 			}
 		);
@@ -37,7 +37,7 @@ Route::prefix('brasil')->group
 			'cities/{uf}',
 			function($uf)
 			{
-				$result = \App\Http\Utilities\Brasil::getCitiesByUf($uf);
+				$result = \App\Utilities\Brasil::getCitiesByUf($uf);
 				return response($result)->withHeaders(cached_headers($result));
 			}
 		);
@@ -48,7 +48,7 @@ Route::prefix('brasil')->group
 			function($cep)
 			{
 				$result = cep_to_address($cep);
-				return $result['data'];
+				return $result->getData();
 			}
 		);
 	}

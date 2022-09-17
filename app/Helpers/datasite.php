@@ -1,5 +1,6 @@
 <?php
-use \App\Http\Utilities\Datasite;
+
+use App\Utilities\Datasite;
 
 if (!function_exists('datasite_add'))
 {

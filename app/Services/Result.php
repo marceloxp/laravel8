@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
  */
 class ResultObject
 {
+    public $name;
     public $result;
     public $success;
     public $cached;
@@ -17,6 +18,7 @@ class ResultObject
 
     public function __construct($success, $message = '', $data = [], $cached = false, $message_log = '')
     {
+        $this->name    = 'Result';
         $this->result  = true;
         $this->success = (!empty($success));
         $this->cached  = $cached;
@@ -36,6 +38,11 @@ class ResultObject
         }
     }
 
+    public function getData()
+    {
+        return $this->data;
+    }
+
     public function get($data_index)
     {
         return data_get($this->data, $data_index);
@@ -50,6 +57,12 @@ class ResultObject
     public function data($data)
     {
         $this->data = $data;
+        return $this;
+    }
+
+    public function name($name)
+    {
+        $this->name = $name;
         return $this;
     }
 
@@ -93,9 +106,9 @@ class Result
 
     public static function cached($p_prefix, $p_cache_name, $message = '', $data = [], $cached, $message_log = '')
     {
-        $cache_name = sprintf('%s-%s', $p_prefix, $p_cache_name);
-        $result     = new ResultObject(true, $message, $data, $cached, $message_log);
-        $result->data = array_merge(compact('cache_name'), $result->data);
+        $cache_name   = sprintf('%s-%s', $p_prefix, $p_cache_name);
+        $result       = new ResultObject(true, $message, $data, $cached, $message_log);
+        $result->name($cache_name);
         return $result;
     }
 
