@@ -46,15 +46,16 @@ php artisan migrate:refresh --seed
 
 ## Plugins
 
-| Plugin                           | Address                                        |
-| -------------------------------- | ---------------------------------------------- |
-| digitalnature/php-ref            | <https://github.com/digitalnature/php-ref>     |
-| barryvdh/laravel-debugbar        | <https://github.com/barryvdh/laravel-debugbar> |
-| ezyang/htmlpurifier              | <https://github.com/ezyang/htmlpurifier>       |
-| summernote/summernote            | <https://github.com/summernote/summernote>     |
-| technoknol/log-my-queries        | <https://github.com/technoknol/LogMyQueries>   |
-| semver/semver                    | <https://github.com/semver/semver>             |
-| cknow/laravel-money              | <https://github.com/cknow/laravel-money>       |
+| Plugin                           | Address                                          |
+| -------------------------------- | ----------------------------------------------   |
+| digitalnature/php-ref            | <https://github.com/digitalnature/php-ref>       |
+| barryvdh/laravel-debugbar        | <https://github.com/barryvdh/laravel-debugbar>   |
+| barryvdh/laravel-ide-helper      | <https://github.com/barryvdh/laravel-ide-helper> |
+| ezyang/htmlpurifier              | <https://github.com/ezyang/htmlpurifier>         |
+| summernote/summernote            | <https://github.com/summernote/summernote>       |
+| technoknol/log-my-queries        | <https://github.com/technoknol/LogMyQueries>     |
+| semver/semver                    | <https://github.com/semver/semver>               |
+| cknow/laravel-money              | <https://github.com/cknow/laravel-money>         |
 
 ## Libraries
 
