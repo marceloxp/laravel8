@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\AdminEnsureUserIsMasterDeveloper;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------

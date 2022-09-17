@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Utilities\Datasite;
-use \App\Utilities\Cached;
+use App\Utilities\Cached;
 
 class BaseAdminController extends Controller
 {

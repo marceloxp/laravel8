@@ -1,6 +1,7 @@
 <?php
 
 use App\Utilities\RouteLang;
+use Illuminate\Support\Facades\Lang;
 
 if (!function_exists('dic'))
 {

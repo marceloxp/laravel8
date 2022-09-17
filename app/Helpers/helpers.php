@@ -1,4 +1,9 @@
 <?php
+
+use App\Utilities\Datasite;
+use App\Utilities\Carbex;
+use Illuminate\Support\HtmlString;
+
 if (!function_exists('app_version'))
 {
 	function app_version($default = '0.0.1')
@@ -7,11 +12,19 @@ if (!function_exists('app_version'))
 	}
 }
 
+if (!function_exists('datasite_json'))
+{
+	function datasite_json()
+	{
+		return Datasite::getAsJson();
+	}
+}
+
 if (!function_exists('carbex'))
 {
 	function carbex()
 	{
-		return App\Utilities\Carbex::class;
+		return Carbex::class;
 	}
 }
 
@@ -71,10 +84,10 @@ if (!function_exists('javascript'))
 	{
 		if (file_exists(public_path($p_source)))
 		{
-			return new \Illuminate\Support\HtmlString( sprintf('<script type="text/javascript" src="%s"></script>', vasset($p_source)) );
+			return new HtmlString( sprintf('<script type="text/javascript" src="%s"></script>', vasset($p_source)) );
 		}
 		
-		return new \Illuminate\Support\HtmlString(sprintf('<!-- %s -->', $p_source));
+		return new HtmlString(sprintf('<!-- %s -->', $p_source));
 	}
 }
 
@@ -82,7 +95,7 @@ if (!function_exists('js'))
 {
 	function js($p_source)
 	{
-		return new \Illuminate\Support\HtmlString( sprintf('<script type="text/javascript" src="%s"></script>', $p_source) );
+		return new HtmlString( sprintf('<script type="text/javascript" src="%s"></script>', $p_source) );
 	}
 }
 
@@ -119,7 +132,7 @@ if (!function_exists('css'))
 {
 	function css($p_source)
 	{
-		return new \Illuminate\Support\HtmlString( sprintf('<link rel="stylesheet" type="text/css" href="%s">', vasset($p_source)) );
+		return new HtmlString( sprintf('<link rel="stylesheet" type="text/css" href="%s">', vasset($p_source)) );
 	}
 }
 
@@ -127,7 +140,7 @@ if (!function_exists('img'))
 {
 	function img($p_source, $p_properties = '')
 	{
-		return new \Illuminate\Support\HtmlString( sprintf('<img src="%s" %s>', vasset($p_source), $p_properties) );
+		return new HtmlString( sprintf('<img src="%s" %s>', vasset($p_source), $p_properties) );
 	}
 }
 
@@ -143,6 +156,6 @@ if (!function_exists('img_background'))
 			$p_style_properties,
 			$p_properties
 		);
-		return new \Illuminate\Support\HtmlString($result);
+		return new HtmlString($result);
 	}
 }

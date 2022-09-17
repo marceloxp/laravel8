@@ -21,7 +21,7 @@
 	@show
 
 	@section('datasite')
-		<script>window.datasite = @json(Datasite::get())</script>
+		{!! DataSite::getHtmlScript() !!}
 	@show
 </head>
 

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use App\Utilities\Cached;
 
 class MakexCached extends Command
@@ -56,11 +57,11 @@ class MakexCached extends Command
 
 		if ($this->option('clear'))
 		{
-			$this->info(sprintf('Cache Quant: %s', (\Cache::get('gcache-prefixes') ?? collect([]))->count()));
+			$this->info(sprintf('Cache Quant: %s', (Cache::get('gcache-prefixes') ?? collect([]))->count()));
 			$this->info('Clearing...');
 			Cached::flush();
 			$this->info('Done.');
-			$this->info(sprintf('Cache Quant: %s', (\Cache::get('gcache-prefixes') ?? collect([]))->count()));
+			$this->info(sprintf('Cache Quant: %s', (Cache::get('gcache-prefixes') ?? collect([]))->count()));
 		}
 		elseif ($this->option('list'))
 		{
@@ -68,7 +69,7 @@ class MakexCached extends Command
 		}
 		elseif ($this->option('count'))
 		{
-			$this->info(sprintf('Cache Quant: %s', (\Cache::get('gcache-prefixes') ?? collect([]))->count()));
+			$this->info(sprintf('Cache Quant: %s', (Cache::get('gcache-prefixes') ?? collect([]))->count()));
 		}
 		else
 		{

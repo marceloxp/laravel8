@@ -22,4 +22,26 @@ class Datasite
 	{
 		return self::$datasite;
 	}
+
+	public static function clear()
+	{
+		self::$datasite = [];
+	}
+
+	public static function getAsJson()
+	{
+		try
+		{
+			return json_encode(self::$datasite);
+		}
+		catch (\Exception $e)
+		{
+			return json_encode([]);
+		}
+	}
+
+	public static function getHtmlScript()
+	{
+		return '<script type="text/javascript">window.datasite = ' . self::getAsJson() . ';</script>';
+	}
 }

@@ -141,7 +141,7 @@ makex:crud ModelName
 
 ## Custom Classes
 
-### Datasite `\App\Utilities\Datasite`
+### Datasite `App\Utilities\Datasite`
 
 ```php
 Datasite::add('csrf_token', csrf_token());
@@ -151,7 +151,7 @@ datasite_add('csrf_token', csrf_token());
 datasite_add(compact('url'));
 ```
 
-### Cached `\App\Utilities\Cached`
+### Cached `App\Utilities\Cached`
 
 ```php
 // Time in minutes
@@ -172,7 +172,7 @@ Cached::forget('admin'); // Clear all files on admin prefix
 Cached::flush();         // Clear all cache
 ```
 
-### MetaSocial `\App\Utilities\MetaSocial`
+### MetaSocial `App\Utilities\MetaSocial`
 
 ```php
 MetaSocial::use('sobre');
@@ -181,23 +181,23 @@ MetaSocial::set('description', 'Entre em contato conosco.');
 Metasocial::print();
 ```
 
-### HttpCurl `\App\Utilities\HttpCurl`
+### HttpCurl `App\Utilities\HttpCurl`
 
 ```php
 $json_data = HttpCurl::json('https://viacep.com.br/ws/05415030/json/');
 ```
 
-### Cep `\App\Utilities\Cep`
+### Cep `App\Utilities\Cep`
 
 ```php
-$address = Cep::get('04045-004');      // Returns Adddress
-$valid   = Cep:valid('04045-004');     // Returns true
-$valid   = Cep:valid('5');             // Returns false
-$masket  = Cep:mask('4045004');        // Returns '04045-004'
-$masket  = Cep:toNumeric('04045-004'); // Returns 4045004
+$address = Cep::get('04045-004');       // Returns Adddress
+$valid   = Cep::valid('04045-004');     // Returns true
+$valid   = Cep::valid('5');             // Returns false
+$masket  = Cep::mask('4045004');        // Returns '04045-004'
+$masket  = Cep::toNumeric('04045-004'); // Returns 4045004
 ```
 
-### Result `\App\Services\Result`
+### Result `App\Services\Result`
 
 ```php
 return Result::success('Dados cadastrados com sucesso.');
@@ -209,7 +209,7 @@ return Result::invalid();     // Entrada de dados inválida.
 return Result::exception($e); // Ocorreu um erro na solicitação.
 ```
 
-### RouteLang `\App\Utilities\RouteLang`
+### RouteLang `App\Utilities\RouteLang`
 
 > Used in `/routes/multilanguague.php`
 
@@ -434,4 +434,9 @@ vendor/bin/phpunit --filter UserTest
 php artisan dusk --filter AdminTest::testAdminLoginAccess
 php artisan dusk --filter AdminTest::testAdminConfigAdd
 php artisan dusk --filter AdminTest::testAdminConfigDelete
+```
+
+### PHPStan
+```terminal
+vendor/bin/phpstan analyse app
 ```
