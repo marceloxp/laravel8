@@ -7,19 +7,18 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\Admin\DefaultCrud;
 use App\Utilities\Datasite;
 use App\Utilities\Cached;
 
 class BaseAdminController extends Controller
 {
-	public $admin_title = 'UMS Admin';
+	public $title = 'UMS Admin';
 	public $pagination_limit = 10;
-
 	public $user;
 	public $route_name;
 	public $fields_captions;
 	public $model;
-	public $title = '';
 
     // create constructor method
     public function __construct()
@@ -70,113 +69,27 @@ class BaseAdminController extends Controller
 
 	public function defaultIndex(Request $request)
     {
-        // get search value
-        $search = trim($request->get('search'));
-
-        // remove all special characters and preserve space from search value
-        $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
-
-        if (!empty($search)) {
-			$fields_search = $this->fields_captions->keys()->toArray();
-			// remove created_at, updated_at and deleted_at from fields_search
-			$fields_search = array_diff($fields_search, ['created_at', 'updated_at', 'deleted_at']);
-
-            // get all table order by id desc
-            $table = $this->model::select();
-			// foreach $fields_search, add orWhere condition
-			foreach ($fields_search as $field) {
-				$table->orWhere($field, 'like', '%' . $search . '%');
-			}
-            $table = $table->orderBy('id', 'desc')->paginate($this->getpaginationLimit());
-        } else {
-            // get all table order by id desc
-            $table = $this->model::orderBy('id', 'desc')->paginate($this->getpaginationLimit());
-        }
-
-		Datasite::add(compact('table'));
-
-        // return view with table
-        return view($this->model::getAdminViewPath('index'), compact('table','search'));
+		$table = DefaultCrud::index($request, $this->model);
+        return view($this->model::getAdminViewPath('index'), compact('table'));
     }
 
     // add create or edit method
     public function defaultCreateOrEdit(Request $request, $id = null)
     {
-        // get table or create new table
-        $register = $this->model::find($id);
-        if(!$register)
-        {
-            $register = new $this->model();
-        }
-        // return view with table
+		$register = DefaultCrud::defaultCreateOrEdit($request, $this->model, $id);
         return view($this->model::getAdminViewPath('create_edit'), compact('register'));
     }
 
     // add store method
     public function defaultStore(Request $request)
     {
-        $id = $request->get('id');
-
-        // get request except _token
-        $form = $request->except('_token');
-
-        // validate request
-		$valid = $this->model::validate($form, $id);
-		if (!$valid['success'])
-		{
-			return back()
-				->withErrors($valid['single'])
-				->withInput()
-			;
-		}
-
-		if (!empty($id))
-		{
-			$register = $this->model::firstOrNew(['id' => $id]);
-			$register->fill($form);
-		}
-		else
-		{
-			$register = $this->model::create($form);
-		}
-        $saved = (empty($id)) ? ($register->save()) : ($register->update());
-
-		if ($saved)
-		{
-			$message = ($id) ? 'Registro atualizado com sucesso.' : 'Registro criado com sucesso.';
-			$request->session()->flash('messages', [$message]);
-
-            if ($id)
-            {
-                return redirect()->route($this->model::getAdminRouteName('edit'), ['id' => $id]);
-            }
-            else
-            {
-                return redirect()->route($this->model::getAdminRouteName('index'));
-            }
-		}
-		else
-		{
-			return back()
-				->withErrors('Ocorreu um erro na gravação do registro.')
-				->withInput();
-		}
+		return DefaultCrud::defaultStore($request, $this->model);
     }
 
     // add delete method
     public function defaultDelete(Request $request, $id)
     {
-        $register = $this->model::find($id);
-        if($register)
-        {
-            $register->delete();
-            $request->session()->flash('messages', ['Registro excluído com sucesso.']);
-        }
-        else
-        {
-            $request->session()->flash('messages', ['Registro não encontrado.']);
-        }
-        return redirect()->route($this->model::getAdminRouteName('index'));
+		return DefaultCrud::defaultDelete($request, $this->model, $id);
     }
 
 	// add set pagination limit method
