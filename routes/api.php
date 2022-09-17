@@ -27,7 +27,7 @@ Route::prefix('brasil')->group
 			'states',
 			function()
 			{
-				$result = \App\Utilities\Brasil::getStates();
+				$result = App\Utilities\Brasil::getStates();
 				return response($result)->withHeaders(cached_headers($result));
 			}
 		);
@@ -37,7 +37,7 @@ Route::prefix('brasil')->group
 			'cities/{uf}',
 			function($uf)
 			{
-				$result = \App\Utilities\Brasil::getCitiesByUf($uf);
+				$result = App\Utilities\Brasil::getCitiesByUf($uf);
 				return response($result)->withHeaders(cached_headers($result));
 			}
 		);
