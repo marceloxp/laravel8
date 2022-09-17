@@ -23,7 +23,7 @@ class State extends BaseModel
 				['getStateIdByUf', $p_uf],
 				function() use ($p_uf)
 				{
-					$state = \App\Models\State::select('id')->where('uf', $p_uf)->first();
+					$state = State::select('id')->where('uf', $p_uf)->first();
 					return $state->id ?? false;
 				}
 			);
@@ -46,7 +46,7 @@ class State extends BaseModel
 				'getAll',
 				function()
 				{
-					return \App\Models\State::select('id','name')->pluck('name','id')->toArray();
+					return State::select('id','name')->pluck('name','id')->toArray();
 				}
 			);
 		}

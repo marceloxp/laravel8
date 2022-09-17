@@ -15,7 +15,7 @@ class City extends BaseModel
 
 	public static function getByUf($p_uf)
 	{
-		$uf_id = \App\Models\State::getStateIdByUf($p_uf);
+		$uf_id = State::getStateIdByUf($p_uf);
 		if (!$uf_id)
 		{
 			return Result::undefined();
@@ -27,14 +27,14 @@ class City extends BaseModel
 			['getByUf', $p_uf],
 			function() use ($uf_id)
 			{
-				return \App\Models\City::select('id','name')->where('state_id', $uf_id)->pluck('name','id')->toArray();
+				return City::select('id','name')->where('state_id', $uf_id)->pluck('name','id')->toArray();
 			}
 		);
 	}
 
 	public function state()
 	{
-		return $this->hasOne(\App\Models\State::class, 'id', 'state_id');
+		return $this->hasOne(State::class, 'id', 'state_id');
 	}
 
 	public static function validate($request, $id = '')

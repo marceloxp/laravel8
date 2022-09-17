@@ -51,7 +51,7 @@ class Role extends BaseModel
 
 	public function users()
 	{
-		return $this->belongsToMany(\App\Models\User::class);
+		return $this->belongsToMany(User::class);
 	}
 	
 	/**
@@ -68,7 +68,7 @@ class Role extends BaseModel
 		(
 			function($role, $key)
 			{
-				$role['color'] = \App\Models\Role::getBgColorByRole($role['name']);
+				$role['color'] = Role::getBgColorByRole($role['name']);
 				return $role;
 			}
 		);

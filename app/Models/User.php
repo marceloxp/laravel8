@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -58,7 +58,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 
 	public function roles()
 	{
-		return $this->belongsToMany(\App\Models\Role::class);
+		return $this->belongsToMany(Role::class);
 	}
 
     public static function validate($request, $id = '')
