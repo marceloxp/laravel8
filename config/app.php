@@ -113,6 +113,7 @@ return [
 	'all_langs'       => array('pt-br', 'en', 'es'),
 	'current_locale'  => '',
 	'multilanguague'  => false,
+    'currency'        => 'BRL',
 
     /*
     |--------------------------------------------------------------------------

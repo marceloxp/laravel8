@@ -54,6 +54,7 @@ php artisan migrate:refresh --seed
 | summernote/summernote            | <https://github.com/summernote/summernote>     |
 | technoknol/log-my-queries        | <https://github.com/technoknol/LogMyQueries>   |
 | semver/semver                    | <https://github.com/semver/semver>             |
+| cknow/laravel-money              | <https://github.com/cknow/laravel-money>       |
 
 ## Libraries
 
