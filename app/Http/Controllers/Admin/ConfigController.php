@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\Config;
 
 class ConfigController extends BaseAdminController
 {
-    // add constructor
-    public function __construct()
-    {
-        $this->model = \App\Models\Config::class;
-        $this->setAdminTitle('Configurações');
-        parent::__construct();
-    }
+    public $model = Config::class;
+    public $title = 'Configurações';
 
     // create index method
     public function index(Request $request)

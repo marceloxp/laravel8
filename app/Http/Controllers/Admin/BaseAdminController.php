@@ -19,6 +19,7 @@ class BaseAdminController extends Controller
 	public $route_name;
 	public $fields_captions;
 	public $model;
+	public $title = '';
 
     // create constructor method
     public function __construct()
@@ -42,11 +43,12 @@ class BaseAdminController extends Controller
 					return $next($request);
 				}
 
+				View::share(['admin_title' => $this->title]);
+
 				// get count of cached
 				$cached_count = Cached::count();
 				View::share('cached_count', $cached_count);
 
-				$this->setAdminTitle($this->admin_title);
 				$this->user = $user;
 				$this->route_name = $route_name;
 
@@ -257,13 +259,6 @@ class BaseAdminController extends Controller
 				->withInput()
 			;
 		}
-	}
-
-	// add function set admin title
-	public function setAdminTitle($admin_title)
-	{
-		$this->admin_title = $admin_title;
-		View::share(['admin_title' => $this->admin_title]);
 	}
 
 	// add set pagination limit method

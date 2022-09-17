@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
 class DashboardController extends BaseAdminController
 {
+    public $title = 'Dashboard';
+
     // create index method
     public function index()
     {

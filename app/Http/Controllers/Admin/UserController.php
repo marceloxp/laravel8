@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends BaseAdminController
 {
-    // add constructor
-    public function __construct()
-    {
-        $this->model = \App\Models\User::class;
-        $this->setAdminTitle('Usuários');
-        parent::__construct();
-    }
-
+    public $model = User::class;
+    public $title = 'Usuários';
+    
     // create index method with search and pagination limit
     public function index(Request $request)
     {

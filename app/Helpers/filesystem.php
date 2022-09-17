@@ -1,9 +1,13 @@
 <?php
+
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 if (!function_exists('disk_file_exists'))
 {
 	function disk_file_exists($p_disk_name, $p_file_name)
 	{
-		return \Illuminate\Support\Facades\Storage::disk($p_disk_name)->exists($p_file_name);
+		return Storage::disk($p_disk_name)->exists($p_file_name);
 	}
 }
 
@@ -11,7 +15,7 @@ if (!function_exists('is_image'))
 {
 	function is_image($p_file_name)
 	{
-		$extension = \File::extension($p_file_name);
+		$extension = File::extension($p_file_name);
 
 		switch ($extension)
 		{
@@ -30,7 +34,7 @@ if (!function_exists('get_disk_name'))
 {
 	function get_disk_name($p_file_name)
 	{
-		$extension = \File::extension($p_file_name);
+		$extension = File::extension($p_file_name);
 
 		switch ($extension)
 		{
@@ -60,8 +64,8 @@ if (!function_exists('disk_new_file_name'))
 		$str = $p_file_name;
 		preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
-		$name = \File::name($p_file_name);
-		$ext  = \File::extension($p_file_name);
+		$name = File::name($p_file_name);
+		$ext  = File::extension($p_file_name);
 
 		if (empty($matches))
 		{
@@ -82,7 +86,7 @@ if (!function_exists('uploaded_file_url'))
 	function uploaded_file_url($p_file_name)
 	{
 		$disk_name = get_disk_name($p_file_name);
-		return \Illuminate\Support\Facades\Storage::disk($disk_name)->url($p_file_name);
+		return Storage::disk($disk_name)->url($p_file_name);
 	}
 }
 
@@ -120,7 +124,7 @@ if (!function_exists('link_uploaded_img'))
 			return '';
 		}
 
-		$extension = \File::extension($p_file_name);
+		$extension = File::extension($p_file_name);
 
 		switch ($extension)
 		{

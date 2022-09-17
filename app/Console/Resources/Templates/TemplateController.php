@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Models\Template;
 
 class TemplateController extends BaseAdminController
 {
-    // add constructor
-    public function __construct()
-    {
-        $this->model = \App\Models\Template::class;
-        $this->setAdminTitle('[admin_title]');
-        parent::__construct();
-    }
+    public $model = Template::class;
+    public $title = '[admin_title]';
 
     // create index method
     public function index(Request $request)
