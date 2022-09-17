@@ -4,7 +4,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use App\Services\Result;
+use App\Utilities\Result;
 use App\Utilities\Cached;
 use App\Utilities\Carbex;
 

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Utilities\Cached;
-use App\Services\Result;
+use App\Utilities\Result;
 
 class State extends BaseModel
 {

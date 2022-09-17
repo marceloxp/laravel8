@@ -3,7 +3,7 @@
 namespace App\Utilities;
 
 use Illuminate\Support\Facades\Cache;
-use App\Services\Result;
+use App\Utilities\Result;
 
 class Cached
 {
