@@ -4,6 +4,8 @@ namespace App\Services\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use App\Traits\Models\Searchable;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class DefaultCrud.
@@ -22,14 +24,20 @@ class DefaultCrud
         View::share(compact('search'));
 
         if (!empty($search)) {
-            // get all users and roles order by id desc
-            $table = $model::where('name', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%')
+            if (in_array(Searchable::class, class_uses($model))) {
+                $table = $model::search($search);
+            } else {
+                $field_search = (Schema::hasColumn($model::getTableName(), 'name')) ? 'name' : 'id';
+                $table = $model::where($field_search, 'like', db_fmt_search($search));
+            }
+
+            $table = $table
                 ->orderBy('id', 'desc')
-                ->paginate($request->get('limit', 10));
+                ->paginate(db_admin_get_pagination_limit())
+            ;
         } else {
             // get all users and roles order by id desc
-            $table = $model::orderBy('id', 'desc')->paginate($request->get('limit', 10));
+            $table = $model::orderBy('id', 'desc')->paginate(db_admin_get_pagination_limit());
         }
 
         // return view with users

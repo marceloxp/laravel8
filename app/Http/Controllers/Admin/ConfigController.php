@@ -13,6 +13,7 @@ class ConfigController extends BaseAdminController
     // create index method
     public function index(Request $request)
     {
+        db_admin_set_pagination_limit(2);
         return $this->defaultIndex($request);
     }
 

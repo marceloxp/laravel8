@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Utilities\Cached;
+use App\Traits\Models\Searchable;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -20,9 +21,12 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 {
     use Authenticatable, Authorizable, CanResetPassword;
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use Searchable;
 
 	protected $dates   = ['created_at','updated_at','deleted_at'];
 	protected $guarded = ['created_at','updated_at','deleted_at'];
+
+    protected $search_fields = ['name', 'email'];
 
     /**
      * The attributes that are mass assignable.

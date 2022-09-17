@@ -14,7 +14,6 @@ use App\Utilities\Cached;
 class BaseAdminController extends Controller
 {
 	public $title = 'UMS Admin';
-	public $pagination_limit = 10;
 	public $user;
 	public $route_name;
 	public $fields_captions;
@@ -29,7 +28,6 @@ class BaseAdminController extends Controller
 			{
                 $user = auth()->guard('admin')->user();
 				$route_name = Route::currentRouteName();
-				$this->setPaginationLimit(intval(env('ADMIN_PAGINATION_LIMIT')));
 
 				// get config from browser cookie
 				$darkMode = Cookie::get('dark-mode');
@@ -91,17 +89,5 @@ class BaseAdminController extends Controller
     {
 		return DefaultCrud::defaultDelete($request, $this->model, $id);
     }
-
-	// add set pagination limit method
-	public function setPaginationLimit($pagination_limit)
-	{
-		$this->pagination_limit = $pagination_limit;
-	}
-
-	// add function get pagination limit
-	public function getPaginationLimit()
-	{
-		return $this->pagination_limit;
-	}
-    
+   
 }

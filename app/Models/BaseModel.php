@@ -31,7 +31,11 @@ class BaseModel extends Model
 		return db_table_get_field_comment(self::getTableName(), $field_name);
 	}
 
-	// add function get get all fields captions
+	// add comment to inform that this method returns a Illuminate\Support\Collection
+	/**
+	 * Get all fields of current table model
+	 * @return \Illuminate\Support\Collection
+	 */
 	public static function getFieldsCaptions()
 	{
 		return db_table_get_fields_captions(self::getTableName());

@@ -25,13 +25,13 @@ class UserCrud
 
         if (!empty($search)) {
             // get all users and roles order by id desc
-            $table = User::where('name', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%')
+            $table = User::search($search)
                 ->orderBy('id', 'desc')
-                ->paginate($request->get('limit', 10));
+                ->paginate(db_admin_get_pagination_limit())
+            ;
         } else {
             // get all users and roles order by id desc
-            $table = User::orderBy('id', 'desc')->paginate($request->get('limit', 10));
+            $table = User::orderBy('id', 'desc')->paginate(db_admin_get_pagination_limit());
         }
 
         // return view with users

@@ -16,6 +16,23 @@ if (!function_exists('db_database_name'))
 	}
 }
 
+if (!function_exists('db_admin_get_pagination_limit'))
+{
+	function db_admin_get_pagination_limit()
+	{
+		return config('database.admin_pagination_limit');
+	}
+}
+
+if (!function_exists('db_admin_set_pagination_limit'))
+{
+	function db_admin_set_pagination_limit($pagination_limit)
+	{
+		config(['database.admin_pagination_limit' => $pagination_limit]);
+		return db_admin_get_pagination_limit();
+	}
+}
+
 if (!function_exists('db_prefix'))
 {
 	function db_prefix()
@@ -29,6 +46,17 @@ if (!function_exists('db_comment_table'))
 	function db_comment_table($table_name, $table_comment)
 	{
 		DB::select(sprintf('ALTER TABLE %s COMMENT = "%s"', db_prefixed_table($table_name), $table_comment));
+	}
+}
+
+if (!function_exists('db_fmt_search'))
+{
+	function db_fmt_search($search)
+	{
+		$search = trim($search);
+		$search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
+		$search = str_replace(' ', '%', $search);
+		return '%' . $search . '%';
 	}
 }
 
@@ -115,6 +143,10 @@ if (!function_exists('db_table_has_index'))
  */
 if (!function_exists('db_table_get_fields_captions'))
 {
+	/**
+	 * Get all fields captions of current table model
+	 * @return \Illuminate\Support\Collection
+	 */
 	function db_table_get_fields_captions($table_name)
 	{
 		$result = Cached::get

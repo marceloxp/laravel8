@@ -17,6 +17,8 @@ return [
 
     'default' => env('DB_CONNECTION', 'mysql'),
 
+    'admin_pagination_limit' => env('ADMIN_PAGINATION_LIMIT', 10),
+
     /*
     |--------------------------------------------------------------------------
     | Database Connections
