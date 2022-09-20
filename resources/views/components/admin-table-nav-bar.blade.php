@@ -4,10 +4,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ $model::getAdminRouteByName('create') }}" class="nav-link">Adicionar</a>
+            <a href="{{ $model::getAdminRouteByDotNotation('create') }}" class="nav-link">Adicionar</a>
         </li>
     </ul>
-    <form class="form-inline ml-3" action="{{ $model::getAdminRouteByName('search') }}" method="get">
+    <form class="form-inline ml-3" action="{{ $model::getAdminRouteByDotNotation('index') }}" method="get">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" id="search" name="search" type="search" placeholder="Buscar" aria-label="Buscar" value="{{ $search }}">
             <div class="input-group-append">

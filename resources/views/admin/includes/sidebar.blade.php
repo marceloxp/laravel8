@@ -11,9 +11,9 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <x-admin-sidebar caption="Administração" icon="fas fa-tachometer-alt" :visible="$user->isDeveloperOrIsMaster()">
                     {{-- add config menu component --}}
-                    <x-admin-sidebar.item routeName="adminConfig" caption="Configurações" slug="config" icon="fas fa-cogs"/>
+                    <x-admin-sidebar.item routeName="admin.config.index" caption="Configurações" slug="config" icon="fas fa-cogs"/>
                     {{-- add user menu component --}}
-                    <x-admin-sidebar.item routeName="adminUser" caption="Usuários" slug="user" icon="fas fa-users"/>
+                    <x-admin-sidebar.item routeName="admin.user.index" caption="Usuários" slug="user" icon="fas fa-users"/>
                     {{-- add clear cache link component --}}
                     <x-admin-sidebar.item routeName="adminClearCache" caption="Limpar Cache ({{ $cached_count }})" slug="clear-cache" icon="fas fa-trash-alt"/>
                     {{-- add logs link --}}

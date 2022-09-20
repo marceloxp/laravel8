@@ -52,6 +52,20 @@ class BaseModel extends Model
 		return sprintf('admin%s%s', $singular_name, ucfirst(strtolower($route)));
 	}
 
+	public static function getAdminPathByDotNotation($route)
+	{
+		// get Laravel singular name of current table model
+		$singular_name = ucfirst(str_to_singular(strtolower(self::getTableName())));
+		return sprintf('admin.%s.%s', strtolower($singular_name), strtolower($route));
+	}
+
+	public static function getAdminRouteByDotNotation($route)
+	{
+		// get Laravel singular name of current table model
+		$singular_name = ucfirst(str_to_singular(strtolower(self::getTableName())));
+		return route(self::getAdminPathByDotNotation($route));
+	}
+
 	// create function to get route of current table model
 	public static function getAdminRouteByName($route)
 	{
@@ -65,59 +79,4 @@ class BaseModel extends Model
 		return sprintf('admin.%s.%s', $singular_name, $route);
 	}
 
-	public static function _validate($request, $rules, $id = null)
-	{
-		try
-		{
-			$result =
-			[
-				'result'  => true,
-				'success' => false,
-				'tag'     => 0,
-				'message' => '',
-				'fields'  => [],
-				'error'   => ''
-			];
-
-			if ($id)
-			{
-				$rules['id'] = 'required';
-			}
-
-			$form_data = (is_array($request)) ? $request : $request->all();
-			$validator = Validator::make($form_data, $rules);
-			$fields_captions = self::getFieldsCaptions();
-
-			if (($validator->fails()))
-			{
-				$result['success'] = false;
-				$result['message'] = 'Entrada de dados inválida.';
-				$result['single']['message'] = 'Entrada de dados inválida.';
-				$result['all']     = [ $result['message'] ];
-				$result['fields']  = [];
-
-				$errors = $validator->errors();
-
-				foreach ($errors->keys() as $field_name)
-				{
-					$str_error                       = $errors->first($field_name);
-					$result['single'][$field_name]   = $str_error;
-					$result['fields'][$field_name][] = $str_error;
-					$result['all'][]                 = $fields_captions->get($field_name) . ': ' . $str_error;
-				}
-			}
-			else
-			{
-				$result['success'] = true;
-			}
-		}
-		catch(\Exception $e)
-		{
-			$result['success'] = false;
-			$result['message'] = 'Ocorreu um erro na validação dos dados.';
-			$result['error'] = $e->getMessage();
-		}
-
-		return $result;
-	}
 }

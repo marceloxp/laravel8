@@ -3,37 +3,94 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\UserPostRequest;
 use App\Services\Admin\UserCrud;
 use App\Models\User;
+use \App\Models\Role;
 
 class UserController extends BaseAdminController
 {
     public $model = User::class;
     public $title = 'Usuários';
     
-    // create index method with search and pagination limit
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
-        $table = UserCrud::index($request);
-        return view('admin.user.index', compact('table'));
+        //db_admin_set_pagination_limit(2);
+		$table = UserCrud::index($request, $this->model);
+        return view($this->model::getAdminViewPath('index'), compact('table'));
     }
 
-    // add create or edit method
-    public function createOrEdit(Request $request, $id = null)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $register = UserCrud::createOrEdit($request, $id);
-        return view('admin.user.create_edit', compact('register'));
+        $roles = Role::all();
+        return view($this->model::getAdminViewPath('create'), compact('roles'));
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserPostRequest $request)
     {
-        return UserCrud::store($request);
+        return UserCrud::store($request, $this->model);
     }
 
-    // create delete method
-    public function delete(Request $request, $id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
     {
-        return UserCrud::delete($request, $id);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        $roles = Role::all();
+        return view($this->model::getAdminViewPath('edit'), ['register' => $user, 'roles' => $roles]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UserPostRequest $request, User $user)
+    {
+        return UserCrud::update($request, $user);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        return UserCrud::destroy($user);
     }
 
 }

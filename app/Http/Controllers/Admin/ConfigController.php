@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ConfigPostRequest;
+use App\Services\Admin\DefaultCrud;
 use App\Models\Config;
 
 class ConfigController extends BaseAdminController
@@ -10,28 +12,81 @@ class ConfigController extends BaseAdminController
     public $model = Config::class;
     public $title = 'Configurações';
 
-    // create index method
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
-        db_admin_set_pagination_limit(2);
-        return $this->defaultIndex($request);
+        //db_admin_set_pagination_limit(2);
+		$table = DefaultCrud::index($request, $this->model);
+        return view($this->model::getAdminViewPath('index'), compact('table'));
     }
 
-    // add create or edit method
-    public function createOrEdit(Request $request, $id = null)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return $this->defaultCreateOrEdit($request, $id);
+        return view($this->model::getAdminViewPath('create'));
     }
 
-    // add store method
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ConfigPostRequest $request)
     {
-        return $this->defaultStore($request);
+        return DefaultCrud::store($request, $this->model);
     }
 
-    // add delete method
-    public function delete(Request $request, $id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Config  $config
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Config $config)
     {
-        return $this->defaultDelete($request, $id);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Config  $config
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Config $config)
+    {
+        return view($this->model::getAdminViewPath('edit'), ['register' => $config]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Config  $config
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ConfigPostRequest $request, Config $config)
+    {
+        return DefaultCrud::update($request, $config);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Config  $config
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, Config $config)
+    {
+        return DefaultCrud::destroy($request, $config);
     }
 }

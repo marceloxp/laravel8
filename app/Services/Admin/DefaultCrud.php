@@ -44,65 +44,19 @@ class DefaultCrud
         return $table;
     }
 
-    public static function defaultCreateOrEdit(Request $request, $model, $id = null)
-    {
-        // get table or create new table
-        $register = $model::find($id);
-        if(!$register)
-        {
-            $register = new $model();
-        }
-
-        return $register;
-    }
-
-    public static function defaultStore(Request $request, $model)
+    public static function store(Request $request, $model)
     {
         try
         {
-            $id = $request->get('id');
-
-            // get request except _token
-            $form = $request->except('_token');
-    
-            // validate request
-            $valid = $model::validate($form, $id);
-            if (!$valid['success'])
-            {
-                throw new \Exception($valid['single']);
-            }
-    
-            if (!empty($id))
-            {
-                $register = $model::firstOrNew(['id' => $id]);
-                $register->fill($form);
-            }
+            if ($model::create($request->validated()))
+                return redirect()
+                    ->route($model::getAdminPathByDotNotation('index'))
+                    ->withMessages('Registro criado com sucesso.')
+                ;
             else
-            {
-                $register = $model::create($form);
-            }
-            $saved = (empty($id)) ? ($register->save()) : ($register->update());
-    
-            if ($saved)
-            {
-                $message = ($id) ? 'Registro atualizado com sucesso.' : 'Registro criado com sucesso.';
-                $request->session()->flash('messages', [$message]);
-    
-                if ($id)
-                {
-                    return redirect()->route($model::getAdminRouteName('edit'), ['id' => $id]);
-                }
-                else
-                {
-                    return redirect()->route($model::getAdminRouteName('index'));
-                }
-            }
-            else
-            {
                 return back()
                     ->withErrors('Ocorreu um erro na gravação do registro.')
                     ->withInput();
-            }
         }
         catch(\Exception $e)
         {
@@ -112,19 +66,43 @@ class DefaultCrud
         }
     }
     
-    public static function defaultDelete(Request $request, $model, $id)
+    public static function update(Request $request, $model)
     {
-        $register = $model::find($id);
-        if($register)
+        try
         {
-            $register->delete();
-            $request->session()->flash('messages', ['Registro excluído com sucesso.']);
+            if ($model->update($request->validated()))
+                return redirect()
+                    ->route($model::getAdminPathByDotNotation('index'))
+                    ->withMessages('Registro atualizado com sucesso.')
+                ;
+            else
+                return back()
+                    ->withErrors('Ocorreu um erro na gravação do registro.')
+                    ->withInput()
+                ;
         }
-        else
+        catch(\Exception $e)
         {
-            $request->session()->flash('messages', ['Registro não encontrado.']);
+            return back()
+                ->withErrors($e->getMessage())
+                ->withInput();
         }
-        return redirect()->route($model::getAdminRouteName('index'));
+    }
+    
+    public static function destroy($model)
+    {
+        try
+        {
+            $model->delete();
+            return redirect()
+                ->route($model::getAdminPathByDotNotation('index'))
+                ->withMessages('Registro excluído com sucesso.')
+            ;
+        }
+        catch (\Exception $e)
+        {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
 }

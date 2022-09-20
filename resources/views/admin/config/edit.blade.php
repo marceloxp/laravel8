@@ -5,8 +5,9 @@
 		<div class="card-header">
 			<h3 class="card-title">Editar Registro</h3>
 		</div>
-		<form action="{{ $model::getAdminRouteByName('store') }}" method="POST">
+		<form method="POST" action="{{ route($model::getAdminPathByDotNotation('update'), $register->id) }}">
 			@csrf
+			@method('PUT')
 			<div class="card-body">
 				<x-admin-form-model :register="$register">
 					<!-- add config id field -->	

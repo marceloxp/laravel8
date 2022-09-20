@@ -13,8 +13,9 @@
 		<div class="card-header">
 			<h3 class="card-title">Editar Registro</h3>
 		</div>
-		<form name="frmTable" id="frmTable" action="{{ $model::getAdminRouteByName('store') }}" enctype="multipart/form-data" method="POST">
+		<form method="POST" name="frmTable" id="frmTable" action="{{ route($model::getAdminPathByDotNotation('update'), $register->id) }}" enctype="multipart/form-data">
 			@csrf
+			@method('PUT')
 			<div class="card-body">
 				<x-admin-form-model :register="$register">
 					<!-- add user id field -->	

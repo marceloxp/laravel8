@@ -20,17 +20,4 @@ class Config extends BaseModel
 
 	// define Searchable fields
 	protected $search_fields = ['name', 'value'];
-
-    // create static function validate
-	public static function validate($request, $id = '')
-	{
-		$rules = 
-		[
-			'name' => 'required|max:255|unique:configs,name,' . $id . ',id,deleted_at,NULL',
-			'value'  => 'required|max:255',
-			'status' => 'required|in:Ativo,Inativo'
-		];
-
-		return Config::_validate($request, $rules, $id);
-	}
 }

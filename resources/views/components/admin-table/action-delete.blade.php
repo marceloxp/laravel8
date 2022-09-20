@@ -1,7 +1,7 @@
 @aware(['register'])
 @props(['caption' => 'Excluir', $confirm_message='Deseja realmente excluir este registro?'])
 
-<form action="{{ route($model::getAdminRouteName('delete'), $register->id) }}" method="POST" style="display: inline-block;">
+<form method="POST" action="{{ route($model::getAdminPathByDotNotation('destroy'), $register->id) }}" style="display: inline-block;">
     @csrf
     @method('DELETE')
     <!-- submit button Excluir with icon and confirm -->

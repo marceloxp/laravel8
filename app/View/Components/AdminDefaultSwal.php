@@ -40,13 +40,13 @@ class AdminDefaultSwal extends Component
     // get messages success as string
     public function getMessagesSuccess()
     {
-        return implode('<br>', $this->messages_success);
+        return addslashes(implode('<br>', $this->messages_success));
     }
 
     // get messages errors as string
     public function getMessagesErrors()
     {
-        return implode('<br>', $this->messages_errors);
+        return addslashes(implode('<br>', $this->messages_errors));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminEnsureUserIsMasterDeveloper
 {
@@ -16,6 +17,7 @@ class AdminEnsureUserIsMasterDeveloper
      */
     public function handle(Request $request, Closure $next)
     {
+        /** @var User $user */
         $user = auth()->guard('admin')->user();
         if (!$user->hasRole('Master') && !$user->hasRole('Developer')) {
             return redirect()->route('adminDashboard');
