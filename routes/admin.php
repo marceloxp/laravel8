@@ -19,6 +19,8 @@ use App\Http\Middleware\AdminEnsureUserIsMasterDeveloper;
 |
  */
 
+# TODO: Passar as rotas de admin para dot notation
+
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
