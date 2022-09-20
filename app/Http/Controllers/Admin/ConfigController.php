@@ -45,17 +45,16 @@ class ConfigController extends BaseAdminController
         return DefaultCrud::store($request, $this->model);
     }
 
-    # FIXME: Criar método show() para exibir detalhes do registro
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Config  $config
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    // public function show(Config $config)
-    // {
-    //     //
-    // }
+    public function show(Config $config)
+    {
+        return view($this->model::getAdminViewPath('show'), ['register' => $config]);
+    }
 
     /**
      * Show the form for editing the specified resource.

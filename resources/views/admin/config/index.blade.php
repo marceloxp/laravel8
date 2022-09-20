@@ -30,9 +30,8 @@
 								<td>{{ $register->updated_at }}</td>
 								<td>
 									<x-admin-table :register="$register">
-										<!-- admin button component edit with icon -->
 										<x-admin-table.action-edit/>
-										<!-- x-admin button delete -->
+										<x-admin-table.action-show/>
 										<x-admin-table.action-delete/>
 									</x-admin-table>
 								</td>

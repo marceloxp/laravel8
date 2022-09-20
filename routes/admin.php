@@ -37,7 +37,7 @@ Route::prefix('admin')->group(function () {
         Route::group(['middleware' => AdminEnsureUserIsMasterDeveloper::class], function () {
             
             // add config resource route
-            Route::resource('/config', ConfigController::class, ['as' => 'admin'])->except(['show']);
+            Route::resource('/config', ConfigController::class, ['as' => 'admin']);
             Route::resource('/user', UserController::class, ['as' => 'admin'])->except(['show']);
             
             // add grouped user all routes

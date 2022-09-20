@@ -20,7 +20,8 @@ class BaseAdminController extends Controller
 		$darkMode = Cookie::get('dark-mode');
 		$darkMode = (!empty($darkMode)) ? 'dark-mode' : '';
 		$fields_captions = ($this->model) ? $this->model::getFieldsCaptions() : [];
-		
+		$fields_show = collect($fields_captions)->except('deleted_at')->toArray();
+
 		View::share([
 			'model' => $this->model,
 			'darkMode' => $darkMode,
@@ -28,6 +29,7 @@ class BaseAdminController extends Controller
 			'cached_count' => Cached::count(),
 			'route_name' => Route::currentRouteName(),
 			'fields_captions' => $fields_captions,
+			'fields_show' => $fields_show,
 		]);
 	}
 

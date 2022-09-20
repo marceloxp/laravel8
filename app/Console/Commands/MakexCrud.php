@@ -69,6 +69,7 @@ class MakexCrud extends Command
 
         $filenames = [
             'index.blade.stub',
+            'show.blade.stub',
             'create.blade.stub',
             'edit.blade.stub',
         ];
