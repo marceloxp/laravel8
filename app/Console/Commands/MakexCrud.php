@@ -37,53 +37,57 @@ class MakexCrud extends Command
      */
     public function handle()
     {
-        $modelName = $this->argument('modelname');
+        $argModelName = $this->argument('modelname');
 
         // ask for model name
-        if (!$modelName) {
-            $modelName = $this->ask('Model Name');
+        if (!$argModelName) {
+            $argModelName = $this->ask('Model Name');
         }
-        $adminTitle = $this->ask('Admin Title');
-
-        // get strlower model name
-        $modelNameLower = strtolower($modelName);
+        $modelname = ucfirst($argModelName);
+        $title = $this->ask('Admin Title');
+        $modelvariable = strtolower($modelname);
+        $modelpostrequest = $modelname . 'PostRequest';
 
         // if not confirm execution, exit
-        if (!$this->confirm('Are you sure to create CRUD for ' . $modelName . '?')) {
+        if (!$this->confirm('Are you sure to create CRUD for ' . $modelname . '?')) {
             return 0;
         }
 
-        # TODO: Criar stubs para os arquivos
+        $filename = base_path('stubs/TemplateController.stub');
+        $replaces = compact('modelname', 'title', 'modelvariable', 'modelpostrequest');
+        $filedest = base_path('app/Http/Controllers/Admin/' . $modelname . 'Controller.php');
+        $template = file_get_contents($filename);
+        foreach ($replaces as $key => $value) {
+            $template = str_replace('{{ ' . $key . ' }}', $value, $template);
+        }
+        file_put_contents($filedest, $template);
 
-        // load file "app/Console/Resources/Templates/TemplateController.php" to variable $templateController
-        $templateController = file_get_contents(__DIR__ . '/../Resources/Templates/TemplateController.php');
-        $templateController = str_replace('<?php /*', '', $templateController);
-        $templateController = str_replace('*/ ?>', '', $templateController);
-        // replace [model_name] with model name
-        $templateController = str_replace('Template', $modelName, $templateController);
-        // replace [admin_title] with admin title
-        $templateController = str_replace('[admin_title]', $adminTitle, $templateController);
-        // create file "app/Http/Controllers/Admin/[model_name]Controller.php"
-        file_put_contents(base_path('app') . '/Http/Controllers/Admin/' . $modelName . 'Controller.php', $templateController);
-
-        // create folder "resources/views/admin/[modelNameLower]"
-        if (!file_exists(base_path('resources/views/admin/' . $modelNameLower))) {
-            mkdir(base_path('resources/views/admin/' . $modelNameLower), 0777, true);
+        // create folder "resources/views/admin/[modelvariable]"
+        if (!file_exists(base_path('resources/views/admin/' . $modelvariable))) {
+            mkdir(base_path('resources/views/admin/' . $modelvariable), 0777, true);
         }
 
-        // load file "create_edit.blade.php" to variable $templateCreateEdit
-        $templateCreateEdit = file_get_contents(__DIR__ . '/../Resources/Templates/create_edit.blade.php');
-        // create file "resources/views/admin/[modelNameLower]/create_edit.blade.php"
-        file_put_contents(base_path('resources/views/admin/' . $modelNameLower . '/create_edit.blade.php'), $templateCreateEdit);
+        $filenames = [
+            'index.blade.stub',
+            'create.blade.stub',
+            'edit.blade.stub',
+        ];
 
-        // load file "index.blade.php" to variable $templateIndex
-        $templateIndex = file_get_contents(__DIR__ . '/../Resources/Templates/index.blade.php');
-        // create file "resources/views/admin/[modelNameLower]/index.blade.php"
-        file_put_contents(base_path('resources/views/admin/' . $modelNameLower . '/index.blade.php'), $templateIndex);
+        foreach ($filenames as $filename)
+        {
+            $filesource = base_path('stubs/TemplateController/' . $filename);
+            $body = file_get_contents($filesource);
+            $filedest = base_path('resources/views/admin/' . $modelvariable . '/' . str_replace('.stub', '.php', $filename));
+            file_put_contents($filedest, $body);
+        }
 
+        // call make:request with modelname
+        $this->call('make:request', [
+            'name' => 'Admin/' . $modelname . 'PostRequest',
+        ]);
 
         // add comment line
-        $this->info('CRUD for ' . $modelName . ' created successfully');
+        $this->info('CRUD for ' . $modelname . ' created successfully');
 
         return 0;
     }

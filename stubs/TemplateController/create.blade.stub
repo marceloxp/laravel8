@@ -3,17 +3,17 @@
 @section('content')
 	<div class="card card-primary">
 		<div class="card-header">
-			<h3 class="card-title">Editar Registro</h3>
+			<h3 class="card-title">Criar Registro</h3>
 		</div>
-		<form action="{{ $model::getAdminRouteByName('store') }}" method="POST">
+		<form method="POST" action="{{ $model::getAdminRouteByDotNotation('store') }}">
 			@csrf
 			<div class="card-body">
-				<x-admin-form-model :register="$register">
-					<!-- add table id field -->	
-					<x-admin-form-model.id/>
-
-					<!-- add table name field -->
+				<x-admin-form-model :register="null">
+					<!-- add config name field -->
 					<x-admin-form-model.text name="name"/>
+
+					<!-- add config value field -->
+					<x-admin-form-model.text name="value"/>
 				</x-admin-form-model>
 			</div>
 			<!-- add Save and Cancel buttons -->
