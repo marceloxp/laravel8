@@ -53,6 +53,8 @@ class MakexCrud extends Command
             return 0;
         }
 
+        # TODO: Criar stubs para os arquivos
+
         // load file "app/Console/Resources/Templates/TemplateController.php" to variable $templateController
         $templateController = file_get_contents(__DIR__ . '/../Resources/Templates/TemplateController.php');
         $templateController = str_replace('<?php /*', '', $templateController);

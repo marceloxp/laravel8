@@ -15,7 +15,7 @@ class ConfigController extends BaseAdminController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -27,7 +27,7 @@ class ConfigController extends BaseAdminController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -37,7 +37,7 @@ class ConfigController extends BaseAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\ConfigPostRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(ConfigPostRequest $request)
@@ -45,22 +45,23 @@ class ConfigController extends BaseAdminController
         return DefaultCrud::store($request, $this->model);
     }
 
+    # FIXME: Criar método show() para exibir detalhes do registro
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Config  $config
      * @return \Illuminate\Http\Response
      */
-    public function show(Config $config)
-    {
-        //
-    }
+    // public function show(Config $config)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Config  $config
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(Config $config)
     {
@@ -70,7 +71,7 @@ class ConfigController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\ConfigPostRequest  $request
      * @param  \App\Models\Config  $config
      * @return \Illuminate\Http\Response
      */
@@ -85,8 +86,8 @@ class ConfigController extends BaseAdminController
      * @param  \App\Models\Config  $config
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Config $config)
+    public function destroy(Config $config)
     {
-        return DefaultCrud::destroy($request, $config);
+        return DefaultCrud::destroy($config);
     }
 }

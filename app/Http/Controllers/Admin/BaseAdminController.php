@@ -13,14 +13,13 @@ class BaseAdminController extends Controller
 	public $title = 'UMS Admin';
 	public $user;
 	public $route_name;
-	public $fields_captions;
 	public $model;
 
 	private function setCommonData()
 	{
 		$darkMode = Cookie::get('dark-mode');
 		$darkMode = (!empty($darkMode)) ? 'dark-mode' : '';
-		$this->fields_captions = ($this->model) ? $this->model::getFieldsCaptions() : [];
+		$fields_captions = ($this->model) ? $this->model::getFieldsCaptions() : [];
 		
 		View::share([
 			'model' => $this->model,
@@ -28,7 +27,7 @@ class BaseAdminController extends Controller
 			'admin_title' => $this->title,
 			'cached_count' => Cached::count(),
 			'route_name' => Route::currentRouteName(),
-			'fields_captions' => $this->fields_captions,
+			'fields_captions' => $fields_captions,
 		]);
 	}
 

@@ -65,22 +65,6 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 		return $this->belongsToMany(Role::class);
 	}
 
-    public static function validate($request, $id = '')
-    {
-		$rules = 
-		[
-			'name'  => 'required|min:3|max:150',
-			'email' => 'required|min:5|max:255|unique:users,email,' . $id . ',id,deleted_at,NULL',
-		];
-
-		if (!$id)
-		{
-			$rules['password'] = 'required|min:4|max:255';
-		}
-
-		return User::_validate($request, $rules, $id);
-    }
-
     // get if user isDeveloper
     public function isDeveloper()
     {

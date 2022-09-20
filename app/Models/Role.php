@@ -13,17 +13,18 @@ class Role extends BaseModel
 	// add fillable fields
 	protected $fillable = ['name', 'description', 'color'];
 
-    public static function validate($request, $id = '')
-    {
-		$rules = 
-		[
-			'name'        => 'required|min:5|max:150|unique:roles,name,' . $id,
-			'description' => 'required|min:5|max:255',
-			'color'       => 'required|min:5|max:255'
-		];
+    # TODO: create a separate validator to this model
+	// public static function validate($request, $id = '')
+    // {
+	// 	$rules = 
+	// 	[
+	// 		'name'        => 'required|min:5|max:150|unique:roles,name,' . $id,
+	// 		'description' => 'required|min:5|max:255',
+	// 		'color'       => 'required|min:5|max:255'
+	// 	];
 
-		return Role::_validate($request, $rules, $id);
-    }
+	// 	return Role::_validate($request, $rules, $id);
+    // }
 
 	public static function getColorBg($p_color_name)
 	{

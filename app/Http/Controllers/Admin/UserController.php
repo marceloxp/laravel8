@@ -16,19 +16,19 @@ class UserController extends BaseAdminController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
         //db_admin_set_pagination_limit(2);
-		$table = UserCrud::index($request, $this->model);
+		$table = UserCrud::index($request);
         return view($this->model::getAdminViewPath('index'), compact('table'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -39,7 +39,7 @@ class UserController extends BaseAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UserPostRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserPostRequest $request)
@@ -47,22 +47,23 @@ class UserController extends BaseAdminController
         return UserCrud::store($request, $this->model);
     }
 
+    # FIXME: Criar método show() para exibir detalhes do registro
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
-    {
-        //
-    }
+    // public function show(User $user)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(User $user)
     {
@@ -73,7 +74,7 @@ class UserController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\UserPostRequest  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */

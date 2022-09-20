@@ -30,14 +30,7 @@ class Datasite
 
 	public static function getAsJson()
 	{
-		try
-		{
-			return json_encode(self::$datasite);
-		}
-		catch (\Exception $e)
-		{
-			return json_encode([]);
-		}
+		return json_encode(self::$datasite);
 	}
 
 	public static function getHtmlScript()

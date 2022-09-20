@@ -36,14 +36,4 @@ class City extends BaseModel
 	{
 		return $this->hasOne(State::class, 'id', 'state_id');
 	}
-
-	public static function validate($request, $id = '')
-	{
-		$rules = 
-		[
-			'state_id'   => 'required',
-			'name'       => 'required|max:150',
-		];
-		return Role::_validate($request, $rules, $id);
-	}
 }

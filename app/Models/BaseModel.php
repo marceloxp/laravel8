@@ -41,6 +41,8 @@ class BaseModel extends Model
 		return db_table_get_fields_captions(self::getTableName());
 	}
 
+	# TODO: Separate below methods to a trait or utility class
+
 	// create function to get default admin route names
 	public static function getAdminRouteName($route)
 	{

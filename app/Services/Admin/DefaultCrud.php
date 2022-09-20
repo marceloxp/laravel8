@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\Models\Searchable;
 use Illuminate\Support\Facades\Schema;
 
@@ -44,7 +45,7 @@ class DefaultCrud
         return $table;
     }
 
-    public static function store(Request $request, $model)
+    public static function store(FormRequest $request, $model)
     {
         try
         {
@@ -66,7 +67,7 @@ class DefaultCrud
         }
     }
     
-    public static function update(Request $request, $model)
+    public static function update(FormRequest $request, $model)
     {
         try
         {
