@@ -15,7 +15,7 @@
 		<div class="card-body table-responsive p-0">
 			@if ($register)
 				<table class="table table-hover table-striped">
-					@foreach ($configCrud->showFields() as $fieldname => $caption)
+					@foreach ($userCrud->showFields() as $fieldname => $caption)
 						<tr>
 							<td class="crud_admin_fieldcaption">{{ $caption }}</td>
 							<td>{{ $register->$fieldname }}</td>

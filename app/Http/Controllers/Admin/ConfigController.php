@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ConfigPostRequest;
-use App\Services\Admin\DefaultCrud;
+use App\Services\Admin\ConfigCrud;
 use App\Models\Config;
 
 class ConfigController extends BaseAdminController
@@ -20,7 +20,7 @@ class ConfigController extends BaseAdminController
     public function index(Request $request)
     {
         //db_admin_set_pagination_limit(2);
-		$table = DefaultCrud::index($request, $this->model);
+		$table = ConfigCrud::index($request);
         return view($this->model::getAdminViewPath('index'), compact('table'));
     }
 
@@ -40,9 +40,9 @@ class ConfigController extends BaseAdminController
      * @param  \App\Http\Requests\Admin\ConfigPostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ConfigPostRequest $request)
+    public function store(ConfigPostRequest $request, Config $config)
     {
-        return DefaultCrud::store($request, $this->model);
+        return ConfigCrud::store($request, $config);
     }
 
     /**
@@ -51,9 +51,9 @@ class ConfigController extends BaseAdminController
      * @param  \App\Models\Config  $config
      * @return \Illuminate\View\View
      */
-    public function show(Config $config)
+    public function show(Config $config, ConfigCrud $configCrud)
     {
-        return view($this->model::getAdminViewPath('show'), ['register' => $config]);
+        return view($this->model::getAdminViewPath('show'), ['register' => $config, 'configCrud' => $configCrud]);
     }
 
     /**
@@ -76,7 +76,7 @@ class ConfigController extends BaseAdminController
      */
     public function update(ConfigPostRequest $request, Config $config)
     {
-        return DefaultCrud::update($request, $config);
+        return ConfigCrud::update($request, $config);
     }
 
     /**
@@ -87,6 +87,6 @@ class ConfigController extends BaseAdminController
      */
     public function destroy(Config $config)
     {
-        return DefaultCrud::destroy($config);
+        return ConfigCrud::destroy($config);
     }
 }

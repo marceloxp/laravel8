@@ -6,37 +6,26 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UserPostRequest;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
-use App\Models\Role;
+use App\Utilities\AdminCrud;
 
 /**
  * Class User.
  */
 class UserCrud
 {
+    /**
+     * Get display fields on show screen.
+     *
+     * @return array
+     */
+    public function showFields()
+    {
+        return User::getFieldsCaptions()->except(['password', 'remember_token', 'email_verified_at', 'deleted_at'])->toArray();
+    }
+
     public static function index(Request $request)
     {
-        // get search value
-        $search = trim($request->get('search'));
-
-        // remove all special characters and preserve space from search value
-        $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
-
-        // share $search to view
-        View::share(compact('search'));
-
-        if (!empty($search)) {
-            // get all users and roles order by id desc
-            $table = User::search($search)
-                ->orderBy('id', 'desc')
-                ->paginate(db_admin_get_pagination_limit())
-            ;
-        } else {
-            // get all users and roles order by id desc
-            $table = User::orderBy('id', 'desc')->paginate(db_admin_get_pagination_limit());
-        }
-
-        // return view with users
-        return $table;
+        return AdminCrud::index($request, User::class);
     }
 
     public static function store(UserPostRequest $request, $model)
@@ -99,18 +88,7 @@ class UserCrud
 
     public static function destroy(User $user)
     {
-        try
-        {
-            $user->delete();
-            return redirect()
-                ->route($user::getAdminPathByDotNotation('index'))
-                ->withMessages('Registro excluído com sucesso.')
-            ;
-        }
-        catch (\Exception $e)
-        {
-            return back()->withErrors($e->getMessage());
-        }
+        return AdminCrud::destroy($user);
     }
 
 }

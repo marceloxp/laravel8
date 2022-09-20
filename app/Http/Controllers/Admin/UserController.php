@@ -42,22 +42,22 @@ class UserController extends BaseAdminController
      * @param  \App\Http\Requests\Admin\UserPostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserPostRequest $request)
+    public function store(UserPostRequest $request, User $user)
     {
-        return UserCrud::store($request, $this->model);
+        return UserCrud::store($request, $user);
     }
 
-    # FIXME: Criar método show() para exibir detalhes do registro
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    // public function show(User $user)
-    // {
-    //     //
-    // }
+    public function show(User $user, UserCrud $userCrud)
+    {
+        # TODO: Adjust register variable to model name variable as sent in the view
+        return view($this->model::getAdminViewPath('show'), ['register' => $user, 'userCrud' => $userCrud]);
+    }
 
     /**
      * Show the form for editing the specified resource.

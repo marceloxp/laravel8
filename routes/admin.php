@@ -38,7 +38,7 @@ Route::prefix('admin')->group(function () {
             
             // add config resource route
             Route::resource('/config', ConfigController::class, ['as' => 'admin']);
-            Route::resource('/user', UserController::class, ['as' => 'admin'])->except(['show']);
+            Route::resource('/user', UserController::class, ['as' => 'admin']);
             
             // add grouped user all routes
             // Route::group(['prefix' => 'user'], function () {
