@@ -5,7 +5,7 @@
 		<div class="card-header">
 			<h3 class="card-title">Criar Registro</h3>
 		</div>
-		<form method="POST" action="{{ $model::getAdminRouteByDotNotation('store') }}">
+		<form method="POST" action="{{ admin_crud_route('config', 'store') }}">
 			@csrf
 			<div class="card-body">
 				<x-admin-form-model :register="null">
@@ -23,7 +23,7 @@
 				</x-admin-form-model>
 			</div>
 			<!-- add Save and Cancel buttons -->
-			<x-admin-form-model.buttons/>
+			<x-admin-form-model.buttons crud="config"/>
 		</form>
 	</div>
 @endsection

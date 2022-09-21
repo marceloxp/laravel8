@@ -9,62 +9,63 @@ use App\Models\Config;
 
 class ConfigController extends BaseAdminController
 {
-    public $model = Config::class;
-    public $title = 'Configurações';
-
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Services\Admin\ConfigCrud  $configCrud
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, ConfigCrud $configCrud)
     {
-        //db_admin_set_pagination_limit(2);
-		$table = ConfigCrud::index($request);
-        return view($this->model::getAdminViewPath('index'), compact('table'));
+        return $configCrud->index($request);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Services\Admin\ConfigCrud  $configCrud
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(ConfigCrud $configCrud)
     {
-        return view($this->model::getAdminViewPath('create'));
+        return $configCrud->create();
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Admin\ConfigPostRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Services\Admin\ConfigCrud  $configCrud
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ConfigPostRequest $request, Config $config)
+    public function store(ConfigPostRequest $request, ConfigCrud $configCrud)
     {
-        return ConfigCrud::store($request, $config);
+        return $configCrud->store($request);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Config  $config
+     * @param  \App\Services\Admin\ConfigCrud  $configCrud
      * @return \Illuminate\View\View
      */
     public function show(Config $config, ConfigCrud $configCrud)
     {
-        return view($this->model::getAdminViewPath('show'), ['register' => $config, 'configCrud' => $configCrud]);
+        return $configCrud->show($config);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Config  $config
+     * @param  \App\Services\Admin\ConfigCrud  $configCrud
      * @return \Illuminate\View\View
      */
-    public function edit(Config $config)
+    public function edit(Config $config, ConfigCrud $configCrud)
     {
-        return view($this->model::getAdminViewPath('edit'), ['register' => $config]);
+        return $configCrud->edit($config);
     }
 
     /**
@@ -72,21 +73,23 @@ class ConfigController extends BaseAdminController
      *
      * @param  \App\Http\Requests\Admin\ConfigPostRequest  $request
      * @param  \App\Models\Config  $config
-     * @return \Illuminate\Http\Response
+     * @param  \App\Services\Admin\ConfigCrud  $configCrud
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ConfigPostRequest $request, Config $config)
+    public function update(ConfigPostRequest $request, Config $config, ConfigCrud $configCrud)
     {
-        return ConfigCrud::update($request, $config);
+        return $configCrud->update($request, $config);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Config  $config
-     * @return \Illuminate\Http\Response
+     * @param  \App\Services\Admin\ConfigCrud  $configCrud
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Config $config)
+    public function destroy(Config $config, ConfigCrud $configCrud)
     {
-        return ConfigCrud::destroy($config);
+        return $configCrud->destroy($config);
     }
 }

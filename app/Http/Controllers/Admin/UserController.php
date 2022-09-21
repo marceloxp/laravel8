@@ -5,70 +5,68 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UserPostRequest;
 use App\Services\Admin\UserCrud;
-use App\Models\User;
-use \App\Models\Role;
+use App\Models\User; use App\Models\Role;
 
 class UserController extends BaseAdminController
 {
-    public $model = User::class;
-    public $title = 'Usuários';
-    
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Services\Admin\UserCrud  $userCrud
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, UserCrud $userCrud)
     {
-        //db_admin_set_pagination_limit(2);
-		$table = UserCrud::index($request);
-        return view($this->model::getAdminViewPath('index'), compact('table'));
+        return $userCrud->index($request);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Services\Admin\UserCrud  $userCrud
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(UserCrud $userCrud)
     {
-        $roles = Role::all();
-        return view($this->model::getAdminViewPath('create'), compact('roles'));
+        return $userCrud->create();
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Admin\UserPostRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Services\Admin\UserCrud  $userCrud
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UserPostRequest $request, User $user)
+    public function store(UserPostRequest $request, UserCrud $userCrud)
     {
-        return UserCrud::store($request, $user);
+        return $userCrud->store($request);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Services\Admin\UserCrud  $userCrud
      * @return \Illuminate\View\View
      */
     public function show(User $user, UserCrud $userCrud)
     {
-        # TODO: Adjust register variable to model name variable as sent in the view
-        return view($this->model::getAdminViewPath('show'), ['register' => $user, 'userCrud' => $userCrud]);
+        return $userCrud->show($user);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Services\Admin\UserCrud  $userCrud
      * @return \Illuminate\View\View
      */
-    public function edit(User $user)
+    public function edit(User $user, UserCrud $userCrud)
     {
         $roles = Role::all();
-        return view($this->model::getAdminViewPath('edit'), ['register' => $user, 'roles' => $roles]);
+        return view($userCrud->editViewPath, compact('user', 'roles'));
     }
 
     /**
@@ -76,22 +74,23 @@ class UserController extends BaseAdminController
      *
      * @param  \App\Http\Requests\Admin\UserPostRequest  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  \App\Services\Admin\UserCrud  $userCrud
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UserPostRequest $request, User $user)
+    public function update(UserPostRequest $request, User $user, UserCrud $userCrud)
     {
-        return UserCrud::update($request, $user);
+        return $userCrud->update($request, $user);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  \App\Services\Admin\UserCrud  $userCrud
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(User $user)
+    public function destroy(User $user, UserCrud $userCrud)
     {
-        return UserCrud::destroy($user);
+        return $userCrud->destroy($user);
     }
-
 }

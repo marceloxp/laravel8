@@ -5,11 +5,11 @@
 		<div class="card-header">
 			<h3 class="card-title">Editar Registro</h3>
 		</div>
-		<form method="POST" action="{{ route($model::getAdminPathByDotNotation('update'), $register->id) }}">
+		<form method="POST" action="{{ admin_crud_route('config', 'update', $config->id) }}">
 			@csrf
 			@method('PUT')
 			<div class="card-body">
-				<x-admin-form-model :register="$register">
+				<x-admin-form-model :register="$config">
 					<!-- add config id field -->	
 					<x-admin-form-model.id/>
 
@@ -27,7 +27,7 @@
 				</x-admin-form-model>
 			</div>
 			<!-- add Save and Cancel buttons -->
-			<x-admin-form-model.buttons/>
+			<x-admin-form-model.buttons crud="config"/>
 		</form>
 	</div>
 @endsection

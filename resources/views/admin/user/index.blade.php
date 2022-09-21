@@ -9,23 +9,21 @@
 @endsection
 
 @section('content')
-	<x-admin-table-nav-bar :search="$search"/>
+	<x-admin-table-nav-bar crud="user" :model="$model" :search="$search"/>
 
-	<!-- add adminlte table -->
 	<div class="card">
 		<div class="card-body table-responsive p-0">
 			@if ($table->total() > 0)
 				<table class="table table-hover">
-					<!-- add users table header -->
 					<thead>
 						<tr>
-							<th>{{ $fields_captions->get('id') }}</th>
-							<th>{{ $fields_captions->get('avatar') }}</th>
-							<th>{{ $fields_captions->get('name') }}</th>
-							<th>{{ $fields_captions->get('email') }}</th>
+							<th>{{ $captions->get('id') }}</th>
+							<th>{{ $captions->get('avatar') }}</th>
+							<th>{{ $captions->get('name') }}</th>
+							<th>{{ $captions->get('email') }}</th>
 							<th>Permissões</th>
-							<th>{{ $fields_captions->get('created_at') }}</th>
-							<th>{{ $fields_captions->get('updated_at') }}</th>
+							<th>{{ $captions->get('created_at') }}</th>
+							<th>{{ $captions->get('updated_at') }}</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
@@ -46,7 +44,7 @@
 								<td>{{ $register->created_at }}</td>
 								<td>{{ $register->updated_at }}</td>
 								<td>
-									<x-admin-table :register="$register">
+									<x-admin-table :register="$register" crud="user">
 										<x-admin-table.action-edit/>
 										<x-admin-table.action-show/>
 										<x-admin-table.action-delete/>
@@ -64,6 +62,5 @@
 		</div>
 	</div>
 
-	<!-- add component user pagination links -->
 	<x-admin-pagination-links :table="$table" />
 @endsection

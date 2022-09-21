@@ -3,48 +3,70 @@
 namespace App\Services\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\UserPostRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
-use App\Utilities\AdminCrud;
+use App\Models\Role;
 
 /**
  * Class User.
  */
-class UserCrud
+class UserCrud extends BaseCrud
 {
+    public $model = User::class;
+    public $title = 'Usuários';
+
     /**
-     * Get display fields on show screen.
-     *
-     * @return array
+     * Set display fields on index screen.
+     * return void
      */
-    public function showFields()
+    public function setIndexFields()
     {
-        return User::getFieldsCaptions()->except(['password', 'remember_token', 'email_verified_at', 'deleted_at'])->toArray();
+        $captions = User::getFieldsCaptions();
+        View::share(compact('captions'));
     }
 
-    public static function index(Request $request)
+    /**
+     * Get table fields on index screen.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\View
+     */
+    public function index(Request $request)
     {
-        return AdminCrud::index($request, User::class);
+        $this->setIndexFields();
+        $table = $this->getIndexTable($request);
+        View::share(compact('table'));
+        return view($this->indexViewPath, compact('table'));
     }
 
-    public static function store(UserPostRequest $request, $model)
+    public function create()
+    {
+        $roles = Role::all();
+        View::share(compact('roles'));
+        return view($this->createViewPath);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * 
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(FormRequest $request)
     {
         try
         {
             $form = $request->validated();
             $form = AdminProcessUploads::handle($request, $form);
-            $register = $model::create($form);
-            if ($register)
-            {
-                $roles = isset($form['roles']) ? $form['roles'] : [];
-                $register->roles()->sync($roles);
-                return redirect()
-                    ->route($model::getAdminPathByDotNotation('index'))
-                    ->withMessages('Usuário criado com sucesso.')
-                ;
-            }
-            throw new \Exception('Ocorreu um erro ao salvar o usuário.');
+            $register = User::create($form);
+
+            $roles = isset($form['roles']) ? $form['roles'] : [];
+            $register->roles()->sync($roles);
+            return redirect()
+                ->route(admin_crud_route('user', 'index'))
+                ->withMessages('Usuário criado com sucesso.')
+            ;
         }
         catch (\Exception $e)
         {
@@ -55,7 +77,19 @@ class UserCrud
         }
     }
 
-    public static function update(UserPostRequest $request, $model)
+    public function show(User $user)
+    {
+        return view($this->showViewPath, compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * 
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(FormRequest $request, User $user)
     {
         try
         {
@@ -65,13 +99,13 @@ class UserCrud
                 unset($form['password']);
             }
             $form = AdminProcessUploads::handle($request, $form);
-            $saved = $model->update($form);
+            $saved = $user->update($form);
             if ($saved)
             {
                 $roles = isset($form['roles']) ? $form['roles'] : [];
-                $model->roles()->sync($roles);
+                $user->roles()->sync($roles);
                 return redirect()
-                    ->route($model::getAdminPathByDotNotation('index'))
+                    ->route(admin_crud_route('user', 'show'))
                     ->withMessages('Usuário atualizado com sucesso.')
                 ;
             }
@@ -86,9 +120,15 @@ class UserCrud
         }
     }
 
-    public static function destroy(User $user)
+    /**
+     * Remove the specified resource from storage.
+     * 
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(User $user)
     {
-        return AdminCrud::destroy($user);
+        return $this->defaultDestroy($user);
     }
 
 }

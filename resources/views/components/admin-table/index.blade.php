@@ -1,3 +1,3 @@
-@props(['register'])
+@props(['register', 'crud'])
 
 {{ $slot }}

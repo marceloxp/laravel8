@@ -1,97 +1,70 @@
 <?php
-if (!function_exists('dashboard_item'))
+if (!function_exists('admin_set_title'))
 {
-	function dashboard_item($color, $link, $ico, $text, $number)
+	function admin_set_title($title)
 	{
-		return compact('color', 'link', 'ico', 'text', 'number');
+		View::share(['admin_title' => $title]);
 	}
 }
 
-if (!function_exists('admin_label_status'))
+if (!function_exists('admin_get_darkmode'))
 {
-	function admin_label_status($value)
+	function admin_get_darkmode()
 	{
-		$color = (in_array(strtolower($value), ['inativo','não','i','n','no','0','excluido','false'])) ? 'red' : 'green';
-		return sprintf('<small class="label pull-center bg-%s">%s</small>', $color, $value);
+		$darkMode = Cookie::get('dark-mode');
+		$darkMode = (!empty($darkMode)) ? 'dark-mode' : '';
+		return $darkMode;
 	}
 }
 
-if (!function_exists('admin_badge_status'))
+if (!function_exists('admin_get_search'))
 {
-	function admin_badge_status($value)
+	function admin_get_search()
 	{
-		return sprintf('<span class="badge">%s</span>', $value);
+		$search = request()->get('search');
+        $search = trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $search));
+        View::share(compact('search'));
+        return $search;
 	}
 }
 
-if (!function_exists('admin_select'))
+if (!function_exists('admin_crud_route'))
 {
-	function admin_select($p_field_name, $p_options, $p_field_value, $p_required, $p_add_text_select = false)
+	function admin_crud_route($table, $route, $param = null)
 	{
-		$required = (!empty($p_required)) ? 'required' : '';
+		$route = sprintf('admin.%s.%s', $table, $route);
+		if (!empty($param)) {
+			return route($route, $param);
+		}
+		return route($route);
+	}
+}
 
-		$result  = sprintf('<select name="%s" id="%s" class="form-control" %s>', $p_field_name, $p_field_name, $required);
-		if ($p_add_text_select)
+if (!function_exists('admin_get_uploaded_file'))
+{
+	function admin_get_uploaded_file($filename, $noimage = '')
+	{
+		$noimage_path = ($noimage) ? $noimage : 'images/admin/no-image.png';
+        $no_image = vasset($noimage_path);
+		if (empty($filename))
 		{
-			$selected = (empty($p_field_value)) ? 'selected' : '';
-			$result .= sprintf('<option value="" %s>%s</option>', $selected, 'Selecione');
+            return $no_image;
 		}
 
-		foreach($p_options as $value => $text)
+		$info = pathinfo($filename);
+		$extension = strtolower($info['extension']);
+
+		switch ($extension)
 		{
-			$selected = ($p_field_value == $value) ? 'selected' : '';
-			$result .= sprintf('<option value="%s" %s>%s</option>', $value, $selected, $text);
-		}
-		$result .= '</select>';
-
-		return $result;
-	}
-}
-
-if (!function_exists('admin_select_simple'))
-{
-	function admin_select_simple($p_field_name, $p_options, $p_default_value, $p_field_value, $p_required, $p_add_text_select = false)
-	{
-		$required = (!empty($p_required)) ? 'required' : '';
-
-		$result  = sprintf('<select name="%s" id="%s" class="form-control" %s>', $p_field_name, $p_field_name, $required);
-		if ($p_add_text_select)
-		{
-			$selected = (empty($p_field_value)) ? 'selected' : '';
-			$result .= sprintf('<option value="" %s>%s</option>', $selected, 'Selecione');
+			case 'png':
+			case 'jpg':
+			case 'jpeg':
+			case 'gif':
+				return uploaded_file_url($filename);
+			case 'pdf':
+				return vasset('/images/admin/fileextensions/pdf.png');
 		}
 
-		foreach($p_options as $option)
-		{
-			$selected = ($p_field_value == $option) ? 'selected' : '';
-			if (empty($selected))
-			{
-				$selected = ($option == $p_default_value) ? 'selected' : '';
-			}
-			$result .= sprintf('<option value="%s" %s>%s</option>', $option, $selected, $option);
-		}
-		$result .= '</select>';
-
-		return $result;
-	}
-}
-
-if (!function_exists('admin_select_simple_with_add_button'))
-{
-	function admin_select_simple_with_add_button($p_field_name, $p_options, $p_field_value, $p_required, $p_add_text_select = false)
-	{
-		$result = admin_select_simple($p_field_name, $p_options, $p_field_value, $p_required, $p_add_text_select);
-		
-		$result = '
-			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-					' . $result . '
-				</div>
-				<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
-					<button type="button" class="btn btn-block btn-primary btn-select-add"><i class="fa fa-fw fa-plus"></i> Adicionar</button>
-				</div>
-			</div>
-		';
-		return $result;
+        return $no_image;
 	}
 }

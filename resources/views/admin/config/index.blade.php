@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-	<x-admin-table-nav-bar :search="$search"/>
+	<x-admin-table-nav-bar crud="config" :model="$model" :search="$search"/>
 
 	<!-- add adminlte table -->
 	<div class="card">
@@ -10,12 +10,12 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>{{ $fields_captions->get('id') }}</th>
-							<th>{{ $fields_captions->get('name') }}</th>
-							<th>{{ $fields_captions->get('value') }}</th>
-							<th>{{ $fields_captions->get('status') }}</th>
-							<th>{{ $fields_captions->get('created_at') }}</th>
-							<th>{{ $fields_captions->get('updated_at') }}</th>
+							<th>{{ $captions->get('id') }}</th>
+							<th>{{ $captions->get('name') }}</th>
+							<th>{{ $captions->get('value') }}</th>
+							<th>{{ $captions->get('status') }}</th>
+							<th>{{ $captions->get('created_at') }}</th>
+							<th>{{ $captions->get('updated_at') }}</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
@@ -29,7 +29,7 @@
 								<td>{{ $register->created_at }}</td>
 								<td>{{ $register->updated_at }}</td>
 								<td>
-									<x-admin-table :register="$register">
+									<x-admin-table :register="$register" crud="config">
 										<x-admin-table.action-edit/>
 										<x-admin-table.action-show/>
 										<x-admin-table.action-delete/>

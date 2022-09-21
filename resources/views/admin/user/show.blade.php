@@ -7,20 +7,26 @@
 			text-align: right;
 			font-weight: bold;
 		}
+
+		.image_uploaded_file {
+			max-height: 100px;
+		}
 	</style>
 @endsection
 
 @section('content')
 	<div class="card">
 		<div class="card-body table-responsive p-0">
-			@if ($register)
+			@if ($user)
 				<table class="table table-hover table-striped">
-					@foreach ($userCrud->showFields() as $fieldname => $caption)
-						<tr>
-							<td class="crud_admin_fieldcaption">{{ $caption }}</td>
-							<td>{{ $register->$fieldname }}</td>
-						</tr>
-					@endforeach
+					<x-admin-field-show.id :text="$user->id"/>
+					<x-admin-field-show.avatar caption="Avatar" :src="$user->avatar"/>
+					<x-admin-field-show.text caption="Nome" :text="$user->name"/>
+					<x-admin-field-show.text caption="E-mail" :text="$user->email"/>
+					<x-admin-field-show.text caption="Status" :text="$user->status"/>
+					<x-admin-field-show.roles caption="Permissões" :roles="$user->roles"/>
+					<x-admin-field-show.text caption="Criado em" :text="$user->created_at"/>
+					<x-admin-field-show.text caption="Atualizado em" :text="$user->updated_at"/>
 				</table>
 			@else
 				<div class="alert">
@@ -29,7 +35,7 @@
 			@endif
 		</div>
 		<div class="card-footer clearfix">
-			<a href="{{ $model::getAdminRouteByDotNotation('index') }}" class="btn btn-success">
+		<a href="{{ admin_crud_route('user', 'index') }}" class="btn btn-success">
 				<i class="fa fa-fw fa-arrow-left"></i> Voltar
 			</a>
 		</div>

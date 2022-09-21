@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\Admin\DashboardAdmin;
+
 class DashboardController extends BaseAdminController
 {
-    public $title = 'Dashboard';
-
     // create index method
-    public function index()
+    public function index(DashboardAdmin $dashboardAdmin)
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard', compact('dashboardAdmin'));
     }
 }
