@@ -16,16 +16,6 @@ class ConfigCrud extends BaseCrud
     public $title = 'Configurações';
 
     /**
-     * Set display fields on index screen.
-     * return void
-     */
-    public function setIndexFields()
-    {
-        $captions = $this->model::getFieldsCaptions();
-        View::share(compact('captions'));
-    }
-
-    /**
      * Get table fields on index screen.
      * 
      * @param  \Illuminate\Http\Request  $request
@@ -34,12 +24,17 @@ class ConfigCrud extends BaseCrud
     public function index(Request $request)
     {
         //db_admin_set_pagination_limit(2);
-        $this->setIndexFields();
+        $captions = $this->model::getFieldsCaptions();
         $table = $this->getIndexTable($request);
-        View::share(compact('table'));
-        return view($this->indexViewPath, compact('table'));
+        View::share(compact('captions', 'table'));
+        return view($this->indexViewPath);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     * 
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         return view($this->createViewPath);
@@ -56,11 +51,23 @@ class ConfigCrud extends BaseCrud
         return $this->defaultStore($request);
     }
 
+    /**
+     * Show a data of the specified resource.
+     * 
+     * @param  \App\Models\Config  $config
+     * @return \Illuminate\View\View
+     */
     public function show(Config $config)
     {
         return view($this->showViewPath, compact('config'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     * 
+     * @param  \App\Models\Config  $config
+     * @return \Illuminate\View\View
+     */
     public function edit(Config $config)
     {
         return view($this->editViewPath, compact('config'));

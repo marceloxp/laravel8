@@ -4,6 +4,8 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
+# TODO: Transform this to a blade component
+
 class AdminTableNavBar extends Component
 {
     public $search;

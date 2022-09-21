@@ -3,7 +3,6 @@
 @section('content')
 	<x-admin-table-nav-bar crud="config" :model="$model" :search="$search"/>
 
-	<!-- add adminlte table -->
 	<div class="card">
 		<div class="card-body table-responsive p-0">
 			@if ($table->total() > 0)
@@ -47,6 +46,5 @@
 		</div>
 	</div>
 
-	<!-- add component config pagination links -->
 	<x-admin-pagination-links :table="$table" />
 @endsection
