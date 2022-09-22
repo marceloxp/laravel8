@@ -55,14 +55,6 @@ class Role extends BaseModel
 		return $this->belongsToMany(User::class);
 	}
 	
-	/**
-	* Retrieve All Pivots related to One Target
-	*/
-	public function scopeMenuRole($query, $p_target_id)
-	{
-		return $query->join('menu_role', 'roles.id', '=', 'menu_role.role_id')->where('menu_role.menu_id', $p_target_id);
-	}
-
 	public static function ajustCollectionRolesColor($p_collection)
 	{
 		$p_collection->transform

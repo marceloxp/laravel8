@@ -10,15 +10,11 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <x-admin-sidebar caption="Administração" icon="fas fa-tachometer-alt" :visible="$user->isDeveloperOrIsMaster()">
-                    {{-- add config menu component --}}
                     <x-admin-sidebar.item routeName="admin.config.index" caption="Configurações" slug="config" icon="fas fa-cogs"/>
-                    {{-- add user menu component --}}
                     <x-admin-sidebar.item routeName="admin.user.index" caption="Usuários" slug="user" icon="fas fa-users"/>
-                    {{-- add clear cache link component --}}
+                    <x-admin-sidebar.item routeName="admin.role.index" caption="Permissões" slug="role" icon="fas fa-user-tag"/>
                     <x-admin-sidebar.item routeName="admin.cache.clear" caption="Limpar Cache ({{ $cached_count }})" slug="clear-cache" icon="fas fa-trash-alt"/>
-                    {{-- add logs link --}}
                     <x-admin-sidebar.item routeName="admin.logs" target="_blank" caption="Logs" slug="logs" icon="fas fa-file-alt"/>
-                    {{-- add telescope link --}}
                     <x-admin-sidebar.item routeName="admin.telescope" target="_blank" caption="Telescope" slug="telescope" icon="fas fa-binoculars"/>
 
                 </x-admin-sidebar>

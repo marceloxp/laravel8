@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Middleware\AdminEnsureUserIsMasterDeveloper;
 
 /*
@@ -36,6 +37,7 @@ Route::prefix('admin')->group(function () {
             // add config resource route
             Route::resource('/config', ConfigController::class, ['as' => 'admin']);
             Route::resource('/user', UserController::class, ['as' => 'admin']);
+            Route::resource('/role', RoleController::class, ['as' => 'admin']);
 
             Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('admin.logs');
 
