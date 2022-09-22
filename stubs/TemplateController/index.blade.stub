@@ -1,20 +1,19 @@
 @extends('layouts.admin')
 
 @section('content')
-	<x-admin-table-nav-bar :search="$search"/>
+	<x-admin-table-nav-bar crud="{{ modelvariable }}" :model="{{ phpmodelvar }}" :search="$search"/>
 
-	<!-- add adminlte table -->
 	<div class="card">
 		<div class="card-body table-responsive p-0">
 			@if ($table->total() > 0)
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>{{ $fields_captions->get('id') }}</th>
-							<th>{{ $fields_captions->get('name') }}</th>
-							<th>{{ $fields_captions->get('value') }}</th>
-							<th>{{ $fields_captions->get('created_at') }}</th>
-							<th>{{ $fields_captions->get('updated_at') }}</th>
+							<th>{{ $captions->get('id') }}</th>
+							<th>{{ $captions->get('name') }}</th>
+							<th>{{ $captions->get('value') }}</th>
+							<th>{{ $captions->get('created_at') }}</th>
+							<th>{{ $captions->get('updated_at') }}</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
@@ -27,10 +26,9 @@
 								<td>{{ $register->created_at }}</td>
 								<td>{{ $register->updated_at }}</td>
 								<td>
-									<x-admin-table :register="$register">
-										<!-- admin button component edit with icon -->
+									<x-admin-table :register="$register" crud="{{ modelvariable }}">
 										<x-admin-table.action-edit/>
-										<!-- x-admin button delete -->
+										<x-admin-table.action-show/>
 										<x-admin-table.action-delete/>
 									</x-admin-table>
 								</td>
@@ -46,6 +44,5 @@
 		</div>
 	</div>
 
-	<!-- add component config pagination links -->
 	<x-admin-pagination-links :table="$table" />
 @endsection

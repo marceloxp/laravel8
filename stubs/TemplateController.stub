@@ -4,89 +4,92 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\{{ modelpostrequest }};
-use App\Services\Admin\DefaultCrud;
+use App\Services\Admin\{{ crudclassname }};
 use App\Models\{{ modelname }};
 
-class {{ modelname }}Controller extends BaseAdminController
+class {{ controllername }} extends BaseAdminController
 {
-    public $model = {{ modelname }}::class;
-    public $title = '{{ title }}';
-
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, {{ classandvar }})
     {
-        //db_admin_set_pagination_limit(2);
-		$table = DefaultCrud::index($request, $this->model);
-        return view($this->model::getAdminViewPath('index'), compact('table'));
+        return {{ crudpgpvar }}->index($request);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create({{ classandvar }})
     {
-        return view($this->model::getAdminViewPath('create'));
+        return {{ crudpgpvar }}->create();
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Admin\{{ modelpostrequest }}  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Services\Admin\{{ phpdocclasscrud }}
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store({{ modelpostrequest }} $request)
+    public function store({{ modelpostrequest }} $request, {{ classandvar }})
     {
-        return DefaultCrud::store($request, $this->model);
+        return {{ crudpgpvar }}->store($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\{{ modelname }}  ${{ modelvariable }}
+     * @param  \App\Models\{{ phpdocmodel }}
+     * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function show({{ modelname }} ${{ modelvariable }})
+    public function show({{ modelvar }}, {{ classandvar }})
     {
-        return view($this->model::getAdminViewPath('show'), ['register' => ${{ modelvariable }}]);
+        return {{ crudpgpvar }}->show({{ phpmodelvar }});
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\{{ modelname }}  ${{ modelvariable }}
+     * @param  \App\Models\{{ phpdocmodel }}
+     * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function edit({{ modelname }} ${{ modelvariable }})
+    public function edit({{ modelvar }}, {{ classandvar }})
     {
-        return view($this->model::getAdminViewPath('edit'), ['register' => ${{ modelvariable }}]);
+        return {{ crudpgpvar }}->edit({{ phpmodelvar }});
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Admin\{{ modelpostrequest }}  $request
-     * @param  \App\Models\{{ modelname }}  ${{ modelvariable }}
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\{{ phpdocmodel }}
+     * @param  \App\Services\Admin\{{ phpdocclasscrud }}
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update({{ modelpostrequest }} $request, {{ modelname }} ${{ modelvariable }})
+    public function update({{ modelpostrequest }} $request, {{ modelvar }}, {{ classandvar }})
     {
-        return DefaultCrud::update($request, ${{ modelvariable }});
+        return {{ crudpgpvar }}->update($request, {{ phpmodelvar }});
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\{{ modelname }}  ${{ modelvariable }}
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\{{ phpdocmodel }}
+     * @param  \App\Services\Admin\{{ phpdocclasscrud }}
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy({{ modelname }} ${{ modelvariable }})
+    public function destroy({{ modelvar }}, {{ classandvar }})
     {
-        return DefaultCrud::destroy(${{ modelvariable }});
+        return {{ crudpgpvar }}->destroy({{ phpmodelvar }});
     }
 }
