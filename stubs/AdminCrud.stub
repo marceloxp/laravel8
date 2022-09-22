@@ -23,7 +23,7 @@ class {{ classname }} extends BaseCrud
      */
     public function index(Request $request)
     {
-        $captions = $this->model::getFieldsCaptions();
+        $captions = {{ modelname }}::getFieldsCaptions();
         $table = $this->getIndexTable($request);
         View::share(compact('captions', 'table'));
         return view($this->indexViewPath);
