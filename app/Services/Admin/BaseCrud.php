@@ -50,6 +50,11 @@ class BaseCrud extends BaseAdmin
         }
     }
 
+    public function setPaginationLimit($limit)
+    {
+        db_admin_set_pagination_limit($limit);
+    }
+
     public function getCaption($fieldname)
     {
         return $this->model::getFieldsCaptions()->get($fieldname);

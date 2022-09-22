@@ -23,7 +23,7 @@ class ConfigCrud extends BaseCrud
      */
     public function index(Request $request)
     {
-        //db_admin_set_pagination_limit(2);
+        $this->setPaginationLimit(2);
         $captions = $this->model::getFieldsCaptions();
         $table = $this->getIndexTable($request);
         View::share(compact('captions', 'table'));

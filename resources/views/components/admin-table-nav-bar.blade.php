@@ -1,3 +1,5 @@
+@props(['crud', 'model', 'search'])
+
 <nav class="navbar navbar-expand ml-0 navbar-dark">
     <ul class="navbar-nav">
         <li class="nav-item">
