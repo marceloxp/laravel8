@@ -82,7 +82,7 @@ class UserCrud extends BaseCrud
     /**
      * Show a data of the specified resource.
      *
-     * @param  \App\Models\Config  $config
+     * @param  \App\Models\User  $user
      * @return \Illuminate\View\View
      */
     public function show(User $user)

@@ -58,9 +58,10 @@ if (!function_exists('db_comment_table')) {
     /**
      * Comment a table.
      *
-     * @param string $table
+     * @param string $table_name
+     * @param string $table_comment
      *
-     * @return string
+     * @return void
      */
     function db_comment_table($table_name, $table_comment)
     {
@@ -89,7 +90,7 @@ if (!function_exists('db_get_comment_table')) {
     /**
      * Get the table comment.
      *
-     * @param string $table
+     * @param string $table_name
      *
      * @return string
      */
@@ -109,7 +110,7 @@ if (!function_exists('db_get_pivot_table_name')) {
      * Get the pivot table name.
      *
      * @param string $p_table_names
-     * @param string $use_prefix
+     * @param bool $use_prefix
      *
      * @return string
      */
@@ -293,7 +294,7 @@ if (!function_exists('db_model_to_table_name')) {
     /**
      * Translate a model name to table name.
      *
-     * @param string $model
+     * @param string $model_name
      *
      * @return string
      */
@@ -377,9 +378,9 @@ if (!function_exists('db_table_exists')) {
 
 if (!function_exists('ln')) {
     /**
-     * Return a line break.
+     * Print a line break.
      *
-     * @return string
+     * @return void
      */
     function ln()
     {
@@ -415,7 +416,7 @@ if (!function_exists('generate_unique_code')) {
     /**
      * Check if a code exists.
      *
-     * @return string
+     * @return bool
      */
     function unique_code_exists($code)
     {
@@ -429,7 +430,7 @@ if (!function_exists('cep_to_address')) {
      *
      * @param string $cep
      *
-     * @return string
+     * @return App/Utilities/Result
      */
     function cep_to_address($cep)
     {
