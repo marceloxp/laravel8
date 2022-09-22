@@ -11,7 +11,7 @@ class MakexCrud extends Command
      *
      * @var string
      */
-    protected $signature = 'makex:crud {modelname : Model Name}';
+    protected $signature = 'makex:crud {modelname : Model Name} {--title=}';
 
     /**
      * The console command description.
@@ -39,9 +39,12 @@ class MakexCrud extends Command
     {
         $argModelName = $this->argument('modelname');
 
-        // ask for model name
         if (!$argModelName) {
             $argModelName = $this->ask('Model Name');
+        }
+        $argTitle = $this->option('title');
+        if (!$argTitle) {
+            $argTitle = $this->ask('Admin Title');
         }
         $modelname = ucfirst($argModelName); // Config
         $controllername = $modelname . 'Controller'; // ConfigController
@@ -51,7 +54,7 @@ class MakexCrud extends Command
         $modelvar = $modelname . ' $' . strtolower($modelname); // Config $config
         $phpdocclasscrud = $modelname . 'Crud  $' . strtolower($modelname) . 'Crud'; // ConfigCrud  $configCrud
         $classandvar = $modelname . 'Crud $' . strtolower($modelname) . 'Crud'; // ConfigCrud $configCrud
-        $title = $this->ask('Admin Title'); // Título
+        $title = $argTitle; // Título
         $modelvariable = strtolower($modelname); // config
         $phpmodelvar = '$' . $modelvariable; // $config
         $modelpostrequest = $modelname . 'PostRequest'; // ConfigPostRequest
