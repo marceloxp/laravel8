@@ -23,23 +23,6 @@ class XpCollectionServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		// collect([ ['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'], ['id' => 2, 'name' => 'Gomes', 'color' => 'bg-orange'] ])->toBootstrapLabel()->toText();
-		\Illuminate\Support\Collection::macro
-		(
-			'toBootstrapLabel',
-			function($p_color = 'bg-green')
-			{
-				return $this->map
-				(
-					function($value) use ($p_color)
-					{
-						$color = $p_color ?? $value['color'];
-						return bs_label($value['id'], $value['name'], $color);
-					}
-				);
-			}
-		);
-
 		// collect([ ['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'], ['id' => 2, 'name' => 'Gomes', 'color' => 'bg-orange'] ])->toBootstrapLabels()->toText();
 		\Illuminate\Support\Collection::macro
 		(

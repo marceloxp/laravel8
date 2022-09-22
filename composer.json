@@ -56,7 +56,6 @@
 			"app/Helpers/helpers.php",
 			"app/Helpers/lang.php",
 			"app/Helpers/string.php",
-			"app/Helpers/bootstrap.php",
 			"app/Helpers/forms.php",
 			"app/Helpers/adminlte.php",
 			"app/Helpers/array.php"

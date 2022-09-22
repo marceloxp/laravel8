@@ -16079,17 +16079,6 @@
          * 
          *
          * @see \App\Providers\XpCollectionServiceProvider::boot()
-         * @param mixed $p_color
-         * @static 
-         */ 
-        public static function toBootstrapLabel($p_color = 'bg-green')
-        {
-                        return \Illuminate\Support\Collection::toBootstrapLabel($p_color);
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\XpCollectionServiceProvider::boot()
          * @param mixed $color
          * @static 
          */ 
