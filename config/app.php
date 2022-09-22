@@ -95,7 +95,7 @@ return [
     |
     */
 
-	'fallback_locale' => 'pt-br',
+    'fallback_locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,10 +109,10 @@ return [
     */
 
     'faker_locale'    => 'pt_BR',
-	'default_locale'  => 'pt-br',
-	'all_langs'       => array('pt-br', 'en', 'es'),
-	'current_locale'  => '',
-	'multilanguague'  => false,
+    'default_locale'  => 'pt-br',
+    'all_langs'       => array('pt-br', 'en', 'es'),
+    'current_locale'  => '',
+    'multilanguague'  => false,
     'currency'        => 'BRL',
 
     /*

@@ -22,11 +22,11 @@ Route::group(
     ],
     function () {
         Route::group(
-                [],
-                function () {
-                    Route::get('', [PageController::class, 'index'])->name('home');
-                    Route::get('empresa', [PageController::class, 'empresa'])->name('empresa');
-                }
-            );
+            [],
+            function () {
+                Route::get('', [PageController::class, 'index'])->name('home');
+                Route::get('empresa', [PageController::class, 'empresa'])->name('empresa');
+            }
+        );
     }
 );

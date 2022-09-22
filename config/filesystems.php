@@ -42,7 +42,7 @@ return [
             'visibility' => 'public',
         ],
 
-        'upload_images' => 
+        'upload_images' =>
         [
             'driver'     => 'local',
             'root'       => storage_path('app/public/uploads/images'),
@@ -50,8 +50,8 @@ return [
             'visibility' => 'public',
         ],
 
-        'upload_pdfs' => 
-		[
+        'upload_pdfs' =>
+        [
             'driver'     => 'local',
             'root'       => storage_path('app/public/uploads/pdfs'),
             'url'        => env('APP_URL') . '/storage/uploads/pdfs',
