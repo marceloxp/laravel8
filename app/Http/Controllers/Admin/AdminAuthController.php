@@ -7,11 +7,22 @@ use Illuminate\Http\Request;
 
 class AdminAuthController extends Controller
 {
+    /**
+     * Show the application login form.
+     *
+     * @return \Illuminate\View\View
+     */
     public function getLogin()
     {
         return view('admin.auth.login');
     }
 
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     */
     public function postLogin(Request $request)
     {
         $this->validate($request, [
@@ -27,7 +38,11 @@ class AdminAuthController extends Controller
         }
     }
 
-    // add admin logout
+    /**
+     * Handle a logout request to the application.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     */
     public function getLogout(Request $request)
     {
         auth()->guard('admin')->logout();

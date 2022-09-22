@@ -12,6 +12,11 @@ class BaseAdmin
     public $title = 'UMS Admin';
     public $options;
 
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->options = collect([]);
@@ -21,6 +26,14 @@ class BaseAdmin
         ]);
     }
 
+    /**
+     * Add an option to the admin panel.
+     *
+     * @param string $name
+     * @param mixed $value
+     *
+     * @return void
+     */
     public function setOption($name, $value)
     {
         $this->options->put($name, $value);

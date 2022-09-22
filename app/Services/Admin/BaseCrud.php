@@ -21,6 +21,11 @@ class BaseCrud extends BaseAdmin
 {
     public $model;
 
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $fields_captions = $this->model::getFieldsCaptions();
@@ -33,6 +38,11 @@ class BaseCrud extends BaseAdmin
         $this->setOption('index.search', true);
     }
 
+    /**
+     * Get the dot notation path to the $route resource.
+     *
+     * @return string
+     */
     private function getAdminViewPath($route)
     {
         $singular_name = str_to_singular(strtolower($this->model::getTableName()));
@@ -52,9 +62,15 @@ class BaseCrud extends BaseAdmin
         }
     }
 
+    /**
+     * Set pagination limit.
+     *
+     * @param int $limit
+     * @return int
+     */
     public function setPaginationLimit($limit)
     {
-        db_admin_set_pagination_limit($limit);
+        return db_admin_set_pagination_limit($limit);
     }
 
     public function getCaption($fieldname)

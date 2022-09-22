@@ -12,6 +12,11 @@ class BaseAdminController extends Controller
     public $user;
     public $model;
 
+    /**
+     * Set a common view data.
+     *
+     * @return void
+     */
     private function setCommonData()
     {
         View::share([
@@ -22,6 +27,11 @@ class BaseAdminController extends Controller
         ]);
     }
 
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware(function ($request, $next) {

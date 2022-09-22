@@ -15,20 +15,18 @@ use App\Http\Controllers\Site\PageController;
  */
 
 
-Route::group
-(
+Route::group(
     [
         'middleware' => ['frontend'],
         'namespace'  => 'Site',
     ],
     function () {
-        Route::group
-            (
-            [],
-            function () {
-                Route::get('', [PageController::class, 'index'])->name('home');
-                Route::get('empresa', [PageController::class, 'empresa'])->name('empresa');
-            }
-        );
+        Route::group(
+                [],
+                function () {
+                    Route::get('', [PageController::class, 'index'])->name('home');
+                    Route::get('empresa', [PageController::class, 'empresa'])->name('empresa');
+                }
+            );
     }
 );

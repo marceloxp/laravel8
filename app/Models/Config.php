@@ -12,12 +12,8 @@ class Config extends BaseModel
     use SoftDeletes;
     use Searchable;
 
-    protected $dates   = ['created_at','updated_at','deleted_at'];
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
-
-    // add fillable fields
-    protected $fillable = ['name', 'value', 'status'];
-
-    // define Searchable fields
+    protected $dates         = ['created_at','updated_at','deleted_at'];
+    protected $guarded       = ['created_at', 'updated_at', 'deleted_at'];
+    protected $fillable      = ['name', 'value', 'status'];
     protected $search_fields = ['name', 'value'];
 }

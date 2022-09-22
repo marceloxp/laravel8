@@ -65,24 +65,41 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Define a relationship with the role model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
-    // get if user isDeveloper
+    /**
+     * Get if user isDeveloper.
+     *
+     * @return bool
+     */
     public function isDeveloper()
     {
         return $this->hasRole('Developer');
     }
 
-    // get if user isDeveloper or is Master
+    /**
+     * get if user isDeveloper or is Master
+     *
+     * @return bool
+     */
     public function isDeveloperOrIsMaster()
     {
         return $this->hasRole('Developer') || $this->hasRole('Master');
     }
 
-    // get if user hasRole
+    /**
+     * Get if user hasRole
+     *
+     * @return bool
+     */
     public function hasRole($role)
     {
         $result = Cached::get(

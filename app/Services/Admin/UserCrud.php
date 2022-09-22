@@ -40,6 +40,11 @@ class UserCrud extends BaseCrud
         return view($this->indexViewPath, compact('table'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $roles = Role::all();
@@ -74,6 +79,12 @@ class UserCrud extends BaseCrud
         }
     }
 
+    /**
+     * Show a data of the specified resource.
+     *
+     * @param  \App\Models\Config  $config
+     * @return \Illuminate\View\View
+     */
     public function show(User $user)
     {
         return view($this->showViewPath, compact('user'));

@@ -9,16 +9,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class City extends BaseModel
 {
     use SoftDeletes;
-    protected $dates   = ['created_at','updated_at','deleted_at'];
-    protected $guarded = ['created_at','updated_at','deleted_at'];
-
-    // add fillable fields
+    protected $dates    = ['created_at','updated_at','deleted_at'];
+    protected $guarded  = ['created_at','updated_at','deleted_at'];
     protected $fillable = ['name', 'state_id', 'status'];
 
+    /**
+     * Get the state that owns the city.
+     *
+     * @param  String  $p_uf
+     * @return \App\Utilities\Result
+     */
     public static function getByUf($p_uf)
     {
         $uf_id = State::getStateIdByUf($p_uf);
-        if (!$uf_id) {
+        if (empty($uf_id)) {
             return Result::undefined();
         }
 
@@ -31,6 +35,11 @@ class City extends BaseModel
         );
     }
 
+    /**
+     * Define a relationship with the state model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function state()
     {
         return $this->hasOne(State::class, 'id', 'state_id');

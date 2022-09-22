@@ -410,4 +410,5 @@ php artisan dusk --filter AdminTest::testAdminConfigDelete
 ### PHPStan
 ```terminal
 vendor/bin/phpstan analyse app
+tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app
 ```

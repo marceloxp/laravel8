@@ -29,25 +29,20 @@ Route::prefix('admin')->group(function () {
         Route::get('/', function () {
             return redirect()->route('admin.dashboard');
         });
-        // add dashboard route
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-        // add route group with middleware to ensure user is master or developer
         Route::group(['middleware' => AdminEnsureUserIsMasterDeveloper::class], function () {
-            // add config resource route
             Route::resource('/config', ConfigController::class, ['as' => 'admin']);
             Route::resource('/user', UserController::class, ['as' => 'admin']);
             Route::resource('/role', RoleController::class, ['as' => 'admin']);
 
             Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('admin.logs');
 
-            // add route to simple folder telescope (https://laravel.com/docs/8.x/telescope)
             Route::get('telescope', function () {
                 return redirect()->to('/telescope');
             })->name('admin.telescope');
         });
 
-        // add clear cache route
         Route::get('/clear-cache', function () {
             Artisan::call('cache:clear');
             Artisan::call('view:clear');

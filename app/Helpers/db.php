@@ -16,14 +16,26 @@ if (!function_exists('db_database_name')) {
 }
 
 if (!function_exists('db_admin_get_pagination_limit')) {
+    /**
+     * Get the pagination limit.
+     *
+     * @return int
+     */
     function db_admin_get_pagination_limit()
     {
-        return config('database.admin_pagination_limit');
+        return intval(config('database.admin_pagination_limit'));
     }
 }
 
 if (!function_exists('db_admin_set_pagination_limit')) {
-    function db_admin_set_pagination_limit($pagination_limit)
+    /**
+     * Set a pagination limit.
+     *
+     * @param int $pagination_limit
+     *
+     * @return int
+     */
+    function db_admin_set_pagination_limit(int $pagination_limit)
     {
         config(['database.admin_pagination_limit' => $pagination_limit]);
         return db_admin_get_pagination_limit();
@@ -31,6 +43,11 @@ if (!function_exists('db_admin_set_pagination_limit')) {
 }
 
 if (!function_exists('db_prefix')) {
+    /**
+     * Get the database prefix.
+     *
+     * @return string
+     */
     function db_prefix()
     {
         return env('DB_TABLE_PREFIX');
@@ -38,6 +55,13 @@ if (!function_exists('db_prefix')) {
 }
 
 if (!function_exists('db_comment_table')) {
+    /**
+     * Comment a table.
+     *
+     * @param string $table
+     *
+     * @return string
+     */
     function db_comment_table($table_name, $table_comment)
     {
         DB::select(sprintf('ALTER TABLE %s COMMENT = "%s"', db_prefixed_table($table_name), $table_comment));
@@ -45,6 +69,13 @@ if (!function_exists('db_comment_table')) {
 }
 
 if (!function_exists('db_fmt_search')) {
+    /**
+     * Format a search string.
+     *
+     * @param string $search
+     *
+     * @return string
+     */
     function db_fmt_search($search)
     {
         $search = trim($search);
@@ -55,6 +86,13 @@ if (!function_exists('db_fmt_search')) {
 }
 
 if (!function_exists('db_get_comment_table')) {
+    /**
+     * Get the table comment.
+     *
+     * @param string $table
+     *
+     * @return string
+     */
     function db_get_comment_table($table_name)
     {
         $register = DB::select(sprintf('SHOW TABLE STATUS WHERE Name="%s"', db_prefixed_table($table_name)));
@@ -67,6 +105,14 @@ if (!function_exists('db_get_comment_table')) {
 }
 
 if (!function_exists('db_get_pivot_table_name')) {
+    /**
+     * Get the pivot table name.
+     *
+     * @param string $p_table_names
+     * @param string $use_prefix
+     *
+     * @return string
+     */
     function db_get_pivot_table_name($p_table_names, $use_prefix = true)
     {
         $sorted = array_sort_ex($p_table_names, true);
@@ -79,6 +125,13 @@ if (!function_exists('db_get_pivot_table_name')) {
 }
 
 if (!function_exists('db_get_pivot_scope_name')) {
+    /**
+     * Get the pivot scope name.
+     *
+     * @param string $p_models
+     *
+     * @return string
+     */
     function db_get_pivot_scope_name($p_models)
     {
         $array  = [$p_models[0]::getTableName(), $p_models[1]::getTableName()];
@@ -91,6 +144,13 @@ if (!function_exists('db_get_pivot_scope_name')) {
 }
 
 if (!function_exists('db_get_primary_key')) {
+    /**
+     * Get the primary key of a table.
+     *
+     * @param string $table_name
+     *
+     * @return string
+     */
     function db_get_primary_key($table_name)
     {
         $register = DB::select(sprintf('SHOW KEYS FROM %s WHERE Key_name = "PRIMARY"', db_prefixed_table($table_name)));
@@ -100,6 +160,14 @@ if (!function_exists('db_get_primary_key')) {
 }
 
 if (!function_exists('db_field_as_unique_index')) {
+    /**
+     * Check if a field is unique index.
+     *
+     * @param string $table_name
+     * @param string $field_names
+     *
+     * @return bool
+     */
     function db_field_as_unique_index($table_name, $field_names)
     {
         $fields = \Illuminate\Support\Collection::wrap($field_names)->implode('_');
@@ -112,6 +180,14 @@ if (!function_exists('db_field_as_unique_index')) {
 }
 
 if (!function_exists('db_table_has_index')) {
+    /**
+     * Check if a table has an index.
+     *
+     * @param string $table_name
+     * @param string $index_name
+     *
+     * @return bool
+     */
     function db_table_has_index($table_name, $index_name)
     {
         $sm = Schema::getConnection()->getDoctrineSchemaManager();
@@ -196,6 +272,13 @@ if (!function_exists('db_table_get_field_comment')) {
 }
 
 if (!function_exists('db_get_name')) {
+    /**
+     * Execute a select query and return the name field.
+     *
+     * @param string $table_name
+     *
+     * @return string
+     */
     function db_get_name($table_name, $id)
     {
         $register = DB::select(sprintf('SELECT `name` FROM `%s` WHERE `id` = "%s";', db_prefixed_table($table_name), $id));
@@ -206,33 +289,14 @@ if (!function_exists('db_get_name')) {
     }
 }
 
-if (!function_exists('db_select_one')) {
-    function db_select_one($p_model, $p_fields, $p_where, $raise_if_empty = false)
-    {
-        $result = $p_model::where($p_where)->get($p_fields)->first();
-        if ($raise_if_empty) {
-            if (empty($result)) {
-                throw new Exception('Falha na captura dos dados solicitados (1).');
-            }
-        }
-        return $result;
-    }
-}
-
-if (!function_exists('db_select_id')) {
-    // db_select_id(\App\Models\Menu::class, ['slug' => 'tabelas'], true);
-    function db_select_id($p_model, $p_where, $raise_if_empty = false)
-    {
-        $result = $p_model::where($p_where)->get(['id'])->take(1)->first();
-        if ($raise_if_empty && empty($result)) {
-            logger('Falha na captura dos dados solicitados (2).', [$p_model, $p_where, $raise_if_empty]);
-            throw new Exception('Falha na captura dos dados solicitados (2).');
-        }
-        return (!empty($result)) ? $result->id : null;
-    }
-}
-
 if (!function_exists('db_model_to_table_name')) {
+    /**
+     * Translate a model name to table name.
+     *
+     * @param string $model
+     *
+     * @return string
+     */
     function db_model_to_table_name($model_name)
     {
         return Illuminate\Support\Str::plural(mb_strtolower($model_name));
@@ -240,20 +304,27 @@ if (!function_exists('db_model_to_table_name')) {
 }
 
 if (!function_exists('db_table_name_to_model')) {
+    /**
+     * Translate a table name to model name.
+     *
+     * @param string $table_name
+     *
+     * @return string
+     */
     function db_table_name_to_model($table_name)
     {
         return Illuminate\Support\Str::singular(ucfirst(mb_strtolower($table_name)));
     }
 }
 
-if (!function_exists('db_table_name_to_model_path')) {
-    function db_table_name_to_model_path($table_name)
-    {
-        return sprintf('\App\Models\%s', db_table_name_to_model($table_name));
-    }
-}
-
 if (!function_exists('db_table_name_to_field_id')) {
+    /**
+     * Translate a table name to field id.
+     *
+     * @param string $table_name
+     *
+     * @return string
+     */
     function db_table_name_to_field_id($table_name)
     {
         return sprintf('%s_id', str_to_singular($table_name));
@@ -261,6 +332,13 @@ if (!function_exists('db_table_name_to_field_id')) {
 }
 
 if (!function_exists('db_trim_table_prefix')) {
+    /**
+     * Remove table prefix from table name.
+     *
+     * @param string $table_name
+     *
+     * @return string
+     */
     function db_trim_table_prefix($table_name)
     {
         $temp = explode(db_prefix(), $table_name);
@@ -269,6 +347,13 @@ if (!function_exists('db_trim_table_prefix')) {
 }
 
 if (!function_exists('db_prefixed_table')) {
+    /**
+     * Add table prefix to table name.
+     *
+     * @param string $table_name
+     *
+     * @return string
+     */
     function db_prefixed_table($table_name)
     {
         return sprintf('%s%s', db_prefix(), db_trim_table_prefix($table_name));
@@ -276,6 +361,13 @@ if (!function_exists('db_prefixed_table')) {
 }
 
 if (!function_exists('db_table_exists')) {
+    /**
+     * Check if a table exists.
+     *
+     * @param string $table_name
+     *
+     * @return bool
+     */
     function db_table_exists($table_name)
     {
         $result = Schema::hasTable(db_trim_table_prefix($table_name));
@@ -284,6 +376,11 @@ if (!function_exists('db_table_exists')) {
 }
 
 if (!function_exists('ln')) {
+    /**
+     * Return a line break.
+     *
+     * @return string
+     */
     function ln()
     {
         echo PHP_EOL;
@@ -291,6 +388,11 @@ if (!function_exists('ln')) {
 }
 
 if (!function_exists('generate_unique_code')) {
+    /**
+     * Generate a unique code.
+     *
+     * @return string
+     */
     function generate_unique_code()
     {
         $codelength = config('codetrait.length', 10);
@@ -310,6 +412,11 @@ if (!function_exists('generate_unique_code')) {
         return $code;
     }
 
+    /**
+     * Check if a code exists.
+     *
+     * @return string
+     */
     function unique_code_exists($code)
     {
         return DB::table('codes')->where('name', $code)->exists();
@@ -317,6 +424,13 @@ if (!function_exists('generate_unique_code')) {
 }
 
 if (!function_exists('cep_to_address')) {
+    /**
+     * Get address from CEP.
+     *
+     * @param string $cep
+     *
+     * @return string
+     */
     function cep_to_address($cep)
     {
         return Cached::get(
@@ -336,6 +450,13 @@ if (!function_exists('cep_to_address')) {
 }
 
 if (!function_exists('db_log_info')) {
+    /**
+     * Log info.
+     *
+     * @param string $message
+     *
+     * @return void
+     */
     function db_log_info($message, $context = [])
     {
         $filename = sprintf('/storage/logs/mysql.%s.log', Carbex::now()->toSqlDate());
@@ -346,6 +467,13 @@ if (!function_exists('db_log_info')) {
 }
 
 if (!function_exists('db_log_slow')) {
+    /**
+     * Log slow query.
+     *
+     * @param string $message
+     *
+     * @return void
+     */
     function db_log_slow($message, $context = [])
     {
         $filename = sprintf('/logs/mysql.slow.%s.log', Carbex::now()->toSqlDate());

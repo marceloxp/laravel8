@@ -7,12 +7,16 @@ use App\Utilities\Result;
 
 class State extends BaseModel
 {
-    protected $dates   = ['created_at','updated_at','deleted_at'];
-    protected $guarded = ['created_at','updated_at','deleted_at'];
-
-    // add fillable fields
+    protected $dates    = ['created_at','updated_at','deleted_at'];
+    protected $guarded  = ['created_at','updated_at','deleted_at'];
     protected $fillable = ['name', 'uf'];
 
+    /**
+     * Get the state by uf
+     *
+     * @param  String  $p_uf
+     * @return \App\Utilities\Result|false
+     */
     public static function getStateIdByUf($p_uf)
     {
         try {
@@ -31,6 +35,11 @@ class State extends BaseModel
         }
     }
 
+    /**
+     * Get all states and cities.
+     *
+     * @return \App\Utilities\Result
+     */
     public static function getAll()
     {
         try {
