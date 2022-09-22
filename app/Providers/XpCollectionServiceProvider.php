@@ -23,53 +23,6 @@ class XpCollectionServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		// collect([ ['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'], ['id' => 2, 'name' => 'Gomes', 'color' => 'bg-orange'] ])->toBootstrapLabels()->toText();
-		\Illuminate\Support\Collection::macro
-		(
-			'toBootstrapLabels',
-			function($color = 'bg-light-blue')
-			{
-				$items = $this->map
-				(
-					function($value, $key) use ($color)
-					{
-						$br = ( ($key != 0) && ($key % 2 == 0) ) ? '<br>' : '&nbsp;';
-						return bs_label($value['id'], $value['name'], $color) . $br;
-					}
-				);
-				return collect()->concat($items);
-			}
-		);
-
-		// collect(['Marcelo', 'Gomes'])->toText(', ');
-		// collect([ ['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'], ['id' => 2, 'name' => 'Gomes', 'color' => 'bg-orange'] ])->toBootstrapLabel()->toText();
-		\Illuminate\Support\Collection::macro
-		(
-			'toText',
-			function($p_glue = '')
-			{
-				return implode($p_glue, $this->toArray());
-			}
-		);
-
-		// collect([ ['id' => 1, 'name' => 'Tony'], ['id' => 2, 'name' => 'Loki'], ['id' => 4, 'name' => 'Peter'] ])->extract('name');
-		\Illuminate\Support\Collection::macro
-		(
-			'extract',
-			function($p_field_name)
-			{
-				$result = collect([]);
-				$this->each
-				(
-					function($item, $key) use ($p_field_name, $result)
-					{
-						$result->push($item[$p_field_name]);
-					}
-				);
-				return $result;
-			}
-		);
-
 		// collect([ ['id' => 1, 'name' => ' Tony '], ['id' => 2, 'name' => '   Loki  '], ['id' => 4, 'name' => 'Peter'] ])->trim('name');
 		// collect([' Tony ', '   Loki  ', 'Peter'])->trim();
 		\Illuminate\Support\Collection::macro
@@ -77,6 +30,7 @@ class XpCollectionServiceProvider extends ServiceProvider
 			'trim',
 			function($p_field_name = '')
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				$this->transform
 				(
 					function($item, $key) use ($p_field_name)
@@ -103,6 +57,7 @@ class XpCollectionServiceProvider extends ServiceProvider
 			'toLower',
 			function($p_field_name = '')
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				$this->transform
 				(
 					function($item, $key) use ($p_field_name)
@@ -129,6 +84,7 @@ class XpCollectionServiceProvider extends ServiceProvider
 			'slugify',
 			function($p_field_name = '', $p_separator = '-')
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				$this->transform
 				(
 					function($item, $key) use ($p_field_name, $p_separator)
@@ -148,29 +104,14 @@ class XpCollectionServiceProvider extends ServiceProvider
 			}
 		);
 
-		\Illuminate\Support\Collection::macro
-		(
-			'toArrayDeep',
-			function()
-			{
-				$this->transform
-				(
-					function($item, $key)
-					{
-						$item->child = collect($item->child)->toArrayDeep();
-						return $item->toArray();
-					}
-				);
-				return $this->toArray();
-			}
-		);
-
-		// $a = [ ['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'], ['id' => 2, 'name' => 'Gomes', 'color' => 'bg-orange'] ]; collect($a)->toBootstrapLabel();
+		// add example of collect toHtmlUnorderedList
+		// collect(['Tony Stark', 'Loki', 'Peter Paker'])->toHtmlUnorderedList('name');
 		\Illuminate\Support\Collection::macro
 		(
 			'toHtmlUnorderedList',
 			function()
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				$result = '<ul>' . PHP_EOL;
 				$unlist = $this->map
 				(
@@ -191,6 +132,7 @@ class XpCollectionServiceProvider extends ServiceProvider
 			'toHtmlTable',
 			function($p_properties = '')
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				$result = '<table ' . $p_properties . '>' . PHP_EOL;
 				$result .= $this->map
 				(
@@ -204,38 +146,6 @@ class XpCollectionServiceProvider extends ServiceProvider
 			}
 		);
 
-		// collect(['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'])->exceptValues('bg-green');
-		\Illuminate\Support\Collection::macro
-		(
-			'exceptValues',
-			function($p_values)
-			{
-				return $this->filter
-				(
-					function($value, $key) use ($p_values)
-					{
-						return (!in_array($value, $p_values));
-					}
-				);
-			}
-		);
-
-		// collect(['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'])->exceptValues('bg-green');
-		\Illuminate\Support\Collection::macro
-		(
-			'onlyValues',
-			function(...$p_values)
-			{
-				return $this->filter
-				(
-					function($value, $key) use ($p_values)
-					{
-						return (in_array($value, $p_values));
-					}
-				);
-			}
-		);
-
 		// collect(['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'])->renameKey('color', 'last_color')->renameKey('name', 'nome_completo');
 		// $a = collect(['id' => 1, 'name' => 'Marcelo', 'color' => 'bg-green'])->renameKey('color', 'last_color');
 		// $a->renameKey('name', 'nome_completo');
@@ -244,6 +154,7 @@ class XpCollectionServiceProvider extends ServiceProvider
 			'renameKey',
 			function($p_old_key_name, $p_new_key_name)
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				$index = $this->keys()->search($p_old_key_name);
 				if ($index === false)
 				{
@@ -264,12 +175,9 @@ class XpCollectionServiceProvider extends ServiceProvider
 			}
 		);
 
-		/*
-$a = collect(['id' => 1, 'name' => 'Marcelo', 'age' => 45, 'state' => 'SP', 'color' => 'bg-green']);
-$a = $a->toggleKey('name', 'state');
-$a = $a->toggleKey('name', 'state')->toggleKey('color', 'id');
-		*/
-
+		// $a = collect(['id' => 1, 'name' => 'Marcelo', 'age' => 45, 'state' => 'SP', 'color' => 'bg-green']);
+		// $a = $a->toggleKey('name', 'state');
+		// $a = $a->toggleKey('name', 'state')->toggleKey('color', 'id');
 		function ___toggle_array_key($array, $key_ini, $key_end)
 		{
 			$array_keys = array_keys($array);
@@ -306,22 +214,21 @@ $a = $a->toggleKey('name', 'state')->toggleKey('color', 'id');
 			'toggleKey',
 			function($p_from_key_name, $p_to_key_name)
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				return collect(___toggle_array_key($this->toArray(), $p_from_key_name, $p_to_key_name));
 			}
 		);
 
-		/*
-$a = collect(['id' => 1, 'name' => 'Marcelo', 'age' => 45, 'state' => 'SP', 'color' => 'bg-green']);
-$a->moveKey('name', 'state');
-$a->moveKey('state', 'name');
-$a->moveKey('name', 'state')->moveKey('color', 'id');
-		*/
-
+		// $a = collect(['id' => 1, 'name' => 'Marcelo', 'age' => 45, 'state' => 'SP', 'color' => 'bg-green']);
+		// $a->moveKey('name', 'state');
+		// $a->moveKey('state', 'name');
+		// $a->moveKey('name', 'state')->moveKey('color', 'id');
 		function ___move_array_key($array, $key_ini, $key_end)
 		{
 			$array_keys = array_keys($array);
 			$pos1 = array_search($key_ini, $array_keys);
 			$pos2 = array_search($key_end, $array_keys);
+			$a = ['italic' => 'ok'];
 
 			$slice1 = $pos1;
 			$slice2 = $pos2;
@@ -329,7 +236,7 @@ $a->moveKey('name', 'state')->moveKey('color', 'id');
 			$use_ini = $key_ini;
 			$use_end = $key_end;
 
-			if ($pos1 > $pos2)
+			if ($pos1 = $pos2)
 			{
 				$slice1 = $pos2;
 				$slice2 = $pos1;
@@ -360,6 +267,7 @@ $a->moveKey('name', 'state')->moveKey('color', 'id');
 			'moveKey',
 			function($p_from_key_name, $p_to_key_name)
 			{
+				/** @var \Illuminate\Support\Collection $this */
 				return collect(___move_array_key($this->toArray(), $p_from_key_name, $p_to_key_name));
 			}
 		);
