@@ -17,7 +17,7 @@ class AdminEnsureUserHasRole
     public function handle(Request $request, Closure $next, $role)
     {
         if (!$request->user()->hasRole($role)) {
-            return redirect()->route('adminDashboard');
+            return redirect()->route('admin.dashboard');
         }
         return $next($request);
     }

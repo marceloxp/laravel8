@@ -20,7 +20,7 @@ class AdminEnsureUserIsMasterDeveloper
         /** @var User $user */
         $user = auth()->guard('admin')->user();
         if (!$user->hasRole('Master') && !$user->hasRole('Developer')) {
-            return redirect()->route('adminDashboard');
+            return redirect()->route('admin.dashboard');
         }
         return $next($request);
     }

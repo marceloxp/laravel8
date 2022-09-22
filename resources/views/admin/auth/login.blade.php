@@ -32,7 +32,7 @@
                 </h1>
             </div>
             <div class="card-body">
-                <form class="auth-login-form mt-2" action="{{ route('adminLoginPost') }}" method="post">
+                <form class="auth-login-form mt-2" action="{{ route('admin.login.post') }}" method="post">
                     @csrf
                     <div class="input-group mb-0">
                         <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}" autofocus />

@@ -19,56 +19,41 @@ use App\Http\Middleware\AdminEnsureUserIsMasterDeveloper;
 |
  */
 
-# TODO: Passar as rotas de admin para dot notation
-
 Route::prefix('admin')->group(function () {
-    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
-    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
-    Route::get('/logout', [AdminAuthController::class, 'getLogout'])->name('adminLogout');
+    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('admin.login.post');
+    Route::get('/logout', [AdminAuthController::class, 'getLogout'])->name('admin.logout');
 
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/', function () {
-            return redirect()->route('adminDashboard');
+            return redirect()->route('admin.dashboard');
         });
         // add dashboard route
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         // add route group with middleware to ensure user is master or developer
         Route::group(['middleware' => AdminEnsureUserIsMasterDeveloper::class], function () {
-            
             // add config resource route
             Route::resource('/config', ConfigController::class, ['as' => 'admin']);
             Route::resource('/user', UserController::class, ['as' => 'admin']);
-            
-            // add grouped user all routes
-            // Route::group(['prefix' => 'user'], function () {
-            //     Route::get('/', [UserController::class, 'index'])->name('adminUser');
-            //     Route::get('/create', [UserController::class, 'createOrEdit'])->name('adminUserCreate');
-            //     Route::post('/store', [UserController::class, 'store'])->name('adminUserStore');
-            //     Route::get('/edit/{id}', [UserController::class, 'createOrEdit'])->name('adminUserEdit');
-            //     Route::post('/update/{id}', [UserController::class, 'update'])->name('adminUserUpdate');
-            //     Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('adminUserDelete');
-            //     Route::get('/search', [UserController::class, 'index'])->name('adminUserSearch');
-            // });
 
-            Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('adminLogs');
+            Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('admin.logs');
 
             // add route to simple folder telescope (https://laravel.com/docs/8.x/telescope)
             Route::get('telescope', function () {
                 return redirect()->to('/telescope');
-            })->name('adminTelescope');
-
+            })->name('admin.telescope');
         });
 
         // add clear cache route
         Route::get('/clear-cache', function () {
-            $exitCode = Artisan::call('cache:clear');
-            $exitCode = Artisan::call('view:clear');
-            $exitCode = Artisan::call('config:clear');
-            $exitCode = Artisan::call('route:clear');
-            $exitCode = Artisan::call('makex:cached --clear');
+            Artisan::call('cache:clear');
+            Artisan::call('view:clear');
+            Artisan::call('config:clear');
+            Artisan::call('route:clear');
+            Artisan::call('makex:cached --clear');
             session()->flash('messages', ['Cache limpo com sucesso']);
-            return redirect()->route('adminDashboard');
-        })->name('adminClearCache');
+            return redirect()->route('admin.dashboard');
+        })->name('admin.cache.clear');
     });
 });
