@@ -1,9 +1,3 @@
-@php
-	use App\Utilities\Datasite;
-	use App\Utilities\AutoAssets;
-	use App\Utilities\MetaSocial;
-@endphp
-
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 	<head>
@@ -25,7 +19,7 @@
 			@show
 
 			@section('datasite')
-				{!! DataSite::getHtmlScript() !!}
+				{!! Datasite::getHtmlScript() !!}
 			@show
 		@show
 	</head>

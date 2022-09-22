@@ -16186,6 +16186,13 @@
         class Datasite {
          
     }
+            /**
+     * 
+     *
+     */ 
+        class MetaSocial {
+         
+    }
      
 }
 
@@ -20731,6 +20738,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class AutoAssets extends \App\Utilities\AutoAssets {}
             class Datasite extends \App\Utilities\Datasite {}
+            class MetaSocial extends \App\Utilities\MetaSocial {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Iseed extends \Orangehill\Iseed\Facades\Iseed {}

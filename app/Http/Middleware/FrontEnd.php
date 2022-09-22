@@ -3,8 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
-use App\Utilities\Datasite;
+use Datasite;
 use Closure;
 
 class FrontEnd

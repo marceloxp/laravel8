@@ -245,6 +245,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'AutoAssets' => App\Utilities\AutoAssets::class,
         'Datasite' => App\Utilities\Datasite::class,
+        'MetaSocial' => App\Utilities\MetaSocial::class,
 
     ],
 
