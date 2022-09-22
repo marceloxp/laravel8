@@ -4,6 +4,13 @@ namespace App\Traits\Models;
 
 trait Searchable
 {
+    /**
+     * Search the model by the given search_fields property.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $search
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeSearch($query, $search)
     {
         if (!empty($search)) {

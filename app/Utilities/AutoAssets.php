@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Route;
 
 class AutoAssets
 {
+	/**
+	 * Find and load the assets for the current route.
+	 * 
+	 * @param  string  $p_type
+	 * @return void
+	 */
 	public static function print($p_type)
 	{
 		$auto_assets = [];
@@ -15,7 +21,7 @@ class AutoAssets
 		{
 			if (strpos($routename, 'admin') === 0)
 			{
-				$asset_file     = sprintf('%s/admin/%s.%s'    , $p_type, $routename, $p_type);
+				$asset_file     = sprintf('%s/admin/%s.%s', $p_type, $routename, $p_type);
 				$asset_file_min = $asset_file;
 			}
 			else

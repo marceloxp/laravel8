@@ -16079,39 +16079,6 @@
          * 
          *
          * @see \App\Providers\XpCollectionServiceProvider::boot()
-         * @param mixed $color
-         * @static 
-         */ 
-        public static function toBootstrapLabels($color = 'bg-light-blue')
-        {
-                        return \Illuminate\Support\Collection::toBootstrapLabels($color);
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\XpCollectionServiceProvider::boot()
-         * @param mixed $p_glue
-         * @static 
-         */ 
-        public static function toText($p_glue = '')
-        {
-                        return \Illuminate\Support\Collection::toText($p_glue);
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\XpCollectionServiceProvider::boot()
-         * @param mixed $p_field_name
-         * @static 
-         */ 
-        public static function extract($p_field_name)
-        {
-                        return \Illuminate\Support\Collection::extract($p_field_name);
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\XpCollectionServiceProvider::boot()
          * @param mixed $p_field_name
          * @static 
          */ 
@@ -16148,16 +16115,6 @@
          * @see \App\Providers\XpCollectionServiceProvider::boot()
          * @static 
          */ 
-        public static function toArrayDeep()
-        {
-                        return \Illuminate\Support\Collection::toArrayDeep();
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\XpCollectionServiceProvider::boot()
-         * @static 
-         */ 
         public static function toHtmlUnorderedList()
         {
                         return \Illuminate\Support\Collection::toHtmlUnorderedList();
@@ -16172,28 +16129,6 @@
         public static function toHtmlTable($p_properties = '')
         {
                         return \Illuminate\Support\Collection::toHtmlTable($p_properties);
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\XpCollectionServiceProvider::boot()
-         * @param mixed $p_values
-         * @static 
-         */ 
-        public static function exceptValues($p_values)
-        {
-                        return \Illuminate\Support\Collection::exceptValues($p_values);
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\XpCollectionServiceProvider::boot()
-         * @param mixed $p_values
-         * @static 
-         */ 
-        public static function onlyValues(...$p_values)
-        {
-                        return \Illuminate\Support\Collection::onlyValues(...$p_values);
         }
                     /**
          * 
@@ -16236,7 +16171,25 @@
      
 }
 
-        namespace Barryvdh\Debugbar\Facades { 
+        namespace App\Utilities { 
+            /**
+     * 
+     *
+     */ 
+        class AutoAssets {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Datasite {
+         
+    }
+     
+}
+
+    namespace Barryvdh\Debugbar\Facades { 
             /**
      * 
      *
@@ -20776,6 +20729,8 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class AutoAssets extends \App\Utilities\AutoAssets {}
+            class Datasite extends \App\Utilities\Datasite {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Iseed extends \Orangehill\Iseed\Facades\Iseed {}

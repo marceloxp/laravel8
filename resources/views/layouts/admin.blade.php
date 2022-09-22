@@ -1,8 +1,3 @@
-@php
-	use App\Utilities\Datasite;
-	use App\Utilities\AutoAssets;
-@endphp
-
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -21,7 +16,7 @@
 	@show
 
 	@section('datasite')
-		{!! DataSite::getHtmlScript() !!}
+		{!! Datasite::getHtmlScript() !!}
 	@show
 </head>
 
