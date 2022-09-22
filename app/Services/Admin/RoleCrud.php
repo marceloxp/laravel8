@@ -23,7 +23,8 @@ class RoleCrud extends BaseCrud
      */
     public function index(Request $request)
     {
-        $captions = $this->model::getFieldsCaptions();
+        $this->setOption('index.search', false);
+        $captions = Role::getFieldsCaptions();
         $table = $this->getIndexTable($request);
         View::share(compact('captions', 'table'));
         return view($this->indexViewPath);

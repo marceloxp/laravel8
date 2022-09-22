@@ -29,6 +29,8 @@ class BaseCrud extends BaseAdmin
             'model' => $this->model,
         ]);
         parent::__construct();
+
+        $this->setOption('index.search', true);
     }
 
     private function getAdminViewPath($route)
