@@ -48,7 +48,6 @@
 		"files": [
 			"app/Helpers/admin.php",
 			"app/Helpers/cached.php",
-			"app/Helpers/datasite.php",
 			"app/Helpers/db.php",
 			"app/Helpers/developer.php",
 			"app/Helpers/statecity.php",

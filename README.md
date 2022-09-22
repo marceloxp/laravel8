@@ -1,7 +1,7 @@
 # Laravel 8 Boilerplate
 
 > Basic site boilerplate start.
-> Version 0.0.2
+> Version 0.0.3
 
 ## Install
 
@@ -148,9 +148,6 @@ makex:crud ModelName
 ```php
 Datasite::add('csrf_token', csrf_token());
 Datasite::add(compact('url'));
-
-datasite_add('csrf_token', csrf_token());
-datasite_add(compact('url'));
 ```
 
 ### Cached `App\Utilities\Cached`
@@ -238,28 +235,6 @@ RouteLang::getCurrentLocale();        // Returns app current locale config (dyna
 | http://local.laravel8.com.br/api/brasil/states    |
 | http://local.laravel8.com.br/api/brasil/cities/rj |
 
-### Helpers
-
-#### admin
-
-```php
-// ['inativo','não','i','n','no','0','excluido'])) ? 'red' : 'green';
-echo admin_label_status($value);
-
-// bootstrap badge
-echo admin_badge_status($value);
-
-// ['RJ' => 'Rio de Janeiro', 'SP' => 'São Paulo']
-echo admin_select($p_field_name, $p_options, $p_field_value, $p_required, $p_add_text_select = false)
-
-// ['RJ', 'SP']
-echo admin_select_simple($p_field_name, $p_options, $p_field_value, $p_required, $p_add_text_select = false)
-
-echo admin_select_simple_with_add_button($p_field_name, $p_options, $p_field_value, $p_required, $p_add_text_select = false)
-```
-
-#### Bootstrap
-
 #### vasset
 
 ```html
@@ -282,12 +257,6 @@ javascript('/js/home.js');
 
 css('/css/style.css');
 <link rel="stylesheet" type="text/css" href="http://local.laravel8.com.br/css/style.css?v=0.0.1">
-```
-
-```php
-echo alert_success('Mensagem enviada com sucesso.');
-echo alert_danger('Ocorreu um erro na solicitação!');
-echo print_alert(); // Auto print messages from Session
 ```
 
 #### DB
