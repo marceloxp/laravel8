@@ -7,24 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends BaseModel
 {
 	use SoftDeletes;
-    protected $dates   = ['created_at','updated_at','deleted_at'];
-	protected $guarded = ['created_at','updated_at','deleted_at'];
-
-	// add fillable fields
+    protected $dates    = ['created_at','updated_at','deleted_at'];
+	protected $guarded  = ['created_at','updated_at','deleted_at'];
 	protected $fillable = ['name', 'description', 'color'];
-
-    # TODO: create a separate validator to this model
-	// public static function validate($request, $id = '')
-    // {
-	// 	$rules = 
-	// 	[
-	// 		'name'        => 'required|min:5|max:150|unique:roles,name,' . $id,
-	// 		'description' => 'required|min:5|max:255',
-	// 		'color'       => 'required|min:5|max:255'
-	// 	];
-
-	// 	return Role::_validate($request, $rules, $id);
-    // }
 
 	public static function getColorBg($p_color_name)
 	{
