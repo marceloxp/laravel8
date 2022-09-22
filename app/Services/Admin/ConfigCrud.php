@@ -17,7 +17,7 @@ class ConfigCrud extends BaseCrud
 
     /**
      * Get table fields on index screen.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
@@ -32,7 +32,7 @@ class ConfigCrud extends BaseCrud
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function create()
@@ -42,7 +42,7 @@ class ConfigCrud extends BaseCrud
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -53,7 +53,7 @@ class ConfigCrud extends BaseCrud
 
     /**
      * Show a data of the specified resource.
-     * 
+     *
      * @param  \App\Models\Config  $config
      * @return \Illuminate\View\View
      */
@@ -64,7 +64,7 @@ class ConfigCrud extends BaseCrud
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @param  \App\Models\Config  $config
      * @return \Illuminate\View\View
      */
@@ -72,10 +72,10 @@ class ConfigCrud extends BaseCrud
     {
         return view($this->editViewPath, compact('config'));
     }
-    
+
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  \App\Models\Config  $config
      * @return \Illuminate\Http\RedirectResponse
@@ -84,10 +84,10 @@ class ConfigCrud extends BaseCrud
     {
         return $this->defaultUpdate($request, $config);
     }
-    
+
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  \App\Models\Config  $config
      * @return \Illuminate\Http\RedirectResponse
      */

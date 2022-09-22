@@ -27,5 +27,5 @@ class BaseAdmin
         View::share([
             'options' => $this->options,
         ]);
-    } 
+    }
 }

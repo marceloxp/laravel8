@@ -26,7 +26,7 @@ class UserPostRequest extends FormRequest
     {
         return [
             'name'  => 'required|min:3|max:150',
-			'email' => 'required|min:5|max:255|unique:users,email,' . $this->id . ',id,deleted_at,NULL',
+            'email' => 'required|min:5|max:255|unique:users,email,' . $this->id . ',id,deleted_at,NULL',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => [Rule::requiredIf(empty($this->id))],
             'status' => 'required|in:Ativo,Inativo',

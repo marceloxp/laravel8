@@ -28,7 +28,7 @@ class UserCrud extends BaseCrud
 
     /**
      * Get table fields on index screen.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
@@ -49,14 +49,13 @@ class UserCrud extends BaseCrud
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(FormRequest $request)
     {
-        try
-        {
+        try {
             $form = $request->validated();
             $form = AdminProcessUploads::handle($request, $form);
             $register = User::create($form);
@@ -67,9 +66,7 @@ class UserCrud extends BaseCrud
                 ->route(admin_crud_route('user', 'index'))
                 ->withMessages('Usuário criado com sucesso.')
             ;
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return back()
                 ->withErrors($e->getMessage())
                 ->withInput()
@@ -84,24 +81,21 @@ class UserCrud extends BaseCrud
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(FormRequest $request, User $user)
     {
-        try
-        {
+        try {
             $form = $request->validated();
-            if (empty($form['password']))
-            {
+            if (empty($form['password'])) {
                 unset($form['password']);
             }
             $form = AdminProcessUploads::handle($request, $form);
             $saved = $user->update($form);
-            if ($saved)
-            {
+            if ($saved) {
                 $roles = isset($form['roles']) ? $form['roles'] : [];
                 $user->roles()->sync($roles);
                 return redirect()
@@ -110,9 +104,7 @@ class UserCrud extends BaseCrud
                 ;
             }
             throw new \Exception('Ocorreu um erro ao salvar o usuário.');
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return back()
                 ->withErrors($e->getMessage())
                 ->withInput()
@@ -122,7 +114,7 @@ class UserCrud extends BaseCrud
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -130,5 +122,4 @@ class UserCrud extends BaseCrud
     {
         return $this->defaultDestroy($user);
     }
-
 }

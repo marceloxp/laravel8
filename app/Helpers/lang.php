@@ -3,22 +3,20 @@
 use App\Utilities\RouteLang;
 use Illuminate\Support\Facades\Lang;
 
-if (!function_exists('dic'))
-{
+if (!function_exists('dic')) {
     function dic($p_string)
-	{
-		$slug           = 'dic.' . $p_string;
-		$current_locale = config('app.current_locale', 'pt-br');
-		$has            = Lang::has($slug, $current_locale);
-		$result         = ($has) ? __($slug) : $p_string;
-		return $result;
+    {
+        $slug           = 'dic.' . $p_string;
+        $current_locale = config('app.current_locale', 'pt-br');
+        $has            = Lang::has($slug, $current_locale);
+        $result         = ($has) ? __($slug) : $p_string;
+        return $result;
     }
 }
 
-if (!function_exists('lang_home_link'))
-{
+if (!function_exists('lang_home_link')) {
     function lang_home_link($p_lang = null)
-	{
-		return url(RouteLang::rootUrl($p_lang));
+    {
+        return url(RouteLang::rootUrl($p_lang));
     }
 }

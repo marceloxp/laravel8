@@ -11,7 +11,7 @@ use App\Traits\Models\Searchable;
 
 /**
  * Class BaseCrud.
- * 
+ *
  * @property string $indexViewPath
  * @property string $createViewPath
  * @property string $showViewPath
@@ -34,10 +34,10 @@ class BaseCrud extends BaseAdmin
     }
 
     private function getAdminViewPath($route)
-	{
-		$singular_name = str_to_singular(strtolower($this->model::getTableName()));
-		return sprintf('admin.%s.%s', $singular_name, $route);
-	}
+    {
+        $singular_name = str_to_singular(strtolower($this->model::getTableName()));
+        return sprintf('admin.%s.%s', $singular_name, $route);
+    }
 
     public function __get($name)
     {
@@ -64,7 +64,7 @@ class BaseCrud extends BaseAdmin
 
     /**
      * Get table fields on index screen.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param string $search
      * @return array
@@ -93,26 +93,24 @@ class BaseCrud extends BaseAdmin
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function defaultStore(FormRequest $request)
     {
-        try
-        {
-            if ($this->model::create($request->validated()))
+        try {
+            if ($this->model::create($request->validated())) {
                 return redirect()
                     ->route($this->indexViewPath)
                     ->withMessages('Registro criado com sucesso.')
                 ;
-            else
+            } else {
                 return back()
                     ->withErrors('Ocorreu um erro na gravação do registro.')
                     ->withInput();
-        }
-        catch(\Exception $e)
-        {
+            }
+        } catch(\Exception $e) {
             return back()
                 ->withErrors($e->getMessage())
                 ->withInput();
@@ -121,28 +119,26 @@ class BaseCrud extends BaseAdmin
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  \App\Models\BaseModel  $model
      * @return \Illuminate\Http\RedirectResponse
      */
     public function defaultUpdate(FormRequest $request, BaseModel $model)
     {
-        try
-        {
-            if ($model->update($request->validated()))
+        try {
+            if ($model->update($request->validated())) {
                 return redirect()
                     ->route($this->indexViewPath)
                     ->withMessages('Registro atualizado com sucesso.')
                 ;
-            else
+            } else {
                 return back()
                     ->withErrors('Ocorreu um erro na gravação do registro.')
                     ->withInput()
                 ;
-        }
-        catch(\Exception $e)
-        {
+            }
+        } catch(\Exception $e) {
             return back()
                 ->withErrors($e->getMessage())
                 ->withInput();
@@ -151,22 +147,19 @@ class BaseCrud extends BaseAdmin
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  \App\Models\BaseModel  $model
      * @return \Illuminate\Http\RedirectResponse
      */
     public function defaultDestroy(BaseModel $model)
     {
-        try
-        {
+        try {
             $model->delete();
             return redirect()
                 ->route($this->indexViewPath)
                 ->withMessages('Registro excluído com sucesso.')
             ;
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return back()->withErrors($e->getMessage());
         }
     }

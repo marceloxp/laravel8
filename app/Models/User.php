@@ -19,12 +19,17 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends BaseModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
     use Searchable;
 
-	protected $dates   = ['created_at','updated_at','deleted_at'];
-	protected $guarded = ['created_at','updated_at','deleted_at'];
+    protected $dates   = ['created_at','updated_at','deleted_at'];
+    protected $guarded = ['created_at','updated_at','deleted_at'];
 
     protected $search_fields = ['name', 'email'];
 
@@ -60,10 +65,10 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         'email_verified_at' => 'datetime',
     ];
 
-	public function roles()
-	{
-		return $this->belongsToMany(Role::class);
-	}
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
     // get if user isDeveloper
     public function isDeveloper()
@@ -80,12 +85,10 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     // get if user hasRole
     public function hasRole($role)
     {
-        $result = Cached::get
-        (
+        $result = Cached::get(
             'sys-user-hasRole',
             [$this->id, $role],
-            function() use ($role)
-            {
+            function () use ($role) {
                 return $this->roles()->where('name', $role)->exists();
             },
             5

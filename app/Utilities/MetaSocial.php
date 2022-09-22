@@ -4,12 +4,12 @@ namespace App\Utilities;
 
 class MetaSocial
 {
-	private static $config_use = 'default';
-	private static $custom_config = [];
+    private static $config_use = 'default';
+    private static $custom_config = [];
 
-	private static function getTemplate()
-	{
-		return '
+    private static function getTemplate()
+    {
+        return '
 			<title>{:title}</title>
 			<meta name="title" content="{:title}">
 			<meta name="description" content="{:description}">
@@ -37,122 +37,115 @@ class MetaSocial
 			<meta name="twitter:site" content="{:url}">
 			<meta name="twitter:description" content="{:description}">
 		';
-	}
+    }
 
-	public static function use($p_config_use)
-	{
-		self::$config_use = $p_config_use;
-	}
+    public static function use($p_config_use)
+    {
+        self::$config_use = $p_config_use;
+    }
 
-	public static function getFinalConfig()
-	{
-		$locale = config('app.locale', 'pt-br');
-		$result = array_merge
-		(
-			config(sprintf('metasocial.%s.default', $locale)) ?? [],
-			// config(sprintf('metasocial.pt-br.default', $locale)) ?? [],
-			config(sprintf('metasocial.%s.%s', $locale, self::$config_use)) ?? [],
-			self::$custom_config
-		);
-		return $result;
-	}
+    public static function getFinalConfig()
+    {
+        $locale = config('app.locale', 'pt-br');
+        $result = array_merge(
+            config(sprintf('metasocial.%s.default', $locale)) ?? [],
+            // config(sprintf('metasocial.pt-br.default', $locale)) ?? [],
+            config(sprintf('metasocial.%s.%s', $locale, self::$config_use)) ?? [],
+            self::$custom_config
+        );
+        return $result;
+    }
 
-	public static function get($key)
-	{
-		$configs = self::getFinalConfig();
-		return $configs[$key] ?? '';
-	}
+    public static function get($key)
+    {
+        $configs = self::getFinalConfig();
+        return $configs[$key] ?? '';
+    }
 
-	public static function append($key, $value)
-	{
-		$config_value = self::get($key);
-		$value = trim($config_value . $value, ' -');
+    public static function append($key, $value)
+    {
+        $config_value = self::get($key);
+        $value = trim($config_value . $value, ' -');
 
-		self::$custom_config[$key] = $value;
-	}
+        self::$custom_config[$key] = $value;
+    }
 
-	public static function set($key, $value = null)
-	{
-		if (is_array($key))
-		{
-			self::$custom_config = array_merge(self::$custom_config, $key);
-			return;
-		}
+    public static function set($key, $value = null)
+    {
+        if (is_array($key)) {
+            self::$custom_config = array_merge(self::$custom_config, $key);
+            return;
+        }
 
-		self::$custom_config[$key] = $value;
-	}
+        self::$custom_config[$key] = $value;
+    }
 
-	public static function build()
-	{
-		$result = self::getTemplate();
-		$configs = self::getFinalConfig();
+    public static function build()
+    {
+        $result = self::getTemplate();
+        $configs = self::getFinalConfig();
 
-		if (!array_key_exists('type'            , $configs)) { $configs['type']                 = 'website'       ; }
-		if (!array_key_exists('url'             , $configs)) { $configs['url']                  = url()->current(); }
-		if (!array_key_exists('twitter_card'    , $configs)) { $configs['summary_large_image']  = ''              ; }
-		if (!array_key_exists('twitter_creator' , $configs)) { $configs['twitter_creator']      = ''              ; }
-		
-		if (array_key_exists('facebook_id', $configs))
-		{
-			if (!empty($configs['facebook_id']))
-			{
-				$result .= PHP_EOL;
-				$result .= '			<!-- FACEBOOK APP -->' . PHP_EOL;
-				$result .= sprintf('			<meta property="fb:app_id" content="%s">' . PHP_EOL, $configs['facebook_id']);
-			}
-		}
+        if (!array_key_exists('type', $configs)) {
+            $configs['type'] = 'website';
+        }
+        if (!array_key_exists('url', $configs)) {
+            $configs['url'] = url()->current();
+        }
+        if (!array_key_exists('twitter_card', $configs)) {
+            $configs['summary_large_image'] = '';
+        }
+        if (!array_key_exists('twitter_creator', $configs)) {
+            $configs['twitter_creator'] = '';
+        }
 
-		foreach ($configs as $key => $value)
-		{
-			switch ($key)
-			{
-				case 'url':
-					if (empty($value))
-					{
-						$value = env('APP_URL', '');
-					}
-				break;
-				case 'image':
-					if (!empty($value))
-					{
-						if (strpos($value, 'http') === false)
-						{
-							$value = vasset($value);
-						}
+        if (array_key_exists('facebook_id', $configs)) {
+            if (!empty($configs['facebook_id'])) {
+                $result .= PHP_EOL;
+                $result .= '			<!-- FACEBOOK APP -->' . PHP_EOL;
+                $result .= sprintf('			<meta property="fb:app_id" content="%s">' . PHP_EOL, $configs['facebook_id']);
+            }
+        }
 
-						$size = false;
-						try
-						{
-							$size = getimagesize($value);
-							if (!$size)
-							{
-								$value = '';
-							}
-							else
-							{
-								$result .= PHP_EOL;
-								$result .= '			<!-- IMAGE SIZE -->' . PHP_EOL;
-								$result .= sprintf('			<meta property="og:image:width"  content="%s">' . PHP_EOL, $size[0]);
-								$result .= sprintf('			<meta property="og:image:height" content="%s">' . PHP_EOL, $size[1]);
-								$result .= sprintf('			<meta property="og:image:type" content="%s">' . PHP_EOL, $size['mime']);
-							}
-						}
-						catch (\Exception $e)
-						{
-							$value = '';
-						}
-					}
-				break;
-			}
+        foreach ($configs as $key => $value) {
+            switch ($key) {
+                case 'url':
+                    if (empty($value)) {
+                        $value = env('APP_URL', '');
+                    }
+                    break;
+                case 'image':
+                    if (!empty($value)) {
+                        if (strpos($value, 'http') === false) {
+                            $value = vasset($value);
+                        }
 
-			$result = str_replace('{:' . $key . '}', $value, $result);
-		}
+                        $size = false;
+                        try {
+                            $size = getimagesize($value);
+                            if (!$size) {
+                                $value = '';
+                            } else {
+                                $result .= PHP_EOL;
+                                $result .= '			<!-- IMAGE SIZE -->' . PHP_EOL;
+                                $result .= sprintf('			<meta property="og:image:width"  content="%s">' . PHP_EOL, $size[0]);
+                                $result .= sprintf('			<meta property="og:image:height" content="%s">' . PHP_EOL, $size[1]);
+                                $result .= sprintf('			<meta property="og:image:type" content="%s">' . PHP_EOL, $size['mime']);
+                            }
+                        } catch (\Exception $e) {
+                            $value = '';
+                        }
+                    }
+                    break;
+            }
 
-		return $result;
-	}
+            $result = str_replace('{:' . $key . '}', $value, $result);
+        }
 
-	public static function print()
-	{
-		echo self::build();
-	}
+        return $result;
+    }
+
+    public static function print()
+    {
+        echo self::build();
+    }
 }

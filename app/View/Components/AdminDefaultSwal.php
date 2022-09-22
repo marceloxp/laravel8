@@ -17,7 +17,7 @@ class AdminDefaultSwal extends Component
     public function __construct()
     {
         if (session()->has('messages')) {
-            if(is_array(session()->get('messages'))) {
+            if (is_array(session()->get('messages'))) {
                 foreach (session()->get('messages') as $message) {
                     $this->messages_success[] = $message;
                 }
@@ -27,7 +27,7 @@ class AdminDefaultSwal extends Component
         }
 
         if (session()->has('errors')) {
-            if(is_string(session()->get('errors'))) {
+            if (is_string(session()->get('errors'))) {
                 $this->messages_errors[] = session()->get('errors');
             } else {
                 foreach (session()->get('errors')->all() as $message) {

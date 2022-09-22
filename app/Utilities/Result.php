@@ -25,14 +25,10 @@ class ResultObject
         $this->message = $message;
         $this->data    = $data;
 
-        if (!empty($message_log))
-        {
-            if ($success)
-            {
+        if (!empty($message_log)) {
+            if ($success) {
                 Log::info($message_log);
-            }
-            else
-            {
+            } else {
                 Log::error($message_log);
             }
         }
@@ -74,14 +70,10 @@ class ResultObject
 
     public function log($message_log)
     {
-        if (!empty($message_log))
-        {
-            if ($this->success)
-            {
+        if (!empty($message_log)) {
+            if ($this->success) {
                 Log::info($message_log);
-            }
-            else
-            {
+            } else {
                 Log::error($message_log);
             }
         }

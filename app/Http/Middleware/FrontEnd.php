@@ -17,22 +17,21 @@ class FrontEnd
      */
     public function handle($request, Closure $next)
     {
-		if (!$request->ajax())
-		{
-			$env = env('APP_ENV');
-			$routename = Route::currentRouteName();
-			$url = 
-			[
-				'name'    => $routename,
-				'base'    => env('APP_URL'),
-				'admin'   => sprintf('%s/admin', env('APP_URL')),
-				'current' => $request->url()
-			];
+        if (!$request->ajax()) {
+            $env = env('APP_ENV');
+            $routename = Route::currentRouteName();
+            $url =
+            [
+                'name'    => $routename,
+                'base'    => env('APP_URL'),
+                'admin'   => sprintf('%s/admin', env('APP_URL')),
+                'current' => $request->url()
+            ];
 
-			Datasite::add('csrf_token', csrf_token());
-			Datasite::add(compact('url', 'env'));
-		}
-		
-		return $next($request);
+            Datasite::add('csrf_token', csrf_token());
+            Datasite::add(compact('url', 'env'));
+        }
+
+        return $next($request);
     }
 }

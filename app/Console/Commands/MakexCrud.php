@@ -85,8 +85,7 @@ class MakexCrud extends Command
             'edit.blade.stub',
         ];
 
-        foreach ($filenames as $filename)
-        {
+        foreach ($filenames as $filename) {
             $filesource = base_path('stubs/TemplateController/' . $filename);
             $body = file_get_contents($filesource);
             foreach ($replaces as $key => $value) {

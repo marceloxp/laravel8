@@ -25,9 +25,9 @@ class ConfigPostRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|unique:configs,name,' . $this->id . ',id,deleted_at,NULL',
-			'value'  => 'required|max:255',
+            'value'  => 'required|max:255',
             'flags' => 'nullable|integer',
-			'status' => 'required|in:Ativo,Inativo'
+            'status' => 'required|in:Ativo,Inativo'
         ];
     }
 }

@@ -29,24 +29,22 @@ class ImageUploadedFile extends Component
     {
         $noimage_path = ($this->noimage) ? $this->noimage : 'images/admin/no-image.png';
         $no_image = sprintf('<img {{ $attributes }} src="%s?v=%s">', asset($noimage_path), app_version('0.0.1'));
-		if (empty($this->filename))
-		{
+        if (empty($this->filename)) {
             return $no_image;
-		}
+        }
 
-		$info = pathinfo($this->filename);
-		$extension = strtolower($info['extension']);
+        $info = pathinfo($this->filename);
+        $extension = strtolower($info['extension']);
 
-		switch ($extension)
-		{
-			case 'png':
-			case 'jpg':
-			case 'jpeg':
-			case 'gif':
-				return sprintf('<img {{ $attributes }} src="%s?v=%s">', uploaded_file_url($this->filename), app_version('0.0.1'));
-			case 'pdf':
-				return sprintf('<img {{ $attributes }} src="%s?v=%s">', vasset('/images/admin/fileextensions/pdf.png'), app_version('0.0.1'));
-		}
+        switch ($extension) {
+            case 'png':
+            case 'jpg':
+            case 'jpeg':
+            case 'gif':
+                return sprintf('<img {{ $attributes }} src="%s?v=%s">', uploaded_file_url($this->filename), app_version('0.0.1'));
+            case 'pdf':
+                return sprintf('<img {{ $attributes }} src="%s?v=%s">', vasset('/images/admin/fileextensions/pdf.png'), app_version('0.0.1'));
+        }
 
         return $no_image;
     }

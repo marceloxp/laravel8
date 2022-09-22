@@ -38,8 +38,7 @@ class Makex extends Command
      */
     public function handle()
     {
-        $command = $this->choice
-        (
+        $command = $this->choice(
             'What do you want to do?',
             [
                 'Exit',
@@ -58,7 +57,7 @@ class Makex extends Command
                 $this->call('config:clear');
                 $this->call('route:clear');
                 $this->call('makex:cached', ['--clear' => true]);
-            break;
+                break;
             case 'Create a new Model, Migrate and Seeder':
                 $modelname = $this->ask('What is the model name?');
                 $this->call('make:model', ['name' => 'App/Models/' . $modelname, '--migration' => true, '-s' => true]);
@@ -70,21 +69,21 @@ class Makex extends Command
                 // save file on disk
                 $this->info('Saving file...');
                 file_put_contents($modelFile, $model);
-            break;
+                break;
             case 'Admin default Controller':
                 $modelname = $this->ask('What is the model name?');
                 $this->call('makex:crud', ['modelname' => $modelname]);
-            break;
+                break;
             case 'Drop all tables and re-run all migrations and seeders':
                 // confirm before dropping tables
                 if ($this->confirm('Are you sure you want to drop all tables and re-run all migrations and seeders?')) {
                     $this->call('migrate:fresh', ['--seed' => true]);
                 }
-            break;
+                break;
             case 'Increments app version':
                 // call app:inc
                 $this->call('app:inc');
-            break;
+                break;
         }
 
         return 0;
