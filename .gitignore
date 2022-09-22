@@ -23,3 +23,5 @@ config/tables\.php
 .env
 .phpunit.result.cache
 laravel8.code-workspace
+tools/php-cs-fixer/vendor
+.php-cs-fixer.cache
