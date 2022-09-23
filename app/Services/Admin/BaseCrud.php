@@ -143,7 +143,7 @@ class BaseCrud extends BaseAdmin
     public function defaultUpdate(FormRequest $request, BaseModel $model)
     {
         try {
-            if ($model->update($request->validated())) {
+            if ($model->fill($request->validated())->update()) {
                 return redirect()
                     ->route($this->indexViewPath)
                     ->withMessages('Registro atualizado com sucesso.')

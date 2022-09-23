@@ -95,6 +95,9 @@ class MakexCrud extends Command
             file_put_contents($filedest, $body);
         }
 
+        $filename = base_path('stubs/TemplateController/index.blade.stub');
+        $body = file_get_contents($filename);
+
         // call make:request with modelname
         $this->call('make:request', ['name' => 'Admin/' . $modelname . 'PostRequest']);
 
