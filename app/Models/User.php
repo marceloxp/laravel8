@@ -28,23 +28,8 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     use SoftDeletes;
     use Searchable;
 
-    protected $dates   = ['created_at','updated_at','deleted_at'];
-    protected $guarded = ['created_at','updated_at','deleted_at'];
-
+    protected $guarded       = ['created_at','updated_at','deleted_at'];
     protected $search_fields = ['name', 'email'];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'avatar',
-        'password',
-        'status',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.

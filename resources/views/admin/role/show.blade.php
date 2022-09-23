@@ -23,8 +23,8 @@
 					<x-admin-field-show.text caption="Nome" :text="$role->name"/>
 					<x-admin-field-show.text caption="Descrição" :text="$role->description"/>
 					<x-admin-field-show.text caption="Cor" :text="$role->color"/>
-					<x-admin-field-show.text caption="Criado em" :text="$role->created_at"/>
-					<x-admin-field-show.text caption="Atualizado em" :text="$role->updated_at"/>
+					<x-admin-field-show.text caption="Criado em" :text="$role->created_at->brDateTime"/>
+					<x-admin-field-show.text caption="Atualizado em" :text="$role->updated_at->brDateTime"/>
 				</table>
 			@else
 				<div class="alert">

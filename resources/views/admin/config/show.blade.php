@@ -24,8 +24,8 @@
 					<x-admin-field-show.text caption="Valor" :text="$config->value"/>
 					<x-admin-field-show.text caption="Flags" :text="$config->flags"/>
 					<x-admin-field-show.text caption="Status" :text="$config->status"/>
-					<x-admin-field-show.text caption="Criado em" :text="$config->created_at"/>
-					<x-admin-field-show.text caption="Atualizado em" :text="$config->updated_at"/>
+					<x-admin-field-show.text caption="Criado em" :text="$config->created_at->brDateTime"/>
+					<x-admin-field-show.text caption="Atualizado em" :text="$config->updated_at->brDateTime"/>
 				</table>
 			@else
 				<div class="alert">

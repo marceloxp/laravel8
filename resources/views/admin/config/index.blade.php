@@ -25,8 +25,8 @@
 								<td>{{ $register->name }}</td>
 								<td>{{ $register->value }}</td>
 								<td>{{ $register->status }}</td>
-								<td>{{ $register->created_at }}</td>
-								<td>{{ $register->updated_at }}</td>
+								<td>{{ $register->created_at->brDateTime }}</td>
+								<td>{{ $register->updated_at->brDateTime }}</td>
 								<td>
 									<x-admin-table :register="$register" crud="config">
 										<x-admin-table.action-edit/>

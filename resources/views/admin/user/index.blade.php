@@ -41,8 +41,8 @@
 										<span class="badge badge-primary">{{ $role->name }}</span>
 									@endforeach
 								</td>
-								<td>{{ $register->created_at }}</td>
-								<td>{{ $register->updated_at }}</td>
+								<td>{{ $register->created_at->brDateTime }}</td>
+								<td>{{ $register->updated_at->brDateTime }}</td>
 								<td>
 									<x-admin-table :register="$register" crud="user">
 										<x-admin-table.action-edit/>

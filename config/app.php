@@ -188,6 +188,7 @@ return [
          * Custom Service Providers...
          */
         App\Providers\XpCollectionServiceProvider::class,
+        App\Providers\CarbonServiceProvider::class,
 
     ],
 

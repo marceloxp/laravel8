@@ -6,37 +6,31 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateStatesTable extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create
-		(
-			'states',
-			function(Blueprint $table)
-			{
-				$table->id();
-				$table->string('name',150)->comment('Estado');
-				$table->string('uf',2)->comment('UF');
-				$table->timestamps();
-				$table->softDeletes();
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create(
+            'states',
+            function (Blueprint $table) {
+                $table->id();
+                $table->string('name', 150)->comment('Estado');
+                $table->string('uf', 2)->comment('UF');
+            }
+        );
+        db_comment_table('states', 'Estados');
+    }
 
-				$table->index(['deleted_at']);
-			}
-		);
-		db_comment_table('states', 'Estados');
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::dropIfExists('states');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('states');
+    }
 }

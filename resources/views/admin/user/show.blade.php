@@ -25,8 +25,8 @@
 					<x-admin-field-show.text caption="E-mail" :text="$user->email"/>
 					<x-admin-field-show.text caption="Status" :text="$user->status"/>
 					<x-admin-field-show.roles caption="Permissões" :roles="$user->roles"/>
-					<x-admin-field-show.text caption="Criado em" :text="$user->created_at"/>
-					<x-admin-field-show.text caption="Atualizado em" :text="$user->updated_at"/>
+					<x-admin-field-show.text caption="Criado em" :text="$user->created_at->brDateTime"/>
+					<x-admin-field-show.text caption="Atualizado em" :text="$user->updated_at->brDateTime"/>
 				</table>
 			@else
 				<div class="alert">

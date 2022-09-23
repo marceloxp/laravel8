@@ -7,9 +7,7 @@ use App\Utilities\Result;
 
 class State extends BaseModel
 {
-    protected $dates    = ['created_at','updated_at','deleted_at'];
-    protected $guarded  = ['created_at','updated_at','deleted_at'];
-    protected $fillable = ['name', 'uf'];
+    public $timestamps  = false;
 
     /**
      * Get the state by uf

@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class City extends BaseModel
 {
     use SoftDeletes;
-    protected $dates    = ['created_at','updated_at','deleted_at'];
     protected $guarded  = ['created_at','updated_at','deleted_at'];
-    protected $fillable = ['name', 'state_id', 'status'];
 
     /**
      * Get the state that owns the city.

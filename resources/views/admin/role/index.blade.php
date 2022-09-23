@@ -25,7 +25,7 @@
 								<td>{{ $register->name }}</td>
 								<td>{{ $register->description }}</td>
 								<td>{{ $register->color }}</td>
-								<td>{{ $register->created_at }}</td>
+								<td>{{ $register->created_at->brDateTime }}</td>
 								<td>
 									<x-admin-table :register="$register" crud="role">
 										<x-admin-table.action-edit/>

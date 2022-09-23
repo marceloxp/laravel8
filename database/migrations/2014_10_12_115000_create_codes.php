@@ -15,19 +15,13 @@ class CreateCodes extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
-            // create name unique max 24 with comment Código
             $table->string('name', 24)->unique()->comment('Código');
-            // create attempts integer with comment Tentativas
             $table->integer('attempts')->comment('Tentativas');
-
             $table->timestamps();
-            // add soft delete
             $table->softDeletes();
 
-            // create unique index name and deleted_at
             $table->unique(['name', 'deleted_at']);
         });
-        // comment table codes as Códigos
         db_comment_table('codes', 'Códigos');
     }
 
