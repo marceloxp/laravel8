@@ -24,7 +24,7 @@ Route::prefix('brasil')->group(
         Route::get(
             'states',
             function () {
-                $result = Brasil::getStates();
+                $result = Brasil::getStates()->toJson();
                 return response($result)->withHeaders(cached_headers($result));
             }
         );
@@ -32,17 +32,18 @@ Route::prefix('brasil')->group(
         Route::get(
             'cities/{uf}',
             function ($uf) {
-                $result = Brasil::getCitiesByUf($uf);
+                $result = Brasil::getCitiesByUf($uf)->toJson();
                 return response($result)->withHeaders(cached_headers($result));
             }
         );
 
-        Route::get(
-            'cep/{cep}',
-            function ($cep) {
-                $result = cep_to_address($cep);
-                return $result->getData();
-            }
-        );
+        # TODO: Create a separate package for this
+        // Route::get(
+        //     'cep/{cep}',
+        //     function ($cep) {
+        //         $result = cep_to_address($cep);
+        //         return $result->getData();
+        //     }
+        // );
     }
 );

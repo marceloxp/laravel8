@@ -9,13 +9,13 @@ class Cached
 {
     public static function get($p_prefix, $p_key, $value, $minutes = 10)
     {
-        $prefix = mb_strtoupper($p_prefix);
+        $prefix = mb_strtolower($p_prefix);
         $key    = (is_array($p_key)) ? implode('-', $p_key) : $p_key;
-        $key    = mb_strtoupper($key);
+        $key    = mb_strtolower($key);
 
-        $cache_name = sprintf('%s-%s', $prefix, $key);
+        $cache_name = cached_mount_name($prefix, $key);
         if (Cache::has($cache_name)) {
-            return Result::cached($prefix, $cache_name, '', Cache::get($cache_name), true);
+            return Result::cache($prefix, $cache_name, '', Cache::get($cache_name), true);
         } else {
             $data = (is_callable($value)) ? $value() : $value;
             if (($data !== false) && ($data !== null)) {
@@ -34,7 +34,7 @@ class Cached
                 }
             }
 
-            return Result::cached($prefix, $cache_name, '', $data, false);
+            return Result::cache($prefix, $cache_name, '', $data, false);
         }
     }
 
@@ -53,12 +53,12 @@ class Cached
     public static function forget($p_prefix, $p_key = null)
     {
         try {
-            $prefix = mb_strtoupper($p_prefix);
+            $prefix = mb_strtolower($p_prefix);
             $caches = Cache::get('gcache-prefixes') ?? collect([]);
 
             if ($p_key !== null) {
                 $key = (is_array($p_key)) ? implode('-', $p_key) : $p_key;
-                $key    = mb_strtoupper($key);
+                $key    = mb_strtolower($key);
                 $cache_name = sprintf('%s-%s', $prefix, $key);
                 Cache::forget($cache_name);
 

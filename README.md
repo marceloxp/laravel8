@@ -177,7 +177,7 @@ Cached::flush();         // Clear all cache
 MetaSocial::use('sobre');
 MetaSocial::append('title', ' - Fale Conosco');
 MetaSocial::set('description', 'Entre em contato conosco.');
-Metasocial::print();
+MetaSocial::print();
 ```
 
 ### HttpCurl `App\Utilities\HttpCurl`

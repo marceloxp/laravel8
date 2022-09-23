@@ -34,6 +34,7 @@ if (!function_exists('str_slugify')) {
     }
 }
 
+# TODO: Run a tool to check a second non used parameter
 if (!function_exists('str_camel')) {
     function str_camel($p_string, $p_separator = '-')
     {

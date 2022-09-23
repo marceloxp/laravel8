@@ -243,9 +243,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
         'AutoAssets' => App\Utilities\AutoAssets::class,
         'Datasite' => App\Utilities\Datasite::class,
         'MetaSocial' => App\Utilities\MetaSocial::class,
+        'Result' => App\Utilities\Result::class,
+        'Cached' => App\Utilities\Cached::class,
 
     ],
 

@@ -5,127 +5,252 @@ namespace App\Utilities;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Class ResultObject.
+ * Class Result.
  */
-class ResultObject
+class Result
 {
     public $name;
     public $result;
     public $success;
-    public $cached;
     public $message;
+    public $cached;
     public $data;
 
-    public function __construct($success, $message = '', $data = [], $cached = false, $message_log = '')
+    /**
+     * Result constructor.
+     *
+     * @param $success
+     * @param $message
+     * @param $data
+     * @param $cached
+     * @param $log
+     */
+    public function __construct($success, $message = '', $data = [], $cached = false, $log = '')
     {
         $this->name    = 'Result';
         $this->result  = true;
         $this->success = (!empty($success));
-        $this->cached  = $cached;
         $this->message = $message;
+        $this->cached  = $cached;
         $this->data    = $data;
 
-        if (!empty($message_log)) {
-            if ($success) {
-                Log::info($message_log);
-            } else {
-                Log::error($message_log);
-            }
-        }
+        $this->log($log);
     }
 
+    /**
+     * Retrieve the data property.
+     * 
+     * @return mixed
+     */
     public function getData()
     {
         return $this->data;
     }
 
-    public function get($data_index)
+    /**
+     * Retrieve de value inside a data property.
+     * 
+     * @param  string $key
+     * 
+     * @return mixed
+     */
+    public function get($key)
     {
-        return data_get($this->data, $data_index);
+        return data_get($this->data, $key);
     }
 
+    /**
+     * Set a message property.
+     * 
+     * @param  string $message
+     * 
+     * @return self
+     */
     public function message($message)
     {
         $this->message = $message;
         return $this;
     }
 
+    /**
+     * Set a data property.
+     * 
+     * @param  mixed $data
+     * 
+     * @return self
+     */
     public function data($data)
     {
         $this->data = $data;
         return $this;
     }
 
+    /**
+     * Set a name property.
+     * 
+     * @param  string $name
+     * 
+     * @return self
+     */
     public function name($name)
     {
         $this->name = $name;
         return $this;
     }
 
+    /**
+     * Set a cached property.
+     * 
+     * @param bool  $cached
+     * 
+     * @return self
+     */
     public function cached($cached = true)
     {
         $this->cached = $cached;
         return $this;
     }
 
-    public function log($message_log)
+    /**
+     * Returns self as json.
+     * 
+     * @return string
+     */
+    public function toJson()
     {
-        if (!empty($message_log)) {
+        return collect($this)->toJson();
+    }
+
+    /**
+     * Returns self as Collection.
+     * 
+     * @return \Illuminate\Support\Collection
+     */
+    public function toCollect()
+    {
+        return collect($this);
+    }
+
+    /**
+     * Log a property log.
+     * 
+     * @param  string $log
+     * 
+     * @return self
+     */
+    public function log($log)
+    {
+        if (!empty($log)) {
             if ($this->success) {
-                Log::info($message_log);
+                Log::info($log);
             } else {
-                Log::error($message_log);
+                Log::error($log);
             }
         }
         return $this;
     }
-}
 
-/**
- * Class Result.
- */
-class Result
-{
-    public static function success($message = '', $data = [], $cached = false, $message_log = '')
+    /**
+     * Create a new Result instance.
+     * 
+     * @param  string  $message
+     * @param  mixed   $data
+     * @param  boolean $cached
+     * @param  string  $log
+     * 
+     * @return self
+     */
+    public static function success($message = '', $data = [], $cached = false, $log = '')
     {
-        return new ResultObject(true, $message, $data, $cached, $message_log);
+        return new Result(true, $message, $data, $cached, $log);
     }
 
-    public static function data($data = [], $message_log = '')
+    /**
+     * Create a new Result instance.
+     * 
+     * @param  string  $message
+     * @param  mixed   $data
+     * @param  string  $log
+     * 
+     * @return self
+     */
+    public static function error($message = '', $data = [], $log = '')
     {
-        return new ResultObject(true, '', $data, false, $message_log);
+        return new Result(false, $message, $data, false, $log);
     }
 
-    public static function cached($p_prefix, $p_cache_name, $message = '', $data = [], $cached, $message_log = '')
-    {
-        $cache_name   = sprintf('%s-%s', $p_prefix, $p_cache_name);
-        $result       = new ResultObject(true, $message, $data, $cached, $message_log);
-        $result->name($cache_name);
-        return $result;
-    }
-
-    public static function error($message = '', $data = [], $message_log = '')
-    {
-        return new ResultObject(false, $message, $data, false, $message_log);
-    }
-
+    /**
+     * Create a new Result instance.
+     * 
+     * @param  bool    $boolean_value
+     * @param  string  $success_message
+     * @param  string  $error_message
+     * 
+     * @return self
+     */
     public static function ifthen($boolean_value, $success_message = 'Solicitação realizada com sucesso.', $error_message = 'Ocorreu um erro na solicitação.')
     {
         return ($boolean_value) ? self::success($success_message) : self::error($error_message);
     }
 
-    public static function invalid($message = 'Dados inválidos.', $data = [], $message_log = '')
+    /**
+     * Create a new Result instance.
+     * 
+     * @param  string  $message
+     * @param  mixed   $data
+     * @param  string  $log
+     * 
+     * @return self
+     */
+    public static function invalid($message = 'Dados inválidos.', $data = [], $log = '')
     {
-        return new ResultObject(false, $message, $data, false, $message_log);
+        return new Result(false, $message, $data, false, $log);
     }
 
+    /**
+     * Create a new Result instance.
+     * 
+     * @param  \Exception $exception
+     * @param  string  $message
+     * 
+     * @return self
+     */
     public static function exception($exception, $message = 'Ocorreu um erro na solicitação.')
     {
-        return new ResultObject(false, $message, ['exception' => $exception], false, $exception->getMessage());
+        return new Result(false, $message, ['exception' => $exception], false, $exception->getMessage());
     }
 
-    public static function undefined($message = 'Ocorreu um erro na solicitação.', $data = [], $message_log = '')
+    /**
+     * Create a new Result instance.
+     * 
+     * @param  string  $message
+     * @param  mixed   $data
+     * @param  string  $log
+     * 
+     * @return self
+     */
+    public static function undefined($message = 'Ocorreu um erro na solicitação.', $data = [], $log = '')
     {
-        return new ResultObject(false, $message, $data, false, $message_log);
+        return new Result(false, $message, $data, false, $log);
+    }
+
+    /**
+     * Create a new Result instance.
+     * 
+     * @param  string  $prefix
+     * @param  string  $cache_name
+     * @param  string  $message
+     * @param  mixed   $data
+     * @param  boolean $cached
+     * @param  string  $log
+     * 
+     * @return self
+     */
+    public static function cache($prefix, $cache_name, $message = '', $data = [], $cached, $log = '')
+    {
+        $cache_name = cached_mount_name($prefix, $cache_name);
+        $result     = new Result(true, $message, $data, $cached, $log);
+        $result->name($cache_name);
+        return $result;
     }
 }
