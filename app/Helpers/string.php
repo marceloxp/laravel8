@@ -34,14 +34,6 @@ if (!function_exists('str_slugify')) {
     }
 }
 
-# TODO: Run a tool to check a second non used parameter
-if (!function_exists('str_camel')) {
-    function str_camel($p_string, $p_separator = '-')
-    {
-        return \Illuminate\Support\Str::camel($p_string);
-    }
-}
-
 if (!function_exists('array_sort_ex')) {
     function array_sort_ex($p_array, $p_reindex_keys = false)
     {
