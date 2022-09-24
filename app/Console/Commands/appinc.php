@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use PHLAK\SemVer;
 
 class appinc extends Command
 {
@@ -38,8 +39,9 @@ class appinc extends Command
     public function handle()
     {
         $v_ini = config('app.version', '0.0.1');
+        $version = new SemVer\Version($v_ini);
         $this->info(sprintf('Initial version: %s', $v_ini));
-        $v_end = \SemVer\SemVer\Version::fromString($v_ini)->patch()->__toString();
+        $v_end = $version->incrementPatch()->__toString();
         $this->info(sprintf('Final version: %s', $v_end));
         $body = file_get_contents(config_path('app.php'));
         $version_ini = sprintf('\'version\' => \'%s\'', $v_ini);

@@ -7,6 +7,7 @@ parameters:
         - app
     excludePaths:
         - app/Providers/XpCollectionServiceProvider.php
+        - app/Providers/CarbonServiceProvider.php
 
 
     # The level 9 is the highest level

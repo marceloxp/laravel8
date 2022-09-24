@@ -17,7 +17,6 @@
         "laravel/tinker": "^2.5",
         "orangehill/iseed": "^3.0",
         "rap2hpoutre/laravel-log-viewer": "^2.2",
-        "semver/semver": "^1.1",
         "symfony/process": "^5.4"
     },
     "require-dev": {
@@ -31,6 +30,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "nunomaduro/larastan": "^1.0",
+        "phlak/semver": "^4.0",
         "phpunit/phpunit": "^9.5.10",
         "timwassenburg/laravel-service-generator": "^1.0"
     },
