@@ -91,6 +91,8 @@ class MakexCrud extends Command
         $replaces['header_captions'] = rtrim($header_captions, PHP_EOL);
         $replaces['fields_values'] = rtrim($fields_values, PHP_EOL);
 
+        # TODO: create replaces to create and edit views
+
         $filenames = [
             'index.blade.stub',
             'show.blade.stub',
