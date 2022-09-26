@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('sidebar')
-	@include('admin.includes.sidebar')
+    @include('admin.includes.sidebar')
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		
-	</div>
+    <div class="container-fluid">
+
+    </div>
 @endsection
