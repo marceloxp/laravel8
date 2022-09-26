@@ -421,12 +421,6 @@ vendor/bin/phpstan analyse app
 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app
 ```
 
-#### Yaml Migration
-
-```terminal
-php artisan exodus
-```
-
 #### New Admin Crud
 
 ```terminal
