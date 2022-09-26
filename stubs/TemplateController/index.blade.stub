@@ -10,7 +10,7 @@
 					<thead>
 						<tr>
 							<th>{{ $captions->get('id') }}</th>
-							{{ fields_captions }}
+{{ header_captions }}
 							<th>Ações</th>
 						</tr>
 					</thead>
@@ -18,7 +18,7 @@
 						@foreach($table as $register)
 							<tr>
 								<td><div data-id="{{ $register->id }}">{{ $register->id }}</div></td>
-								{{ fields_values }}
+{{ fields_values }}
 								<td>
 									<x-admin-table :register="$register" crud="{{ modelvariable }}">
 										<x-admin-table.action-edit/>

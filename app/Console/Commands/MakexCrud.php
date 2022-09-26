@@ -56,6 +56,7 @@ class MakexCrud extends Command
         $classandvar = $modelname . 'Crud $' . strtolower($modelname) . 'Crud'; // ConfigCrud $configCrud
         $title = $argTitle; // Título
         $modelvariable = strtolower($modelname); // config
+        $tablename = \Illuminate\Support\Str::plural(strtolower($modelname)); // configs
         $phpmodelvar = '$' . $modelvariable; // $config
         $modelpostrequest = $modelname . 'PostRequest'; // ConfigPostRequest
 
@@ -78,6 +79,18 @@ class MakexCrud extends Command
             mkdir(base_path('resources/views/admin/' . $modelvariable), 0777, true);
         }
 
+        $header_captions = '';
+        $fields_values = '';
+        $fields = db_table_get_fields_captions($tablename)->except('id');
+        $tabs7 = str_repeat("\t", 7);
+        $tabs8 = str_repeat("\t", 8);
+        foreach ($fields as $name => $caption) {
+            $header_captions .= $tabs7 . "<th>{{ \$captions->get('" . $name . "') }}</th>" . PHP_EOL;
+            $fields_values .= $tabs8 . "<td>{{ \$register->" . $name . " }}</td>" . PHP_EOL;
+        }
+        $replaces['header_captions'] = rtrim($header_captions, PHP_EOL);
+        $replaces['fields_values'] = rtrim($fields_values, PHP_EOL);
+
         $filenames = [
             'index.blade.stub',
             'show.blade.stub',
@@ -94,9 +107,6 @@ class MakexCrud extends Command
             $filedest = base_path('resources/views/admin/' . $modelvariable . '/' . str_replace('.stub', '.php', $filename));
             file_put_contents($filedest, $body);
         }
-
-        $filename = base_path('stubs/TemplateController/index.blade.stub');
-        $body = file_get_contents($filename);
 
         // call make:request with modelname
         $this->call('make:request', ['name' => 'Admin/' . $modelname . 'PostRequest']);

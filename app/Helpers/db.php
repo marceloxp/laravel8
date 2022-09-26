@@ -230,6 +230,11 @@ if (!function_exists('db_table_get_fields_captions')) {
                             $item->Comment = 'Atualizado em';
                         }
                     }
+                    if ($item->Field == 'deleted_at') {
+                        if (empty($item->Comment)) {
+                            $item->Comment = 'Excluído em';
+                        }
+                    }
                     // set Comment as "#" if Field = "id" and comment is empty
                     if ($item->Field == 'id') {
                         if (empty($item->Comment)) {

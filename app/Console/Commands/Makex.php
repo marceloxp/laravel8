@@ -60,7 +60,7 @@ class Makex extends Command
                 break;
             case 'Create a new Model, Migrate and Seeder':
                 $modelname = $this->ask('What is the model name?');
-                $this->call('make:model', ['name' => 'App/Models/' . $modelname, '--migration' => true, '-s' => true]);
+                $this->call('make:model', ['name' => 'App/Models/' . $modelname, '--migration' => true]);
                 // get filename of current Model
                 $modelFile = app_path('Models/' . $modelname . '.php');
                 $model = file_get_contents($modelFile);
@@ -69,6 +69,7 @@ class Makex extends Command
                 // save file on disk
                 $this->info('Saving file...');
                 file_put_contents($modelFile, $model);
+                $this->call('make:seeder', ['name' => $modelname . 'TableSeeder']);
                 break;
             case 'Admin default Controller':
                 $modelname = $this->ask('What is the model name?');

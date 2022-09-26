@@ -407,14 +407,28 @@ php artisan dusk --filter AdminTest::testAdminConfigAdd
 php artisan dusk --filter AdminTest::testAdminConfigDelete
 ```
 
-### PHPStan
+### Commands
+
+#### PHPStan
 
 ```terminal
 vendor/bin/phpstan analyse app
 ```
 
-### PHP CS Fixer
+#### PHP CS Fixer
 
 ```terminal
 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app
+```
+
+#### Yaml Migration
+
+```terminal
+php artisan exodus
+```
+
+#### New Admin Crud
+
+```terminal
+php artisan makex:crud Customer --title="Clientes"
 ```

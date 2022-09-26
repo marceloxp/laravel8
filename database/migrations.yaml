@@ -1,16 +1,16 @@
 customers:
   id: true
-  name: string
-  email: string
-  password: string
-  born_at: timestamp
+  name: string(150)
+  email: string(256)
+  password: string(256)
+  born_at: datetime
   phone: string(24)
-  zipcode: int
+  postcode: string(9)
   address: string(256)
-  address_number: string(64)
+  address_number: string(64).nullable
   complement: string.nullable
-  neighborhood: string
+  neighborhood: string(256)
   state: string(2)
-  city: string
-  softDeletes: true
+  city: string(256)
   timestamps: true
+  softDeletes: true
