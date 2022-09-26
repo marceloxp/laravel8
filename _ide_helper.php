@@ -17283,27 +17283,6 @@
      
 }
 
-    namespace Illuminate\Database\Schema { 
-            /**
-     * 
-     *
-     */ 
-        class Blueprint {
-                    /**
-         * 
-         *
-         * @see \App\Providers\AppServiceProvider::boot()
-         * @static 
-         */ 
-        public static function name()
-        {
-                        return \Illuminate\Database\Schema\Blueprint::name();
-        }
-         
-    }
-     
-}
-
 
 namespace  { 
             class App extends \Illuminate\Support\Facades\App {}
