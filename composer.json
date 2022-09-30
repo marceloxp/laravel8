@@ -2,8 +2,11 @@
     "name": "marceloxp/laravel8",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "version": "0.0.3",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "version": "0.0.4",
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -45,20 +48,20 @@
         "psr-4": {
             "Tests\\": "tests/"
         },
-		"files": [
-			"app/Helpers/admin.php",
-			"app/Helpers/cached.php",
-			"app/Helpers/db.php",
-			"app/Helpers/developer.php",
-			"app/Helpers/statecity.php",
-			"app/Helpers/filesystem.php",
-			"app/Helpers/helpers.php",
-			"app/Helpers/lang.php",
-			"app/Helpers/string.php",
-			"app/Helpers/forms.php",
-			"app/Helpers/adminlte.php",
-			"app/Helpers/array.php"
-		]
+        "files": [
+            "app/Helpers/admin.php",
+            "app/Helpers/cached.php",
+            "app/Helpers/db.php",
+            "app/Helpers/developer.php",
+            "app/Helpers/statecity.php",
+            "app/Helpers/filesystem.php",
+            "app/Helpers/helpers.php",
+            "app/Helpers/lang.php",
+            "app/Helpers/string.php",
+            "app/Helpers/forms.php",
+            "app/Helpers/adminlte.php",
+            "app/Helpers/array.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [
