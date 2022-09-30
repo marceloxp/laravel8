@@ -98,8 +98,7 @@ class BaseCrud extends BaseAdmin
 
             $table = $table
                 ->orderBy('id', 'desc')
-                ->paginate(db_admin_get_pagination_limit())
-            ;
+                ->paginate(db_admin_get_pagination_limit());
         } else {
             $table = $this->model::orderBy('id', 'desc')->paginate(db_admin_get_pagination_limit());
         }
@@ -119,14 +118,13 @@ class BaseCrud extends BaseAdmin
             if ($this->model::create($request->validated())) {
                 return redirect()
                     ->route($this->indexViewPath)
-                    ->withMessages('Registro criado com sucesso.')
-                ;
+                    ->withMessages('Registro criado com sucesso.');
             } else {
                 return back()
                     ->withErrors('Ocorreu um erro na gravação do registro.')
                     ->withInput();
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return back()
                 ->withErrors($e->getMessage())
                 ->withInput();
@@ -143,18 +141,16 @@ class BaseCrud extends BaseAdmin
     public function defaultUpdate(FormRequest $request, BaseModel $model)
     {
         try {
-            if ($model->fill($request->validated())->update()) {
+            if ($model->update($request->validated())) {
                 return redirect()
                     ->route($this->indexViewPath)
-                    ->withMessages('Registro atualizado com sucesso.')
-                ;
+                    ->withMessages('Registro atualizado com sucesso.');
             } else {
                 return back()
                     ->withErrors('Ocorreu um erro na gravação do registro.')
-                    ->withInput()
-                ;
+                    ->withInput();
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return back()
                 ->withErrors($e->getMessage())
                 ->withInput();
@@ -173,8 +169,7 @@ class BaseCrud extends BaseAdmin
             $model->delete();
             return redirect()
                 ->route($this->indexViewPath)
-                ->withMessages('Registro excluído com sucesso.')
-            ;
+                ->withMessages('Registro excluído com sucesso.');
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage());
         }
