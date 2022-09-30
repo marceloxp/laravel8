@@ -1,5 +1,5 @@
 @extends('layouts.site')
 
 @section('content')
-	@include('site/pages/sections/empresa')
+@include('site/partials/empresa')
 @endsection
