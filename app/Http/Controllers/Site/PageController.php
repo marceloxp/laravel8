@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers\Site;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\View\View;
 
 class PageController extends SiteController
 {
-    /**
-     * Show the application home page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
-        return view('site/pages/home');
+        return view('site.pages.home');
     }
 
-    /**
-     * Show the application about page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function empresa()
+    public function empresa(): View
     {
-        return view('site/pages/empresa');
+        return view('site.pages.empresa');
+    }
+
+    public function docs(): View
+    {
+        return view('site.pages.docs');
     }
 }

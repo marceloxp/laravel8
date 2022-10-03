@@ -426,3 +426,9 @@ tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app
 ```terminal
 php artisan makex:crud Customer --title="Clientes"
 ```
+
+#### BrowserSync
+
+```terminal
+browser-sync start --proxy "local.laravel8.com.br" --files "app" "resources" --host "local.laravel8.com.br" --open external
+```

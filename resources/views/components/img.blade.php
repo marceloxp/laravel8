@@ -1,3 +1,3 @@
 @props(['src' => ''])
 
-<img {{ $attributes }} src="{{ vasset($src) }}"/>
+<img src="{{ vasset($src) }}" {{ $attributes }}/>
