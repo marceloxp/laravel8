@@ -10,19 +10,19 @@
         <meta name="now" content="{{ date('Y-m-d H:i:s') }}">
         <meta name="framework-version" content="{{ App::VERSION() }}">
         <meta name="app-version" content="{{ app_version() }}">
-        <link rel="shortcut icon" type="image/png" href="{{ url('/favicon.png') }}" />
-        {{-- css('/css/all.min.css') --}}
-        {{ MetaSocial::print() }}
-
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    @section('vendor.css')
-        {{ AutoAssets::print('css') }}
-    @show
+        <x-favicon url="/favicon.png"/>
+        <x-css src="/css/style.css"/>
 
-    @section('datasite')
-        {!! Datasite::getHtmlScript() !!}
+        {{ MetaSocial::print() }}
+        @section('vendor.css')
+            {{ AutoAssets::print('css') }}
+        @show
+
+        @section('datasite')
+            {!! Datasite::getHtmlScript() !!}
+        @show
     @show
-@show
 </head>
 
 <body>
@@ -36,6 +36,7 @@
         @show
         <div id="wrapper-content">
             @yield('content')
+            <x-img src="/images/logo.png" alt="Logo"/>
         </div>
         <footer>
             @section('footer')
@@ -46,9 +47,8 @@
 
     {{-- Vendor Scripts --}}
     @section('vendor.js')
-        <script type="text/javascript" src="{{ vasset('/libs/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ vasset('/libs/cjsbaseclass.slim.min.js') }}" data-jquery-exclusive="true"
-            data-silent-host="www.site.com.br"></script>
+        {{ javascript('/libs/jquery.min.js') }}
+        {{ cjsbaseclass('/libs', true, 'www.site.com.br') }}
         {{ javascript('/libs/sweetalert.min.js') }}
     @show
 
