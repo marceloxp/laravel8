@@ -23,7 +23,6 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     use Authorizable;
     use CanResetPassword;
     use HasApiTokens;
-    use HasFactory;
     use Notifiable;
     use SoftDeletes;
     use Searchable;

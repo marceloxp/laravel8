@@ -8,7 +8,6 @@ use App\Traits\Models\Searchable;
 
 class Config extends BaseModel
 {
-    use HasFactory;
     use SoftDeletes;
     use Searchable;
 
