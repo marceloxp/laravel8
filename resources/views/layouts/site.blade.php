@@ -36,7 +36,6 @@
         @show
         <div id="wrapper-content">
             @yield('content')
-            <x-img src="/images/logo.png" alt="Logo"/>
         </div>
         <footer>
             @section('footer')

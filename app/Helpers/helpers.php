@@ -98,13 +98,6 @@ if (!function_exists('js')) {
     }
 }
 
-if (!function_exists('javascript_routine')) {
-    function javascript_routine($p_routine)
-    {
-        return '<script>' . $p_routine . '</script>';
-    }
-}
-
 if (!function_exists('javascript_var')) {
     function javascript_var($p_var_name, $p_var_value, $p_quote_var = true)
     {
@@ -127,26 +120,5 @@ if (!function_exists('css')) {
     function css($p_source)
     {
         return new HtmlString(sprintf('<link rel="stylesheet" type="text/css" href="%s">', vasset($p_source)));
-    }
-}
-
-if (!function_exists('img')) {
-    function img($p_source, $p_properties = '')
-    {
-        return new HtmlString(sprintf('<img src="%s" %s>', vasset($p_source), $p_properties));
-    }
-}
-
-if (!function_exists('img_background')) {
-    function img_background($p_source, $p_background, $p_properties = '', $p_style_properties = '')
-    {
-        $result = sprintf(
-            '<img src="%s" style="background-image: url(%s); %s" %s>',
-            vasset($p_source),
-            vasset($p_background),
-            $p_style_properties,
-            $p_properties
-        );
-        return new HtmlString($result);
     }
 }
