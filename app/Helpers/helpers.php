@@ -82,6 +82,15 @@ if (!function_exists('javascript')) {
     }
 }
 
+if (!function_exists('cjsbaseclass')) {
+    function cjsbaseclass($p_path, $p_jquery_exclusive, $p_silent_host)
+    {
+        $p_jquery_exclusive = ($p_jquery_exclusive) ? 'true' : 'false';
+        $p_silent_host = $p_silent_host ?? 'www.site.com.br';
+        return new HtmlString(sprintf('<script type="text/javascript" src="' . vasset($p_path . '/cjsbaseclass.slim.min.js') . '" data-jquery-exclusive="%s" data-silent-host="%s"></script>', $p_jquery_exclusive, $p_silent_host));
+    }
+}
+
 if (!function_exists('js')) {
     function js($p_source)
     {
