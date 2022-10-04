@@ -81,6 +81,9 @@
         ],
         "incversion": [
             "php artisan app:inc"
+        ],
+        "start" : [
+            "browser-sync start --proxy 'local.laravel8.com.br' --files 'app' 'resources' --host 'local.laravel8.com.br' --open external"
         ]
     },
     "extra": {
