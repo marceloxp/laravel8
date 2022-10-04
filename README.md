@@ -241,6 +241,7 @@ RouteLang::getCurrentLocale();        // Returns app current locale config (dyna
 <!-- Versioned Asset -->
 <!-- Add host and app version -->
 <img src="{{ vasset('/img/logo.png') }}">
+<x-img src="/img/logo.png"/>
 <img src="http://local.laravel8.com.br/images/logo.png?v=0.0.2">
 ```
 
@@ -256,6 +257,7 @@ javascript('/js/home.js');
 <script type="text/javascript" src="http://local.laravel8.com.br/js/home.js?v=0.0.1"></script>
 
 css('/css/style.css');
+<x-css src="/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="http://local.laravel8.com.br/css/style.css?v=0.0.1">
 ```
 
@@ -371,6 +373,7 @@ echo str2bool('foo');   // Returns false;
 ## summernote
 
 `composer.json`
+
 ```json
 	"require": {
 	    ...
@@ -385,6 +388,7 @@ echo str2bool('foo');   // Returns false;
 ```
 
 `AppServiceProvider.php`
+
 ```php
 	public function boot()
 	{
