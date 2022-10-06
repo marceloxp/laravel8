@@ -47,7 +47,7 @@ php artisan migrate:refresh --seed
 ## Plugins
 
 | Plugin                           | Address                                          |
-| -------------------------------- | ----------------------------------------------   |
+| -------------------------------- | ------------------------------------------------ |
 | digitalnature/php-ref            | <https://github.com/digitalnature/php-ref>       |
 | barryvdh/laravel-debugbar        | <https://github.com/barryvdh/laravel-debugbar>   |
 | barryvdh/laravel-ide-helper      | <https://github.com/barryvdh/laravel-ide-helper> |
