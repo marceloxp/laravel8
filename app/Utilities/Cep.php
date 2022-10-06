@@ -51,9 +51,9 @@ class Cep
             if (!self::valid($p_cep)) {
                 $result =
                 [
-                    'service'     => 'unknow',
-                    'located'     => false,
-                    'message'     => 'Este CEP não pertence as faixas de CEP do Brasil.'
+                    'service' => 'unknow',
+                    'located' => false,
+                    'message' => 'Este CEP não pertence as faixas de CEP do Brasil.'
                 ];
 
                 return $result;
@@ -76,7 +76,7 @@ class Cep
 
     private static function getcep($cep)
     {
-        $method = collect(['viacep','postmon'])->random();
+        $method = collect(['viacep', 'postmon'])->random();
         return self::$method($cep);
     }
 

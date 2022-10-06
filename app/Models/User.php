@@ -87,7 +87,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     public function hasRole($role)
     {
         $result = Cached::get(
-            'sys-user-hasRole',
+            'sys-user-has-role',
             [$this->id, $role],
             function () use ($role) {
                 return $this->roles()->where('name', $role)->exists();

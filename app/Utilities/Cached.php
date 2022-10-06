@@ -20,7 +20,7 @@ class Cached
             $data = (is_callable($value)) ? $value() : $value;
             if (($data !== false) && ($data !== null)) {
                 $use_cache = config('cache.use', 's');
-                if ($use_cache == 's') {
+                if ($use_cache === 's') {
                     Cache::put($cache_name, $data, ($minutes * 60));
 
                     $caches = Cache::get('gcache-prefixes') ?? collect([]);
@@ -58,7 +58,7 @@ class Cached
 
             if ($p_key !== null) {
                 $key = (is_array($p_key)) ? implode('-', $p_key) : $p_key;
-                $key    = mb_strtolower($key);
+                $key = mb_strtolower($key);
                 $cache_name = sprintf('%s-%s', $prefix, $key);
                 Cache::forget($cache_name);
 
