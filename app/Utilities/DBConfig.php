@@ -6,7 +6,7 @@ use App\Models\Config;
 
 class DBConfig
 {
-    public static function set($p_name, $p_value)
+    public static function set($p_name, $p_value): bool
     {
         try {
             $config = Config::firstOrNew(['name' => $p_name]);

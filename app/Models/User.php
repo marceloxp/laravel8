@@ -26,9 +26,14 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     use Notifiable;
     use SoftDeletes;
     use Searchable;
+    use hasFactory;
 
-    protected $guarded       = ['created_at','updated_at','deleted_at'];
+    protected $guarded       = ['created_at', 'updated_at', 'deleted_at'];
     protected $search_fields = ['name', 'email'];
+
+    public const ROLE_ADMIN     = 'Admin';
+    public const ROLE_MASTER    = 'Master';
+    public const ROLE_DEVELOPER = 'Developer';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -66,7 +71,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
      */
     public function isDeveloper()
     {
-        return $this->hasRole('Developer');
+        return $this->hasRole(self::ROLE_DEVELOPER);
     }
 
     /**
@@ -76,7 +81,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
      */
     public function isDeveloperOrIsMaster()
     {
-        return $this->hasRole('Developer') || $this->hasRole('Master');
+        return $this->hasRole(self::ROLE_DEVELOPER) || $this->hasRole(self::ROLE_MASTER);
     }
 
     /**

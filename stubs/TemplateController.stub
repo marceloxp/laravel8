@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Admin\{{ modelpostrequest }};
 use App\Services\Admin\{{ crudclassname }};
 use App\Models\{{ modelname }};
+use Illuminate\View\View;
 
 class {{ controllername }} extends BaseAdminController
 {
@@ -14,9 +16,9 @@ class {{ controllername }} extends BaseAdminController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
-     * @return \Illuminate\View\View
+     * @return \
      */
-    public function index(Request $request, {{ classandvar }})
+    public function index(Request $request, {{ classandvar }}): View
     {
         return {{ crudpgpvar }}->index($request);
     }
@@ -27,7 +29,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function create({{ classandvar }})
+    public function create({{ classandvar }}): View
     {
         return {{ crudpgpvar }}->create();
     }
@@ -39,7 +41,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store({{ modelpostrequest }} $request, {{ classandvar }})
+    public function store({{ modelpostrequest }} $request, {{ classandvar }}): RedirectResponse
     {
         return {{ crudpgpvar }}->store($request);
     }
@@ -51,7 +53,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function show({{ modelvar }}, {{ classandvar }})
+    public function show({{ modelvar }}, {{ classandvar }}): View
     {
         return {{ crudpgpvar }}->show({{ phpmodelvar }});
     }
@@ -63,7 +65,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function edit({{ modelvar }}, {{ classandvar }})
+    public function edit({{ modelvar }}, {{ classandvar }}): View
     {
         return {{ crudpgpvar }}->edit({{ phpmodelvar }});
     }
@@ -76,7 +78,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update({{ modelpostrequest }} $request, {{ modelvar }}, {{ classandvar }})
+    public function update({{ modelpostrequest }} $request, {{ modelvar }}, {{ classandvar }}): RedirectResponse
     {
         return {{ crudpgpvar }}->update($request, {{ phpmodelvar }});
     }
@@ -88,7 +90,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy({{ modelvar }}, {{ classandvar }})
+    public function destroy({{ modelvar }}, {{ classandvar }}): RedirectResponse
     {
         return {{ crudpgpvar }}->destroy({{ phpmodelvar }});
     }

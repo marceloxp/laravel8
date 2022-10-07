@@ -3,8 +3,9 @@
 namespace App\Services\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\View;
 use App\Models\{{ modelname }};
 
 /**
@@ -17,11 +18,11 @@ class {{ classname }} extends BaseCrud
 
     /**
      * Get table fields on index screen.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $captions = {{ modelname }}::getFieldsCaptions();
         $table = $this->getIndexTable($request);
@@ -31,66 +32,66 @@ class {{ classname }} extends BaseCrud
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): View
     {
         return view($this->createViewPath);
     }
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(FormRequest $request)
+    public function store(FormRequest $request): RedirectResponse
     {
         return $this->defaultStore($request);
     }
 
     /**
      * Show a data of the specified resource.
-     * 
+     *
      * @param  \App\Models\{{ phpdocvar }}
      * @return \Illuminate\View\View
      */
-    public function show({{ modelvar }})
+    public function show({{ modelvar }}): View
     {
         return view($this->showViewPath, compact('{{ modelvariable }}'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * 
+     *
      * @param  \App\Models\{{ phpdocvar }}
      * @return \Illuminate\View\View
      */
-    public function edit({{ modelvar }})
+    public function edit({{ modelvar }}): View
     {
         return view($this->editViewPath, compact('{{ modelvariable }}'));
     }
-    
+
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  \App\Models\{{ phpdocvar }}
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(FormRequest $request, {{ modelvar }})
+    public function update(FormRequest $request, {{ modelvar }}): RedirectResponse
     {
         return $this->defaultUpdate($request, {{ phpmodelvar }});
     }
-    
+
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  \App\Models\{{ phpdocvar }}
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy({{ modelvar }})
+    public function destroy({{ modelvar }}): RedirectResponse
     {
         return $this->defaultDestroy({{ phpmodelvar }});
     }
