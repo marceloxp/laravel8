@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UMS Admin</title>
-    {{ css('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}
-    {{ css('/adminlte/plugins/fontawesome-free/css/all.min.css') }}
-    {{ css('/adminlte/dist/css/adminlte.min.css') }}
-    {{ css('/adminlte/plugins/select2/css/select2.min.css') }}
-    {{ css('//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css') }}
-    {{ js('//cdn.jsdelivr.net/npm/sweetalert2@11') }}
-    {{ css('/adminlte/dist/css/adminlte.custom.css') }}
+    <x-css src="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <x-css src="/adminlte/plugins/fontawesome-free/css/all.min.css" />
+    <x-css src="/adminlte/dist/css/adminlte.min.css" />
+    <x-css src="/adminlte/plugins/select2/css/select2.min.css" />
+    <x-css src="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-css src="/adminlte/dist/css/adminlte.custom.css" />
     @section('styles')
 
     @show
@@ -36,7 +36,7 @@
                 @yield('content')
             </div>
         </div>
-        <x-admin-default-swal />
+        <x-admin.default-swal />
     </div>
 
     {{ javascript('/adminlte/plugins/jquery/jquery.min.js') }}

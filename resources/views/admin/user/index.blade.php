@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <x-admin-table-nav-bar crud="user" :model="$model" :search="$search" />
+    <x-admin.table-nav-bar crud="user" :model="$model" :search="$search" />
 
     <div class="card">
         <div class="card-body table-responsive p-0">

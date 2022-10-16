@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <x-admin-table-nav-bar show="{{ $options->get('index.search') }}" crud="role" :model="$model" :search="$search" />
+    <x-admin.table-nav-bar show="{{ $options->get('index.search') }}" crud="role" :model="$model" :search="$search" />
 
     <div class="card">
         <div class="card-body table-responsive p-0">
