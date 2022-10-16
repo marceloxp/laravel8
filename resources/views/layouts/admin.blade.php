@@ -42,7 +42,7 @@
     {{ javascript('/adminlte/plugins/jquery/jquery.min.js') }}
     {{ javascript('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}
     {{ javascript('/adminlte/dist/js/adminlte.min.js') }}
-    <script type="text/javascript" src="{{ vasset('/lib/cjsbaseclass.slim.min.js') }}" data-jquery-exclusive="true" data-silent-host="www.site.com.br"></script>
+    <script type="text/javascript" src="{{ vasset('/libs/cjsbaseclass.slim.min.js') }}" data-jquery-exclusive="true" data-silent-host="www.site.com.br"></script>
     {{ javascript('/adminlte/plugins/select2/js/select2.full.min.js') }}
     {{ javascript('/lib/jquery.SimpleMask.min.js') }}
     <script>

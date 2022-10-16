@@ -433,3 +433,9 @@ php artisan makex:crud Customer --title="Clientes"
 ```terminal
 browser-sync start --proxy "local.laravel8.com.br" --files "app" "resources" --host "local.laravel8.com.br" --open external
 ```
+
+#### Verify Composer packages
+
+```terminal
+composer update --dry-run
+```
