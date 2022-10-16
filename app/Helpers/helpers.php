@@ -83,7 +83,7 @@ if (!function_exists('javascript')) {
 }
 
 if (!function_exists('cjsbaseclass')) {
-    function cjsbaseclass($p_path, $p_jquery_exclusive, $p_silent_host)
+    function cjsbaseclass($p_path, $p_jquery_exclusive = 'true', $p_silent_host = 'none')
     {
         $p_jquery_exclusive = ($p_jquery_exclusive) ? 'true' : 'false';
         $p_silent_host = $p_silent_host ?? 'www.site.com.br';

@@ -48,5 +48,5 @@
         </div>
     </div>
 
-    <x-admin-pagination-links :table="$table" />
+    <x-admin.pagination-links :table="$table" />
 @endsection
