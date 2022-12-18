@@ -4,6 +4,73 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+if (!function_exists('___toggle_array_key')) {
+    function ___toggle_array_key($array, $key_ini, $key_end)
+    {
+        $array_keys = array_keys($array);
+        $pos1 = array_search($key_ini, $array_keys);
+        $pos2 = array_search($key_end, $array_keys);
+
+        $slice1 = $pos1;
+        $slice2 = $pos2;
+
+        $use_ini = $key_ini;
+        $use_end = $key_end;
+
+        if ($pos1 > $pos2) {
+            $slice1 = $pos2;
+            $slice2 = $pos1;
+
+            $use_ini = $key_end;
+            $use_end = $key_ini;
+        }
+
+        $arr1   = array_slice($array, 0, $slice1 + 1);
+        $elem1  = [$use_ini => array_pop($arr1)];
+        $arr2   = array_slice($array, $slice1 + 1, $slice2 + 1);
+        $elem2  = [$use_end => array_pop($arr2)];
+        $arr3   = array_slice($array, $slice2 + 1);
+        $result = $arr1 + $elem2 + $arr2 + $elem1 + $arr3;
+
+        return $result;
+    }
+
+    function ___move_array_key($array, $key_ini, $key_end)
+    {
+        $array_keys = array_keys($array);
+        $pos1 = array_search($key_ini, $array_keys);
+        $pos2 = array_search($key_end, $array_keys);
+        $a = ['italic' => 'ok'];
+
+        $slice1 = $pos1;
+        $slice2 = $pos2;
+
+        $use_ini = $key_ini;
+        $use_end = $key_end;
+
+        if ($pos1 = $pos2) {
+            $slice1 = $pos2;
+            $slice2 = $pos1;
+
+            $use_ini = $key_end;
+            $use_end = $key_ini;
+        }
+
+        $arr1   = array_slice($array, 0, $slice1 + 1);
+        $elem1  = [$use_ini => array_pop($arr1)];
+        $arr2   = array_slice($array, $slice1 + 1, $slice2 + 1);
+        $elem2  = [$use_end => array_pop($arr2)];
+        $arr3   = array_slice($array, $slice2 + 1);
+        if ($pos1 > $pos2) {
+            $result = $arr1 + $elem2 + $elem1 + $arr2 + $arr3;
+        } else {
+            $result = $arr1 + $arr2 + $elem2 + $elem1 + $arr3;
+        }
+
+        return $result;
+    }
+}
+
 class XpCollectionServiceProvider extends ServiceProvider
 {
     /**
@@ -145,36 +212,6 @@ class XpCollectionServiceProvider extends ServiceProvider
         // $a = collect(['id' => 1, 'name' => 'Marcelo', 'age' => 45, 'state' => 'SP', 'color' => 'bg-green']);
         // $a = $a->toggleKey('name', 'state');
         // $a = $a->toggleKey('name', 'state')->toggleKey('color', 'id');
-        function ___toggle_array_key($array, $key_ini, $key_end)
-        {
-            $array_keys = array_keys($array);
-            $pos1 = array_search($key_ini, $array_keys);
-            $pos2 = array_search($key_end, $array_keys);
-
-            $slice1 = $pos1;
-            $slice2 = $pos2;
-
-            $use_ini = $key_ini;
-            $use_end = $key_end;
-
-            if ($pos1 > $pos2) {
-                $slice1 = $pos2;
-                $slice2 = $pos1;
-
-                $use_ini = $key_end;
-                $use_end = $key_ini;
-            }
-
-            $arr1   = array_slice($array, 0, $slice1+1);
-            $elem1  = [$use_ini => array_pop($arr1)];
-            $arr2   = array_slice($array, $slice1+1, $slice2+1);
-            $elem2  = [$use_end => array_pop($arr2)];
-            $arr3   = array_slice($array, $slice2+1);
-            $result = $arr1 + $elem2 + $arr2 + $elem1 + $arr3;
-
-            return $result;
-        }
-
         \Illuminate\Support\Collection::macro(
             'toggleKey',
             function ($p_from_key_name, $p_to_key_name) {
@@ -187,41 +224,6 @@ class XpCollectionServiceProvider extends ServiceProvider
         // $a->moveKey('name', 'state');
         // $a->moveKey('state', 'name');
         // $a->moveKey('name', 'state')->moveKey('color', 'id');
-        function ___move_array_key($array, $key_ini, $key_end)
-        {
-            $array_keys = array_keys($array);
-            $pos1 = array_search($key_ini, $array_keys);
-            $pos2 = array_search($key_end, $array_keys);
-            $a = ['italic' => 'ok'];
-
-            $slice1 = $pos1;
-            $slice2 = $pos2;
-
-            $use_ini = $key_ini;
-            $use_end = $key_end;
-
-            if ($pos1 = $pos2) {
-                $slice1 = $pos2;
-                $slice2 = $pos1;
-
-                $use_ini = $key_end;
-                $use_end = $key_ini;
-            }
-
-            $arr1   = array_slice($array, 0, $slice1+1);
-            $elem1  = [$use_ini => array_pop($arr1)];
-            $arr2   = array_slice($array, $slice1+1, $slice2+1);
-            $elem2  = [$use_end => array_pop($arr2)];
-            $arr3   = array_slice($array, $slice2+1);
-            if ($pos1 > $pos2) {
-                $result = $arr1 + $elem2 + $elem1 + $arr2 + $arr3;
-            } else {
-                $result = $arr1 + $arr2 + $elem2 + $elem1 + $arr3;
-            }
-
-            return $result;
-        }
-
         \Illuminate\Support\Collection::macro(
             'moveKey',
             function ($p_from_key_name, $p_to_key_name) {

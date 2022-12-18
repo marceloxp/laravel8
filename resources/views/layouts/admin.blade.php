@@ -36,7 +36,7 @@
                 @yield('content')
             </div>
         </div>
-        <x-admin.default-swal />
+        <x-admin-default-swal />
     </div>
 
     {{ javascript('/adminlte/plugins/jquery/jquery.min.js') }}
