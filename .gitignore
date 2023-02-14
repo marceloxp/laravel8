@@ -15,6 +15,9 @@ public/adminer/login-otp\.php
 public/adminer/plugin\.php
 public/adminer/struct-comments\.php
 public/uploads/*
+public/css/vendor.min.css
+public/css/vendor.min.css
+public/js/vendor.min.js
 _temp/
 storage/framework/cache/data/
 *.directory
