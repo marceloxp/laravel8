@@ -121,7 +121,7 @@ class MetaSocial
 
                         $size = false;
                         try {
-                            $size = getimagesize($value);
+                            $size = (env_is_local()) ? [1920, 1080] : getimagesize($value);
                             if (!$size) {
                                 $value = '';
                             } else {
