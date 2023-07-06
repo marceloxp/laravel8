@@ -1,7 +1,7 @@
-# Laravel 8 Boilerplate
+# Laravel 9 Boilerplate
 
 > Basic site boilerplate start.
-> Version 0.0.6
+> Version 0.1.0
 
 ## Install
 
@@ -27,7 +27,7 @@ php artisan migrate:refresh --seed
 
 ## Framework
 
-- Laravel 8.x: <https://laravel.com/docs/8.x>
+- Laravel 9.x: <https://laravel.com/docs/9.x>
 
 ### Server Requirements
 
