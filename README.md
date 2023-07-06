@@ -1,7 +1,7 @@
 # Laravel 8 Boilerplate
 
 > Basic site boilerplate start.
-> Version 0.0.5
+> Version 0.0.6
 
 ## Install
 
