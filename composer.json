@@ -36,7 +36,8 @@
         "nunomaduro/larastan": "^1.0",
         "phlak/semver": "^4.0",
         "phpunit/phpunit": "^9.5.10",
-        "timwassenburg/laravel-service-generator": "^1.0"
+        "timwassenburg/laravel-service-generator": "^1.0",
+        "spatie/laravel-export": "^0.3.11"
     },
     "autoload": {
         "psr-4": {
