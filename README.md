@@ -1,7 +1,7 @@
 # Laravel 9 Boilerplate
 
 > Basic site boilerplate start.
-> Version 0.1.2
+> Version 0.1.3
 
 ## Install
 
