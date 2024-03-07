@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ $register->id }}</td>
                                 <td>
-                                    <x-image-uploaded-file class="image_uploaded_file" :filename="$register->avatar" noimage="/images/admin/user-no-image.png" />
+                                    <x-image-uploaded-file class="image_uploaded_file" :filename="$register->avatar" noimage="/img/admin/user-no-image.png" />
                                 </td>
                                 <td>{{ $register->name }}</td>
                                 <td>{{ $register->email }}</td>

@@ -96,7 +96,7 @@ if (!function_exists('img_uploaded_file')) {
             case 'gif':
                 return sprintf('<img src="%s?v=%s" %s >', uploaded_file_url($p_file_name), app_version('0.0.1'), $p_attr);
             case 'pdf':
-                return sprintf('<img src="%s?v=%s" %s >', vasset('/images/admin/fileextensions/pdf.png'), app_version('0.0.1'), $p_attr);
+                return sprintf('<img src="%s?v=%s" %s >', vasset('/img/admin/fileextensions/pdf.png'), app_version('0.0.1'), $p_attr);
         }
     }
 }
@@ -126,7 +126,7 @@ if (!function_exists('link_uploaded_img')) {
                 return sprintf(
                     '<a href="%s" target="_blank"><img src="%s" %s ></a>',
                     uploaded_file_url($p_file_name),
-                    vasset('/images/admin/fileextensions/pdf.png'),
+                    vasset('/img/admin/fileextensions/pdf.png'),
                     $p_attr
                 );
         }

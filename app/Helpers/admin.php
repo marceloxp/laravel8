@@ -40,7 +40,7 @@ if (!function_exists('admin_crud_route')) {
 if (!function_exists('admin_get_uploaded_file')) {
     function admin_get_uploaded_file($filename, $noimage = '')
     {
-        $noimage_path = ($noimage) ? $noimage : 'images/admin/no-image.png';
+        $noimage_path = ($noimage) ? $noimage : 'img/admin/no-image.png';
         $no_image = vasset($noimage_path);
         if (empty($filename)) {
             return $no_image;
@@ -56,7 +56,7 @@ if (!function_exists('admin_get_uploaded_file')) {
             case 'gif':
                 return uploaded_file_url($filename);
             case 'pdf':
-                return vasset('/images/admin/fileextensions/pdf.png');
+                return vasset('/img/admin/fileextensions/pdf.png');
         }
 
         return $no_image;

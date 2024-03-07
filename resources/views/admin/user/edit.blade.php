@@ -21,7 +21,7 @@
                     <x-admin-form-model.id />
                     <div class="row">
                         <div class="col-3 col-sm-3 col-lg-2 col-xl-2">
-                            <x-image-uploaded-file class="image_uploaded_file" :filename="$user->avatar" noimage="/images/admin/user-no-image.png" />
+                            <x-image-uploaded-file class="image_uploaded_file" :filename="$user->avatar" noimage="/img/admin/user-no-image.png" />
                         </div>
                         <div class="col-9 col-sm-9 col-lg-10 col-xl-10">
                             <div class="form-group">
