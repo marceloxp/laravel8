@@ -18,7 +18,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \
      */
-    public function index(Request $request, {{ classandvar }}): View
+    public function index(Request $request, {{ classandvar }})
     {
         return {{ crudpgpvar }}->index($request);
     }
@@ -29,7 +29,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function create({{ classandvar }}): View
+    public function create({{ classandvar }})
     {
         return {{ crudpgpvar }}->create();
     }
@@ -53,7 +53,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function show({{ modelvar }}, {{ classandvar }}): View
+    public function show({{ modelvar }}, {{ classandvar }})
     {
         return {{ crudpgpvar }}->show({{ phpmodelvar }});
     }
@@ -65,7 +65,7 @@ class {{ controllername }} extends BaseAdminController
      * @param  \App\Services\Admin\{{ phpdocclasscrud }}
      * @return \Illuminate\View\View
      */
-    public function edit({{ modelvar }}, {{ classandvar }}): View
+    public function edit({{ modelvar }}, {{ classandvar }})
     {
         return {{ crudpgpvar }}->edit({{ phpmodelvar }});
     }
