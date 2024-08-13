@@ -7,7 +7,6 @@ const concat = require('gulp-concat');
 const autoprefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass')(require('sass'));
 const edit = require('gulp-edit');
-const urlAdjuster = require('gulp-css-replace-url');
 const terser = require('gulp-terser');
 const strnow = require('strnow');
 const fkill = require('fkill');
