@@ -8,6 +8,7 @@ class PageController extends SiteController
 {
     public function index(): View
     {
+        // MetaSocial::set('title', env('APP_NAME') . ' - Section');
         return view('site.pages.home');
     }
 

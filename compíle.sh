@@ -17,10 +17,10 @@ execute_command() {
     # Copie o arquivo .env correspondente à opção selecionada
     if [[ $1 == "h" ]]; then
         cp .env.homolog .env
-        gulp homolog
+        ../node_modules/.bin/gulp homolog
         elif [[ $1 == "p" ]]; then
         cp .env.production .env
-        gulp production
+        ../node_modules/.bin/gulp production
     else
         echo "Opção inválida!"
         exit 1
@@ -28,6 +28,7 @@ execute_command() {
     
     # Execute o comando "php artisan export"
     php artisan export
+    php substituir_urls.php
     
     # Remova o arquivo .env
     rm .env

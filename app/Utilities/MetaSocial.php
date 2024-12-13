@@ -20,21 +20,13 @@ class MetaSocial
 			<meta property="og:title" content="{:title}">
 			<meta property="og:image" content="{:image}">
 			<meta property="og:type" content="{:type}">
-			<meta property="og:url" content="{:url}">
 			<meta property="og:description" content="{:description}">
-
-			<!-- GOOGLE PLUS -->
-			<meta itemprop="name" content="{:title}">
-			<meta itemprop="image" content="{:image}">
-			<meta itemprop="url" content="{:url}">
-			<meta itemprop="description" content="{:description}">
 
 			<!-- TWITTER -->
 			<meta name="twitter:card" content="{:twitter_card}">
 			<meta name="twitter:title" content="{:title}">
 			<meta name="twitter:creator" content="{:twitter_creator}">
 			<meta name="twitter:image:src" content="{:image}">
-			<meta name="twitter:site" content="{:url}">
 			<meta name="twitter:description" content="{:description}">
 		';
     }
@@ -129,7 +121,7 @@ class MetaSocial
                                 $result .= '			<!-- IMAGE SIZE -->' . PHP_EOL;
                                 $result .= sprintf('			<meta property="og:image:width"  content="%s">' . PHP_EOL, $size[0]);
                                 $result .= sprintf('			<meta property="og:image:height" content="%s">' . PHP_EOL, $size[1]);
-                                $result .= sprintf('			<meta property="og:image:type" content="%s">' . PHP_EOL, $size['mime']);
+                                // $result .= sprintf('			<meta property="og:image:type" content="%s">' . PHP_EOL, $size['mime']);
                             }
                         } catch (\Exception $e) {
                             $value = '';
